@@ -32,6 +32,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Bloc.cpp" />
+		<Unit filename="Bloc.h" />
+		<Unit filename="Cassable.cpp" />
+		<Unit filename="Cassable.h" />
+		<Unit filename="Poussable.cpp" />
+		<Unit filename="Poussable.h" />
+		<Unit filename="Snoopy.cpp" />
+		<Unit filename="Snoopy.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
