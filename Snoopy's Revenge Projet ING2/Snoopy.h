@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <string>
+#include <string.h>
 
 class Snoopy
 {

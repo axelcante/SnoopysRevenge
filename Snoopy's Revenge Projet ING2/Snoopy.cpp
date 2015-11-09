@@ -40,23 +40,23 @@ int Snoopy::getOiseaux() const
 }
 
 //Setters
-void setPosX(int posX)
+void Snoopy::setPosX(int posX)
 {
     m_pos_x=posX;
 }
-void setPosY(int posY)
+void Snoopy::setPosY(int posY)
 {
     m_pos_y=posY;
 }
-void setVies(int vies)
+void Snoopy::setVies(int vies)
 {
     m_vies=vies;
 }
-void setScore(int score)
+void Snoopy::setScore(int score)
 {
     m_score=score;
 }
-void setOiseaux(int oiseaux)
+void Snoopy::setOiseaux(int oiseaux)
 {
     m_oiseaux=oiseaux;
 }

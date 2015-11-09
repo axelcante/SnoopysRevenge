@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1447022670 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.cpp
+	<iostream>
+	"Bloc.h"
+
+1447022251 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.h
+	<iostream>
+
+1447023010 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\cassable.cpp
+	<iostream>
+	"Cassable.h"
+	"Bloc.h"
+
+1447022312 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\cassable.h
+	"Bloc.h"
+
+1447087505 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
+	<iostream>
+
+1447079114 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\poussable.cpp
+	<iostream>
+	"Poussable.h"
+	"Bloc.h"
+
+1447016948 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\poussable.h
+	"Bloc.h"
+
+1447088249 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\snoopy.cpp
+	"Snoopy.h"
+
+1447088101 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\snoopy.h
+	<iostream>
+	<stdlib.h>
+	<string.h>
+
