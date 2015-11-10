@@ -1,7 +1,7 @@
 #ifndef BLOCK_H_INCLUDED
 #define BLOCK_H_INCLUDED
-#include <iostream>
 
+///Classe mère : one block to rule them all...
 class Bloc
 {
 protected:
@@ -22,6 +22,44 @@ public:
     void setPosX(int posX);
     void setPosY(int posY);
     void setType(char type);
+};
+
+///Bloc que Snoopy pourra casser
+class Cassable : public Bloc
+{
+public:
+    //constructeur surchargé
+    Cassable(int posX, int posY, char type);
+    //destructeur
+    ~Cassable();
+};
+
+///Bloc que Snoopy pourra pousser
+class Poussable : public Bloc
+{
+private:
+    bool m_estPoussable;
+public:
+    //constructeur surchargé
+    Poussable(int posX, int posY, char type, bool estPoussable);
+    //destructeur
+    ~Poussable();
+    //getters
+    bool getEstPoussable();
+    //setters
+    void setEstPoussable(bool estPoussable);
+    //méthodes (Snoopy ?)
+    //void bougerBlocPoussable(int posX, int posY);
+};
+
+///Bloc vide qui tapisse la matrice
+class Vide : public Bloc
+{
+public :
+    //constructeur surchargé
+    Vide(int posX, int posY, char type);
+    //destructeur
+    ~Vide();
 };
 
 #endif // BLOCK_H_INCLUDED

@@ -1,10 +1,6 @@
 #ifndef SNOOPY_H_INCLUDED
 #define SNOOPY_H_INCLUDED
 
-#include <iostream>
-#include <stdlib.h>
-#include <string.h>
-
 class Snoopy
 {
 private:

@@ -34,12 +34,12 @@
 		</Compiler>
 		<Unit filename="Bloc.cpp" />
 		<Unit filename="Bloc.h" />
-		<Unit filename="Cassable.cpp" />
-		<Unit filename="Cassable.h" />
-		<Unit filename="Poussable.cpp" />
-		<Unit filename="Poussable.h" />
+		<Unit filename="Matrice.h" />
+		<Unit filename="Niveau.h" />
 		<Unit filename="Snoopy.cpp" />
 		<Unit filename="Snoopy.h" />
+		<Unit filename="console.cpp" />
+		<Unit filename="console.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
