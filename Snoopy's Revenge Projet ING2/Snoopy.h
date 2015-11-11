@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
-#include "Block.h"
+#include "Bloc.h"
 
 class Snoopy
 {

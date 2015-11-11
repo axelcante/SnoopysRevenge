@@ -43,6 +43,7 @@ void Matrice::afficherMatrice()
         {
             std::cout << '|' << m_matrice[i][j].getType();
         }
+        std::cout << '|';
         std::cout << std::endl;
     }
 }
