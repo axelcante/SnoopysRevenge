@@ -15,9 +15,9 @@ public:
     //destructeur
     ~Bloc();
     //getters
-    int getPosX();
-    int getPosY();
-    char getType();
+    int getPosX()const;
+    int getPosY()const;
+    char getType()const;
     //setters
     void setPosX(int posX);
     void setPosY(int posY);
@@ -45,7 +45,7 @@ public:
     //destructeur
     ~Poussable();
     //getters
-    bool getEstPoussable();
+    bool getEstPoussable()const;
     //setters
     void setEstPoussable(bool estPoussable);
     //méthodes (Snoopy ?)
