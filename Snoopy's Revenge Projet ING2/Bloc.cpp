@@ -14,9 +14,9 @@ Bloc::Bloc(){m_pos_x = 0; m_pos_y = 0; m_type = ' ';}
 Bloc::~Bloc(){}
 
 //getters
-int Bloc::getPosX(){return m_pos_x;}
-int Bloc::getPosY(){return m_pos_y;}
-char Bloc::getType(){return m_type;}
+int Bloc::getPosX()const{return m_pos_x;}
+int Bloc::getPosY()const{return m_pos_y;}
+char Bloc::getType()const{return m_type;}
 
 //setters
 void Bloc::setPosX(int posX){m_pos_x = posX;}
@@ -47,7 +47,7 @@ Poussable::Poussable(int posX, int posY, char type, bool estPoussable) : Bloc(po
 Poussable::~Poussable(){}
 
 //getters
-bool Poussable::getEstPoussable(){return m_estPoussable;}
+bool Poussable::getEstPoussable()const{return m_estPoussable;}
 
 //setters
 void Poussable::setEstPoussable(bool estPoussable)
