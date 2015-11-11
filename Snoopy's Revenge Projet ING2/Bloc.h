@@ -62,4 +62,32 @@ public :
     ~Vide();
 };
 
+///Bloc Snoopy
+class Snoopy : public Bloc
+{
+private :
+    int m_vies;
+    int m_score;
+    int m_oiseaux;
+
+public :
+    //Constructeurs
+    Snoopy();
+    //Destructeur
+    ~Snoopy();
+    //getters
+    int getVies()const;
+    int getScore()const;
+    int getOiseaux()const;
+//setters
+    void setVies(int vies);
+    void setScore(int score);
+    void setOiseaux(int oiseaux);
+    /* //Méthodes
+       void moveSnoopy();
+       void breakbloc(Bloc &bloc); ///
+       void saveGame();
+       void loadGame();*/
+};
+
 #endif // BLOC_H_INCLUDED
