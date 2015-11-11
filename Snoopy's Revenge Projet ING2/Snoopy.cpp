@@ -11,7 +11,7 @@ Snoopy::~Snoopy() {}
 
 ///Méthodes
 /*    void moveSnoopy();
-    void breakBlock();
+    void breakBlock(Block &block);
     void saveGame();
     void loadGame();
 */
@@ -40,23 +40,23 @@ int Snoopy::getOiseaux() const
 }
 
 //Setters
-void Snoopy::setPosX(int posX)
+void setPosX(int posX)
 {
     m_pos_x=posX;
 }
-void Snoopy::setPosY(int posY)
+void setPosY(int posY)
 {
     m_pos_y=posY;
 }
-void Snoopy::setVies(int vies)
+void setVies(int vies)
 {
     m_vies=vies;
 }
-void Snoopy::setScore(int score)
+void setScore(int score)
 {
     m_score=score;
 }
-void Snoopy::setOiseaux(int oiseaux)
+void setOiseaux(int oiseaux)
 {
     m_oiseaux=oiseaux;
 }
