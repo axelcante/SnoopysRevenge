@@ -52,8 +52,12 @@
 1447250658 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\console.h
 	<iostream>
 
-1447250658 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\main.cpp
+1447260382 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\main.cpp
 	<iostream>
+	"Bloc.h"
+	"Matrice.h"
+	"Niveau.h"
+	<vector>
 
 1447251581 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\bloc.cpp
 	<iostream>
@@ -69,4 +73,6 @@
 1447260060 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.h
 	"Bloc.h"
 	<vector>
+
+1447260456 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.h
 
