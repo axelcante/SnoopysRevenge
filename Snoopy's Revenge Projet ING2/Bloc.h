@@ -24,16 +24,24 @@ public:
     void setType(char type);
 };
 
+///----------------------------------------------------------------
 ///Bloc que Snoopy pourra casser
 class Cassable : public Bloc
 {
+private :
+    bool m_estPiege;
 public:
     //constructeur surchargé
-    Cassable(int posX, int posY, char type);
+    Cassable(int posX, int posY, char type,bool estPiege);
     //destructeur
     ~Cassable();
+        //getters
+    bool getEstPiege()const;
+    //setters
+    void setEstPiege(bool estPiege);
 };
 
+///----------------------------------------------------------------
 ///Bloc que Snoopy pourra pousser
 class Poussable : public Bloc
 {
@@ -52,16 +60,7 @@ public:
     //void bougerBlocPoussable(int posX, int posY);
 };
 
-///Bloc vide qui tapisse la matrice
-class Vide : public Bloc
-{
-public :
-    //constructeur surchargé
-    Vide(int posX, int posY, char type);
-    //destructeur
-    ~Vide();
-};
-
+///----------------------------------------------------------------
 ///Bloc Snoopy
 class Snoopy : public Bloc
 {
@@ -72,7 +71,7 @@ private :
 
 public :
     //Constructeurs
-    Snoopy();
+    Snoopy(int posX, int posY, char type,int vies,int score,int oiseaux);
     //Destructeur
     ~Snoopy();
     //getters

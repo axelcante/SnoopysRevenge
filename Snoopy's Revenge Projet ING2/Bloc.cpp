@@ -11,31 +11,62 @@ Bloc::Bloc(int posX, int posY, char type)
 }
 
 //destructeur
-Bloc::~Bloc(){}
+Bloc::~Bloc() {}
 
 //getters
-int Bloc::getPosX()const{return m_pos_x;}
-int Bloc::getPosY()const{return m_pos_y;}
-char Bloc::getType()const{return m_type;}
+int Bloc::getPosX()const
+{
+    return m_pos_x;
+}
+int Bloc::getPosY()const
+{
+    return m_pos_y;
+}
+char Bloc::getType()const
+{
+    return m_type;
+}
 
 //setters
-void Bloc::setPosX(int posX){m_pos_x = posX;}
-void Bloc::setPosY(int posY){m_pos_y = posY;}
-void Bloc::setType(char type){m_type = type;}
+void Bloc::setPosX(int posX)
+{
+    m_pos_x = posX;
+}
+void Bloc::setPosY(int posY)
+{
+    m_pos_y = posY;
+}
+void Bloc::setType(char type)
+{
+    m_type = type;
+}
 
+///----------------------------------------------------------------
 ///Bloc Cassable
-Cassable::Cassable(int posX, int posY, char type) : Bloc(posX, posY, type)
+Cassable::Cassable(int posX, int posY, char type,bool estPiege) : Bloc(posX,posY, type)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_estPiege = estPiege; //Savoir s'il est piégé ou pas
 }
 //Destructeur
-Cassable::~Cassable(){}
+Cassable::~Cassable() {}
+//getters
+bool Cassable::getEstPiege()const
+{
+    return m_estPiege;
+}
+//setters
+void Cassable::setEstPiege(bool estPiege)
+{
+    m_estPiege = estPiege;
+}
 
+///----------------------------------------------------------------
 ///Bloc Poussable
 //constructeur surchargé
-Poussable::Poussable(int posX, int posY, char type, bool estPoussable) : Bloc(posX, posY, type)
+Poussable::Poussable(int posX, int posY, char type,bool estPoussable) : Bloc(posX,posY,type)
 {
     m_pos_x = posX;
     m_pos_y = posY;
@@ -44,34 +75,34 @@ Poussable::Poussable(int posX, int posY, char type, bool estPoussable) : Bloc(po
 }
 
 //destructeur
-Poussable::~Poussable(){}
+Poussable::~Poussable() {}
 
 //getters
-bool Poussable::getEstPoussable()const{return m_estPoussable;}
+bool Poussable::getEstPoussable()const
+{
+    return m_estPoussable;
+}
 
 //setters
 void Poussable::setEstPoussable(bool estPoussable)
 {
     m_estPoussable = estPoussable;
 }
-
-///Bloc vide
-//Constructeur surchargé
-Vide::Vide(int posX, int posY, char type) : Bloc(posX, posY, type)
+///----------------------------------------------------------------
+///Bloc Snoopy
+//Initialisation: constructeurs & Destructeurs
+//constructeur surchargé
+Snoopy::Snoopy(int posX, int posY, char type,int vies,int score,int oiseaux) : Bloc(posX,posY,type)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_vies=vies;
+    m_score=score;
+    m_oiseaux=oiseaux;
+
 }
 
-//Destructeur
-Vide::~Vide(){}
-
-
-///Bloc Snoopy
-//Initialisation: constructeurs & Destructeurs
-//Par défaut
-Snoopy::Snoopy() {}
 //Destructeur unique
 Snoopy::~Snoopy() {}
 
@@ -98,15 +129,15 @@ int Snoopy::getOiseaux() const
 }
 
 //Setters
-void setVies(int vies)
+void Snoopy::setVies(int vies)
 {
     m_vies=vies;
 }
-void setScore(int score)
+void Snoopy::setScore(int score)
 {
     m_score=score;
 }
-void setOiseaux(int oiseaux)
+void Snoopy::setOiseaux(int oiseaux)
 {
     m_oiseaux=oiseaux;
 }
