@@ -1,7 +1,7 @@
-#ifndef BLOCK_H_INCLUDED
-#define BLOCK_H_INCLUDED
+#ifndef BLOC_H_INCLUDED
+#define BLOC_H_INCLUDED
 
-///Classe mère : one block to rule them all...
+///Classe mère : one bloc to rule them all...
 class Bloc
 {
 protected:
@@ -10,9 +10,8 @@ protected:
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
 
 public:
-    //constructeurs
+    //constructeur
     Bloc(int posX, int posY, char type);
-    Bloc();
     //destructeur
     ~Bloc();
     //getters
@@ -54,13 +53,13 @@ public:
 };
 
 ///Bloc vide qui tapisse la matrice
-/*class Vide : public Bloc
+class Vide : public Bloc
 {
 public :
     //constructeur surchargé
     Vide(int posX, int posY, char type);
     //destructeur
     ~Vide();
-};*/
+};
 
-#endif // BLOCK_H_INCLUDED
+#endif // BLOC_H_INCLUDED
