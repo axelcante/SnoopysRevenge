@@ -4,8 +4,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
-#include "Bloc.h"
-
+#include "bloc.h"
+/*
 class Snoopy
 {
 private:
@@ -41,9 +41,10 @@ public:
 
     //methods
     void moveSnoopy();
-    void breakBlock(Block &block); ///
+    void breakbloc(Bloc &bloc); ///
     void saveGame();
     void loadGame();
 };
+*/
 
 #endif // SNOOPY_H_INCLUDED

@@ -6,10 +6,15 @@
 Matrice::Matrice()
 {
     Bloc blocVide =  Bloc(0,0,'C');
+    std::vector<Bloc>column;
+    for (int i = 0; i < 20; i++)
+        {
+            column.push_back(blocVide);
+        }
     for (int i = 0; i < 10; i++)
-    {
-        m_matrice.push_back(std::vector<Bloc>(20,blocVide));
-    }
+        {
+            m_matrice.push_back(column);
+        }
 }
 
 //getters
@@ -43,7 +48,6 @@ void Matrice::afficherMatrice()
         {
             std::cout << '|' << m_matrice[i][j].getType();
         }
-        std::cout << '|';
-        std::cout << std::endl;
+        std::cout <<"|\n";
     }
 }
