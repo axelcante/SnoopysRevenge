@@ -2,14 +2,14 @@
 #include "Bloc.h"
 
 ///Bloc : classe mère
-//constructeur surchargé
+//constructeurs
 Bloc::Bloc(int posX, int posY, char type)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
 }
-
+Bloc::Bloc(){m_pos_x = 0; m_pos_y = 0; m_type = ' ';}
 //destructeur
 Bloc::~Bloc(){}
 
@@ -54,15 +54,3 @@ void Poussable::setEstPoussable(bool estPoussable)
 {
     m_estPoussable = estPoussable;
 }
-
-///Bloc vide
-//Constructeur surchargé
-Vide::Vide(int posX, int posY, char type) : Bloc(posX, posY, type)
-{
-    m_pos_x = posX;
-    m_pos_y = posY;
-    m_type = type;
-}
-
-//Destructeur
-Vide::~Vide(){}

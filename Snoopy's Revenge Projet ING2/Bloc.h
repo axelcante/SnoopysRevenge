@@ -10,8 +10,9 @@ protected:
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
 
 public:
-    //constructeur
+    //constructeurs
     Bloc(int posX, int posY, char type);
+    Bloc();
     //destructeur
     ~Bloc();
     //getters
@@ -53,13 +54,13 @@ public:
 };
 
 ///Bloc vide qui tapisse la matrice
-class Vide : public Bloc
+/*class Vide : public Bloc
 {
 public :
     //constructeur surchargé
     Vide(int posX, int posY, char type);
     //destructeur
     ~Vide();
-};
+};*/
 
 #endif // BLOCK_H_INCLUDED
