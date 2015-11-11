@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+<<<<<<< HEAD
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="154" topLine="0" />
@@ -9,6 +10,16 @@
 	<File name="Bloc.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="370" topLine="0" />
+=======
+	<File name="console.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="56" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="Bloc.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1428" topLine="7" />
+>>>>>>> a9f7cf64dcdb2ba78771969bef3a52351bc57705
 		</Cursor>
 	</File>
 	<File name="Bloc.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -16,6 +27,7 @@
 			<Cursor1 position="320" topLine="44" />
 		</Cursor>
 	</File>
+<<<<<<< HEAD
 	<File name="Matrice.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="152" topLine="0" />
@@ -32,13 +44,42 @@
 		</Cursor>
 	</File>
 	<File name="Snoopy.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+	<File name="Snoopy.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="54" topLine="0" />
+			<Cursor1 position="1025" topLine="39" />
 		</Cursor>
 	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="41" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Bloc.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+>>>>>>> a9f7cf64dcdb2ba78771969bef3a52351bc57705
+		<Cursor>
+			<Cursor1 position="1350" topLine="8" />
+		</Cursor>
+	</File>
+<<<<<<< HEAD
 	<File name="Snoopy.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="431" topLine="0" />
+=======
+	<File name="Snoopy.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="174" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="console.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="83" />
+		</Cursor>
+	</File>
+	<File name="Matrice.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="54" topLine="0" />
+>>>>>>> a9f7cf64dcdb2ba78771969bef3a52351bc57705
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
