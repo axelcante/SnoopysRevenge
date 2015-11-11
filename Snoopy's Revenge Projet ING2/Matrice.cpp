@@ -1,20 +1,21 @@
 #include <iostream>
 #include <vector>
 #include "Matrice.h"
+#include "console.h"
 
 //constructeur
 Matrice::Matrice()
 {
-    Bloc blocVide =  Bloc(0,0,'C');
+    Bloc blocVide =  Bloc(0,0,' ');
     std::vector<Bloc>column;
     for (int i = 0; i < 20; i++)
-        {
-            column.push_back(blocVide);
-        }
+    {
+        column.push_back(blocVide);
+    }
     for (int i = 0; i < 10; i++)
-        {
-            m_matrice.push_back(column);
-        }
+    {
+        m_matrice.push_back(column);
+    }
 }
 
 //getters
