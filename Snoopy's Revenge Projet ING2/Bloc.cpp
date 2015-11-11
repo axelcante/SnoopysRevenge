@@ -66,3 +66,47 @@ Vide::Vide(int posX, int posY, char type) : Bloc(posX, posY, type)
 
 //Destructeur
 Vide::~Vide(){}
+
+
+///Bloc Snoopy
+//Initialisation: constructeurs & Destructeurs
+//Par défaut
+Snoopy::Snoopy() {}
+//Destructeur unique
+Snoopy::~Snoopy() {}
+
+//Méthodes
+/*    void moveSnoopy();
+    void breakbloc(Bloc &bloc);
+    void saveGame();
+    void loadGame();
+*/
+
+//Accesseurs
+//Getters
+int Snoopy::getVies() const
+{
+    return m_vies;
+}
+int Snoopy::getScore() const
+{
+    return m_score;
+}
+int Snoopy::getOiseaux() const
+{
+    return m_oiseaux;
+}
+
+//Setters
+void setVies(int vies)
+{
+    m_vies=vies;
+}
+void setScore(int score)
+{
+    m_score=score;
+}
+void setOiseaux(int oiseaux)
+{
+    m_oiseaux=oiseaux;
+}
