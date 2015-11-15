@@ -13,11 +13,7 @@ public :
     Matrice();
     //getters
     std::vector<std::vector<Bloc> > getMatrice();
-    //setters
-    //void setMatrice(Bloc matrice);
-
     //methodes
-    //Bloc construireMatrice();
     void afficherMatrice();
     //void changerBloc();
 };

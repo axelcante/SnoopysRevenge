@@ -141,3 +141,25 @@ void Snoopy::setOiseaux(int oiseaux)
 {
     m_oiseaux=oiseaux;
 }
+
+///----------------------------------------------------------------
+///Bloc Balle
+//Initialisation : Constructeur surchargé
+
+Balle::Balle(int posX, int posY, char type) : Bloc(posX, posY, type)
+{
+    m_pos_x = posX;
+    m_pos_y = posY;
+    m_type = type;
+}
+
+void Balle::bougerBalle()
+{
+
+
+
+
+
+}
+
+

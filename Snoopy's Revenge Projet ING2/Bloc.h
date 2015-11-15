@@ -35,7 +35,7 @@ public:
     Cassable(int posX, int posY, char type,bool estPiege);
     //destructeur
     ~Cassable();
-        //getters
+    //getters
     bool getEstPiege()const;
     //setters
     void setEstPiege(bool estPiege);
@@ -87,6 +87,19 @@ public :
        void breakbloc(Bloc &bloc); ///
        void saveGame();
        void loadGame();*/
+};
+
+///-----------------------------------------------------
+///Classe balle
+class Balle : public Bloc
+{
+public :
+    //Constructeur
+    Balle(int posX, int posY, char type);
+    //Destructeur
+    ~Balle();
+    //Méthodes
+    void bougerBalle();
 };
 
 #endif // BLOC_H_INCLUDED
