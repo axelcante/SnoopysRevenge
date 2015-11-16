@@ -34,6 +34,7 @@
 		</Compiler>
 		<Unit filename="Bloc.cpp" />
 		<Unit filename="Bloc.h" />
+		<Unit filename="Constantes.h" />
 		<Unit filename="Matrice.cpp" />
 		<Unit filename="Matrice.h" />
 		<Unit filename="Niveau.h" />
