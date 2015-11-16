@@ -146,20 +146,25 @@ void Snoopy::setOiseaux(int oiseaux)
 ///Bloc Balle
 //Initialisation : Constructeur surchargé
 
-Balle::Balle(int posX, int posY, char type) : Bloc(posX, posY, type)
+Balle::Balle(int posX, int posY, char type) : Bloc(posX,posY,type)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
 }
 
+
 void Balle::bougerBalle()
 {
-
-
-
-
-
+    int decalage_X = 1, decalage_Y = 1;
+    setPosX(getPosX()+decalage_X);
+    setPosY(getPosY()+decalage_Y);
+    if(getPosX() == 19 || getPosX() == 0)
+    {
+        decalage_X *= -1;
+    }
+    if(getPosY() == 9 || getPosY() == 0)
+    {
+        decalage_Y *= -1;
+    }
 }
-
-

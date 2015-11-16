@@ -90,14 +90,14 @@ public :
 };
 
 ///-----------------------------------------------------
-///Classe balle
+///Classe Balle
 class Balle : public Bloc
 {
 public :
-    //Constructeur
+    //Constructeur surchargé
     Balle(int posX, int posY, char type);
     //Destructeur
-    ~Balle();
+    //~Balle();
     //Méthodes
     void bougerBalle();
 };
