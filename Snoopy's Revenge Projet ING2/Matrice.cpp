@@ -6,7 +6,7 @@
 //constructeur
 Matrice::Matrice()
 {
-    Bloc blocVide =  Bloc(0,0,' ');
+    Bloc blocVide =  Bloc(0,0,'P');
     std::vector<Bloc>column;
     for (int i = 0; i < 20; i++)
     {
@@ -19,13 +19,11 @@ Matrice::Matrice()
 }
 
 //getters
-std::vector<std::vector<Bloc> > Matrice::getMatrice()
+std::vector<std::vector<Bloc> > Matrice::getMatrice() const
 {
     return m_matrice;
 }
 
-//setters
-//Do we need one ?
 
 //Methodes
 /*Bloc Matrice::construireMatrice()

@@ -5,6 +5,7 @@
 
 class Matrice
 {
+    class Bloc;
 private :
     std::vector<std::vector<Bloc> > m_matrice;
 
@@ -12,9 +13,8 @@ public :
     //constructeur
     Matrice();
     //getters
-    std::vector<std::vector<Bloc> > getMatrice();
+    std::vector<std::vector<Bloc> > getMatrice()const;
     //setters
-    //void setMatrice(Bloc matrice);
 
     //methodes
     //Bloc construireMatrice();

@@ -1,6 +1,5 @@
 #include "console.h"
-#include <conio.h>
-#include <windows.h>
+
 
 Console* Console::m_instance = NULL;
 
@@ -38,12 +37,12 @@ void Console::gotoLigCol(int lig, int col)
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
 
-int Console::getInputKey()
+char Console::getInputKey()
 {
     return getch();
 }
 
-bool Console::isKeyboardPressed()
+bool Console::ifKeyboardPressed()
 {
     return kbhit();
 }

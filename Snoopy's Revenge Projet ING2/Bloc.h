@@ -1,5 +1,8 @@
 #ifndef BLOC_H_INCLUDED
 #define BLOC_H_INCLUDED
+#include <iostream>
+#include "console.h"
+#include "Matrice.h"
 
 ///Classe mère : one bloc to rule them all...
 class Bloc
@@ -8,12 +11,11 @@ protected:
     int m_pos_x;
     int m_pos_y;
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
-
 public:
     //constructeur
     Bloc(int posX, int posY, char type);
     //destructeur
-    ~Bloc();
+    virtual ~Bloc();
     //getters
     int getPosX()const;
     int getPosY()const;
@@ -57,7 +59,7 @@ public:
     //setters
     void setEstPoussable(bool estPoussable);
     //méthodes (Snoopy ?)
-    //void bougerBlocPoussable(int posX, int posY);
+   void pousser(int& posX, int& posY);
 };
 
 ///----------------------------------------------------------------
@@ -87,6 +89,7 @@ public :
        void breakbloc(Bloc &bloc); ///
        void saveGame();
        void loadGame();*/
+
 };
 
 #endif // BLOC_H_INCLUDED
