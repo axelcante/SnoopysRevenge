@@ -8,18 +8,13 @@
 //constructeur intialisant les positions de la Balle et de Snoopy (?)
 Matrice::Matrice()
 {
-<<<<<<< HEAD
     Bloc blocVide =  Bloc(0,0,'P');
-=======
+
     Bloc blocVide =  Bloc(0,0,' ');
-<<<<<<< HEAD
     Balle Balle = Balle(10,5,'B') : Bloc(10,5,'B');
->>>>>>> 483f22727128a3bce1355375e30a13c93d9650d1
-=======
     Balle Balle(5,9,'B');
     Bloc Oiseau(0,0,'O');
     //Balle& refBalle = Balle;
->>>>>>> 5a2bfd08d2996de1bf3af315bd8e4bb8ea674023
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
@@ -42,16 +37,12 @@ std::vector<std::vector<Bloc> > Matrice::getMatrice() const
     return m_matrice;
 }
 
-<<<<<<< HEAD
-=======
 //setters
 //Permet de modifier manuellement un bloc de la matrice
 void Matrice::setBloc(int posX, int posY, Bloc Bloc)
 {
     m_matrice[posX][posY] = Bloc;
 }
->>>>>>> 5a2bfd08d2996de1bf3af315bd8e4bb8ea674023
-
 //Methodes
 
 void Matrice::afficherMatrice()

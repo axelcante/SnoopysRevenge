@@ -98,11 +98,10 @@ void Poussable::pousser(int& posX, int& posY) //Je suppose que gotoligcol utilis
     int i=posX; //ligne
     int j=posY;// columns (OU l'inverse :0)
     char touche; //touche pour utilisateur
-     Console conso();
+     Console *conso=Console::getInstance();
         do
         {
-            touche=conso.getInputKey();//saisie de la touche appuyée par le joueur
-            ///console.getInputkey() ?
+            touche=conso->getInputKey();//saisie de la touche appuyée par le joueur
         }
         while(touche==0);
         switch(touche)//Permuter
