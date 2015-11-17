@@ -5,14 +5,19 @@
 //constructeur intialisant les positions de la Balle et de Snoopy (?)
 Matrice::Matrice()
 {
+<<<<<<< HEAD
     return;
 
     Bloc blocPoussable(0,0,'P');
     Bloc blocVide(0,0,' ');
     Balle balle(10,5,'B');
 
+=======
+    Bloc blocVide =  Bloc(0,0,' ');
+    Balle balle(5,9,'B');
+    Balle& ref_Balle = balle;
+>>>>>>> e361e0771de46a0b9042daaaf1d6123613e92b0f
     Bloc Oiseau(0,0,'O');
-    //Balle& refBalle = Balle;
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
