@@ -10,22 +10,25 @@
 
 int main()
 {
+
     //initialisation de la matrice et du premier niveau
     Matrice matrice_niveau_1;
     char touche; //touche appuyee par le joueur
     bool estPoussable;
-    matrice_niveau_1.afficherMatrice();
-    estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');
+    Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
+
+   // matrice_niveau_1.afficherMatrice();
+   /* estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');
     //réference
     int& posX= matrice_niveau_1.getMatrice().getPosX();
-    int& posY= matrice_niveau_1.getMatrice().getPosY();
+    int& posY= matrice_niveau_1.getMatrice().getPosY();*/
 
-    gotoLigCol(POSLIGNE,POSCOLONNE);
+    conso->gotoLigCol(POSLIGNE,POSCOLONNE);
 
     /***********************
     deplacement
     ************************/
-    void deplacement()
+  /*  void deplacement()
     {
 
         //Ressources
@@ -68,12 +71,12 @@ int main()
                     break;
                 }
             }
-
-            gotoLigCol(poslig,poscol);//positionner le curseur a lendroit voulu
+            conso->gotoLigCol(poslig,poscol);//positionner le curseur a lendroit voulu
         }
         while (touche!=' '); //sortir
         i=poslig-POSLIGNE;//Reinitialiser les positions
         j=poscol-POSCOLONNE;
 
-    }
+    }*/
+
 }

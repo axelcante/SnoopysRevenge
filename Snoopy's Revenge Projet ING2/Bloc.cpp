@@ -91,44 +91,44 @@ void Poussable::setEstPoussable(bool estPoussable)
 }
 
 //Méthodes
-void Poussable::pousser(int& posX, int& posY) //Je suppose que gotoligcol utilisée avant et confirmation avec espace
+void Poussable::pousser(int& posX, int& posY,Console* conso) //Je suppose que gotoligcol utilisée avant et confirmation avec espace
 {
     //Déclaration de variables
     char x; //tampon
     int i=posX; //ligne
     int j=posY;// columns (OU l'inverse :0)
     char touche; //touche pour utilisateur
-     Console *conso=Console::getInstance();
         do
         {
             touche=conso->getInputKey();//saisie de la touche appuyée par le joueur
         }
-        while(touche==0);
+        while(touche=='0');
+        /*
         switch(touche)//Permuter
         {
         case '2': //permuter avec "bloc" du bas
-            x=m_matrice[i][j].getType();
-            m_matrice[i][j].setType()=m_matrice[i+1][j].getType();
-            m_matrice[i+1][j].setType()=x;
+            x=matrice->getMatrice()[i][j].getType();
+            matrice->getMatrice()[i][j].setType(matrice->getMatrice()[i+1][j].getType());
+            matrice->getMatrice()[i+1][j].setType(x);
             break;
         case '4'://permuter avec "bloc" de gauche
-            x=m_matrice[i][j].getType();
-            m_matrice[i][j].setType()=m_matrice[i][j-1].getType();
-            m_matrice[i][j-1].setType()=x;
+            x=matrice->getMatrice()[i][j].getType();
+            matrice->getMatrice()[i][j].setType(matrice->getMatrice()[i][j-1].getType());
+            matrice->getMatrice()[i][j-1].setType(x);
             break;
         case '6'://permuter avec "bloc" de droite
-            x=m_matrice[i][j].getType();
-            m_matrice[i][j].setType()=m_matrice[i][j+1].getType();
-            m_matrice[i][j+1].setType()=x;
+            x=matrice->getMatrice()[i][j].getType();
+            matrice->getMatrice()[i][j].setType(matrice->getMatrice()[i][j+1].getType());
+            matrice->getMatrice()[i][j+1].setType(x);
             break;
         case '8'://permuer avec "bloc" du haut
-            x=m_matrice[i][j].getType();
-            m_matrice[i][j].setType()=m_matrice[i-1][j].getType();
-            m_matrice[i-1][j].setType()=x;
+            x=matrice->getMatrice()[i][j].getType();
+            matrice->getMatrice()[i][j].setType(matrice->getMatrice()[i-1][j].getType());
+            matrice->getMatrice()[i-1][j].setType(x);
             break;
         case 's': //sauver la partie
             break;
-        }
+        }*/
 }
 
 ///----------------------------------------------------------------

@@ -1,9 +1,8 @@
 #ifndef BLOC_H_INCLUDED
 #define BLOC_H_INCLUDED
+
 #include <iostream>
 #include "console.h"
-#include "Matrice.h"
-
 ///Classe mère : one bloc to rule them all...
 class Bloc
 {
@@ -59,7 +58,7 @@ public:
     //setters
     void setEstPoussable(bool estPoussable);
     //méthodes (Snoopy ?)
-   void pousser(int& posX, int& posY);
+   void pousser(int& posX, int& posY,Console* conso);
 };
 
 ///----------------------------------------------------------------

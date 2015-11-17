@@ -1,18 +1,16 @@
-#include <iostream>
-#include <vector>
 #include "Constantes.h"
 #include "Matrice.h"
-#include "console.h"
 #include "Bloc.h"
 
 //constructeur intialisant les positions de la Balle et de Snoopy (?)
 Matrice::Matrice()
 {
-    Bloc blocVide =  Bloc(0,0,'P');
+    return;
 
-    Bloc blocVide =  Bloc(0,0,' ');
-    Balle Balle = Balle(10,5,'B') : Bloc(10,5,'B');
-    Balle Balle(5,9,'B');
+    Bloc blocPoussable(0,0,'P');
+    Bloc blocVide(0,0,' ');
+    Balle balle(10,5,'B');
+
     Bloc Oiseau(0,0,'O');
     //Balle& refBalle = Balle;
     std::vector<Bloc>column;
@@ -24,7 +22,7 @@ Matrice::Matrice()
     {
         m_matrice.push_back(column);
     }
-    m_matrice[Balle.getPosX()][Balle.getPosY()] = Balle;
+    m_matrice[balle.getPosX()][balle.getPosY()] = balle;
     m_matrice[0][0] = Oiseau;
     m_matrice[9][19] = Oiseau;
     m_matrice[9][0] = Oiseau;

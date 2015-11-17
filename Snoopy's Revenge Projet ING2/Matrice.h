@@ -1,11 +1,15 @@
 #ifndef MATRICE_H_INCLUDED
 #define MATRICE_H_INCLUDED
-#include "Bloc.h"
 #include <vector>
+#include <iostream>
+#include <string>
+
+
+#include "Bloc.h"
 
 class Matrice
 {
-    class Bloc;
+
 private :
     std::vector<std::vector<Bloc> > m_matrice;
 
