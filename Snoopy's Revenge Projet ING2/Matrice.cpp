@@ -9,9 +9,9 @@
 Matrice::Matrice()
 {
     Bloc blocVide =  Bloc(0,0,' ');
-    Balle Balle(5,9,'B');
+    Balle balle(5,9,'B');
+    Balle& ref_Balle = balle;
     Bloc Oiseau(0,0,'O');
-    //Balle& refBalle = Balle;
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
@@ -21,7 +21,7 @@ Matrice::Matrice()
     {
         m_matrice.push_back(column);
     }
-    m_matrice[Balle.getPosX()][Balle.getPosY()] = Balle;
+    m_matrice[balle.getPosX()][balle.getPosY()] = balle;
     m_matrice[0][0] = Oiseau;
     m_matrice[9][19] = Oiseau;
     m_matrice[9][0] = Oiseau;
