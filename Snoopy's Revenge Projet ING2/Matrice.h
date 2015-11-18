@@ -19,9 +19,7 @@ public :
     //getters
     std::vector<std::vector<Bloc> > getMatrice()const;
     //setters
-
     std::vector<std::vector<Bloc> > getMatrice();
-
     //setters
     void setBloc(int posX, int posY, Bloc Bloc);
     //methodes

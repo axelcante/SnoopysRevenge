@@ -88,7 +88,6 @@ public :
        void breakbloc(Bloc &bloc); ///
        void saveGame();
        void loadGame();*/
-
 };
 
 ///-----------------------------------------------------
@@ -99,7 +98,7 @@ public :
     //Constructeur surchargé
     Balle(int posX, int posY, char type);
     //Destructeur
-    //~Balle();
+    ~Balle();
     //Méthodes
     void bougerBalle();
 };
