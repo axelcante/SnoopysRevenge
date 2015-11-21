@@ -1,27 +1,50 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 1447782274 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\bloc.cpp
 	"console.h"
 	"Bloc.h"
 
 1447693847 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\console.h
+=======
+1447871018 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\bloc.cpp
+	"console.h"
+	"Bloc.h"
+
+1447782919 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\console.h
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 	<windows.h>
 	<conio.h>
 	<iostream>
 
+<<<<<<< HEAD
 1447782251 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\bloc.h
 	<iostream>
 	"console.h"
 
 1447781358 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.h
+=======
+1447870972 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\bloc.h
+	<iostream>
+	"console.h"
+
+1447874667 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.h
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 	<vector>
 	<iostream>
 	<string>
 	"Bloc.h"
 
+<<<<<<< HEAD
 1447693847 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\console.cpp
 	"console.h"
 
 1447782362 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\main.cpp
+=======
+1447782919 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\console.cpp
+	"console.h"
+
+1448115190 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\main.cpp
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 	<iostream>
 	"Bloc.h"
 	"Matrice.h"
@@ -29,13 +52,20 @@
 	"console.h"
 	<vector>
 
+<<<<<<< HEAD
 1447685303 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.h
 
 1447782376 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.cpp
+=======
+1447782919 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.h
+
+1447875270 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.cpp
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 	"Constantes.h"
 	"Matrice.h"
 	"Bloc.h"
 
+<<<<<<< HEAD
 1447767194 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
 	<iostream>
 
@@ -77,5 +107,8 @@
 	"Bloc.h"
 
 1447707312 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\constantes.h
+=======
+1447782919 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 	<iostream>
 
