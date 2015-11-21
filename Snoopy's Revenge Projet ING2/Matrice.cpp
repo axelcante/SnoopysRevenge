@@ -5,11 +5,18 @@
 //constructeur intialisant les positions de la Balle et de Snoopy (?)
 Matrice::Matrice()
 {
+<<<<<<< HEAD
     /*
     Bloc blocPoussable(0,0,'P');
     Bloc blocVide(0,0,' ');
     Balle balle(10,5,'B');
     Bloc Oiseau(0,0,'O');
+=======
+    /*Bloc Oiseau1(0,0,'O');
+    Bloc Oiseau2(9,19,'O');
+    Bloc Oiseau3(9,0,'O');
+    Bloc Oiseau4(0,19,'O');
+>>>>>>> 14fb0b17d377e13a26fb3b8d489e829acde339fc
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
@@ -20,6 +27,7 @@ Matrice::Matrice()
         m_matrice.push_back(column);
     }
     m_matrice[balle.getPosX()][balle.getPosY()] = balle;
+<<<<<<< HEAD
     m_matrice[0][0] = Oiseau;
     m_matrice[9][19] = Oiseau;
     m_matrice[9][0] = Oiseau;
@@ -30,6 +38,12 @@ Matrice::Matrice()
 Matrice::Matrice(std::vector<std::vector<Bloc> > matrice)
 {
     m_matrice=matrice;
+=======
+    m_matrice[Oiseau1.getPosX()][Oiseau2.getPosY()] = Oiseau1;
+    m_matrice[Oiseau2.getPosX()][Oiseau2.getPosY()] = Oiseau2;
+    m_matrice[Oiseau3.getPosX()][Oiseau3.getPosY()] = Oiseau3;
+    m_matrice[Oiseau3.getPosX()][Oiseau3.getPosY()] = Oiseau4;*/
+>>>>>>> 14fb0b17d377e13a26fb3b8d489e829acde339fc
 }
 //desctructeur unique
 Matrice::~Matrice() {}
@@ -47,6 +61,8 @@ void Matrice::setBloc(int posX, int posY, Bloc Bloc)
     m_matrice[posX][posY] = Bloc;
 }
 //Methodes
+
+
 
 void Matrice::afficherMatrice()
 {
