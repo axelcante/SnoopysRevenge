@@ -34,12 +34,11 @@ void Matrice::initialisationMatrice()
     Bloc oiseau2(0,19,'O');
     Bloc oiseau3(9,0,'O');
     Bloc oiseau4(9,19,'O');
-    Bloc blocVide(0,0,' ');
 
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
-        column.push_back(blocVide);
+        column.push_back(m_blocVide);
     }
     for (int i = 0; i < N_LIGNES; i++)
     {
@@ -66,6 +65,7 @@ void Matrice::afficherMatrice()
 
 void Matrice::bougerBalle()
 {
+    m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
     int decalage_X = 1, decalage_Y = 1;
     m_balle.setPosX(m_balle.getPosX()+decalage_X);
     m_balle.setPosY(m_balle.getPosY()+decalage_Y);
@@ -77,6 +77,7 @@ void Matrice::bougerBalle()
     {
         decalage_Y *= -1;
     }
+    m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
 
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)

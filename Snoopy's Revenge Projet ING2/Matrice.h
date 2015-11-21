@@ -11,13 +11,13 @@ class Matrice
 {
 private :
     std::vector<std::vector<Bloc> > m_matrice;
-    Balle m_balle; //= Balle(5,10,'B')
+    Balle m_balle = Balle(5,10,'B');
+    Bloc m_blocVide = Bloc(0,0,' ');
+    Snoopy m_Snoopy = Snoopy(4,4,'S')
 
 public :
-    //constructeur par défaut
+    //constructeur
     Matrice();
-    //constructeur surchargé
-    Matrice(std::vector<std::vector<Bloc> > matrice);
     //destructeur
     ~Matrice();
     //getters
