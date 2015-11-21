@@ -14,6 +14,9 @@ int main()
     Matrice matrice_niveau_1;
     matrice_niveau_1.initialisationMatrice();
     matrice_niveau_1.afficherMatrice();
+    matrice_niveau_1.bougerBalle();
+    std::cout << std::endl;
+    matrice_niveau_1.afficherMatrice();
     //matrice_niveau_1.bougerBalle();
     //char touche; //touche appuyee par le joueur
     //bool estPoussable;
