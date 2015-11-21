@@ -1,90 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-<<<<<<< HEAD
-	<File name="console.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="441" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="Bloc.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2385" topLine="66" />
-		</Cursor>
-	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="363" topLine="9" />
+			<Cursor1 position="0" topLine="65" />
 		</Cursor>
 	</File>
-	<File name="Bloc.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="Matrice.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4568" topLine="159" />
+			<Cursor1 position="0" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="console.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="console.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="714" topLine="13" />
+			<Cursor1 position="0" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="Niveau.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Bloc.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="71" topLine="0" />
+			<Cursor1 position="93" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Matrice.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="Constantes.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="468" topLine="9" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Matrice.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="Matrice.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1210" topLine="0" />
-=======
-	<File name="Matrice.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="971" topLine="16" />
+			<Cursor1 position="129" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Bloc.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="Niveau.h" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1644" topLine="68" />
+			<Cursor1 position="0" topLine="1" />
 		</Cursor>
 	</File>
-	<File name="console.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="Bloc.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="76" topLine="0" />
+			<Cursor1 position="0" topLine="72" />
 		</Cursor>
 	</File>
-	<File name="Niveau.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="console.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="71" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Matrice.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="746" topLine="10" />
-		</Cursor>
-	</File>
-	<File name="Constantes.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="70" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Bloc.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1540" topLine="41" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="734" topLine="5" />
-		</Cursor>
-	</File>
-	<File name="console.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="714" topLine="13" />
->>>>>>> e5b2097e364150214ffe830793f5d888984618a3
+			<Cursor1 position="0" topLine="45" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

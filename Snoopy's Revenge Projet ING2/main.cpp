@@ -12,18 +12,15 @@ int main()
 {
     //initialisation de la matrice et du premier niveau
     Matrice matrice_niveau_1;
-<<<<<<< HEAD
     matrice_niveau_1.initialisationMatrice();
     matrice_niveau_1.afficherMatrice();
     //matrice_niveau_1.bougerBalle();
     //char touche; //touche appuyee par le joueur
     //bool estPoussable;
     //Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
-=======
     //char touche; //touche appuyee par le joueur
-   // bool estPoussable;
+    // bool estPoussable;
     Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
->>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 
     // matrice_niveau_1.afficherMatrice();
     /* estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');

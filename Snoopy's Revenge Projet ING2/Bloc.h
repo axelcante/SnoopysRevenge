@@ -1,8 +1,8 @@
 #ifndef BLOC_H_INCLUDED
 #define BLOC_H_INCLUDED
-
 #include <iostream>
 #include "console.h"
+
 ///Classe mère : one bloc to rule them all...
 class Bloc
 {
@@ -17,10 +17,6 @@ public:
     Bloc(int posX, int posY, char type);
     //destructeur
     ~Bloc();
-<<<<<<< HEAD
-=======
-   /// virtual ~Bloc();
->>>>>>> e5b2097e364150214ffe830793f5d888984618a3
     //getters
     int getPosX()const;
     int getPosY()const;
