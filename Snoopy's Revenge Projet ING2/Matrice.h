@@ -13,8 +13,13 @@ private :
     std::vector<std::vector<Bloc> > m_matrice;
     Balle m_balle = Balle(5,10,'B');
     Bloc m_blocVide = Bloc(0,0,' ');
+<<<<<<< HEAD
+    //Snoopy m_Snoopy = Snoopy(4,4,'S');
+    Bloc m_Oiseau = Bloc(0,0,'O');
+=======
     Snoopy m_Snoopy = Snoopy(4,4,'S',0,0,0);
     Poussable m_blocPoussable = Poussable(0,0,'P',true);
+>>>>>>> 41be20b4de823ffeb8f7c64d65acb147097f4021
 
 public :
     //constructeur
