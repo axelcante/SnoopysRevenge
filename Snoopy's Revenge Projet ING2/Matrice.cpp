@@ -2,13 +2,36 @@
 #include "Matrice.h"
 #include "Bloc.h"
 
-//constructeur intialisant les positions de la Balle et de Snoopy (?)
-Matrice::Matrice()
+//constructeur
+Matrice::Matrice(){}
+
+//getters
+std::vector<std::vector<Bloc> > Matrice::getMatrice() const
 {
-    /*Bloc Oiseau1(0,0,'O');
-    Bloc Oiseau2(9,19,'O');
-    Bloc Oiseau3(9,0,'O');
-    Bloc Oiseau4(0,19,'O');
+    return m_matrice;
+}
+
+Balle Matrice::getBalle() const
+{
+    return m_balle;
+}
+
+//setters
+//Permet de modifier manuellement un bloc de la matrice
+void Matrice::setBloc(int posX, int posY, Bloc bloc)
+{
+    m_matrice[posX][posY] = bloc;
+}
+
+///Methodes
+//Cette méthode initialise les oiseaux
+void Matrice::initialisationMatrice()
+{
+    Bloc oiseau1(0,0,'O');
+    Bloc oiseau2(0,19,'O');
+    Bloc oiseau3(9,0,'O');
+    Bloc oiseau4(9,19,'O');
+    Bloc blocVide(0,0,' ');
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
@@ -18,28 +41,12 @@ Matrice::Matrice()
     {
         m_matrice.push_back(column);
     }
-    m_matrice[balle.getPosX()][balle.getPosY()] = balle;
-    m_matrice[Oiseau1.getPosX()][Oiseau2.getPosY()] = Oiseau1;
-    m_matrice[Oiseau2.getPosX()][Oiseau2.getPosY()] = Oiseau2;
-    m_matrice[Oiseau3.getPosX()][Oiseau3.getPosY()] = Oiseau3;
-    m_matrice[Oiseau3.getPosX()][Oiseau3.getPosY()] = Oiseau4;*/
+    m_matrice[oiseau1.getPosX()][oiseau1.getPosY()] = oiseau1;
+    m_matrice[oiseau2.getPosX()][oiseau2.getPosY()] = oiseau2;
+    m_matrice[oiseau3.getPosX()][oiseau3.getPosY()] = oiseau3;
+    m_matrice[oiseau4.getPosX()][oiseau4.getPosY()] = oiseau4;
+    m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
-
-//getters
-std::vector<std::vector<Bloc> > Matrice::getMatrice() const
-{
-    return m_matrice;
-}
-
-//setters
-//Permet de modifier manuellement un bloc de la matrice
-void Matrice::setBloc(int posX, int posY, Bloc Bloc)
-{
-    m_matrice[posX][posY] = Bloc;
-}
-//Methodes
-
-
 
 void Matrice::afficherMatrice()
 {
@@ -50,5 +57,20 @@ void Matrice::afficherMatrice()
             std::cout << '|' << m_matrice[i][j].getType();
         }
         std::cout <<"|\n";
+    }
+}
+
+void Matrice::bougerBalle()
+{
+    int decalage_X = 1, decalage_Y = 1;
+    m_balle.setPosX(m_balle.getPosX()+decalage_X);
+    m_balle.setPosY(m_balle.getPosY()+decalage_Y);
+    if(m_balle.getPosX() == 19 || m_balle.getPosX() == 0)
+    {
+        decalage_X *= -1;
+    }
+    if(m_balle.getPosY() == 9 || m_balle.getPosY() == 0)
+    {
+        decalage_Y *= -1;
     }
 }

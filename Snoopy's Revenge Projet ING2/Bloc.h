@@ -14,7 +14,7 @@ public:
     //constructeur
     Bloc(int posX, int posY, char type);
     //destructeur
-    virtual ~Bloc();
+    ~Bloc();
     //getters
     int getPosX()const;
     int getPosY()const;
@@ -100,7 +100,6 @@ public :
     //Destructeur
     ~Balle();
     //Méthodes
-    void bougerBalle();
 };
 
 #endif // BLOC_H_INCLUDED
