@@ -11,10 +11,13 @@ protected:
     int m_pos_y;
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
 public:
-    //constructeur
+    //constructeur par défaut
+    Bloc();
+    //constructeur surchargé
     Bloc(int posX, int posY, char type);
     //destructeur
-    virtual ~Bloc();
+    ~Bloc();
+   /// virtual ~Bloc();
     //getters
     int getPosX()const;
     int getPosY()const;
@@ -57,8 +60,7 @@ public:
     bool getEstPoussable()const;
     //setters
     void setEstPoussable(bool estPoussable);
-    //méthodes (Snoopy ?)
-   void pousser(int& posX, int& posY,Console* conso);
+    //méthodes (dans Snoopy ?)
 };
 
 ///----------------------------------------------------------------

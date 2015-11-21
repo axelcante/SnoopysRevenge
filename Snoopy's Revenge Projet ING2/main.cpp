@@ -13,8 +13,8 @@ int main()
 
     //initialisation de la matrice et du premier niveau
     Matrice matrice_niveau_1;
-    char touche; //touche appuyee par le joueur
-    bool estPoussable;
+    //char touche; //touche appuyee par le joueur
+   // bool estPoussable;
     Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
 
    // matrice_niveau_1.afficherMatrice();

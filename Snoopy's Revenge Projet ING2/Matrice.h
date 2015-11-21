@@ -9,13 +9,16 @@
 
 class Matrice
 {
-
 private :
     std::vector<std::vector<Bloc> > m_matrice;
 
 public :
-    //constructeur
+    //constructeur par défaut
     Matrice();
+    //constructeur surchargé
+    Matrice(std::vector<std::vector<Bloc> > matrice);
+    //destructeur
+    ~Matrice();
     //getters
     std::vector<std::vector<Bloc> > getMatrice()const;
     //setters
@@ -27,6 +30,8 @@ public :
     //methodes
     void afficherMatrice();
     //void changerBloc();
+    //pousser
+    void pousser(Console* conso, char& touche,Matrice* matrice, int& posXSnoopy, int& posYSnoopy);
 };
 
 #endif // MATRICE_H_INCLUDED
