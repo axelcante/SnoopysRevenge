@@ -16,10 +16,14 @@ int main()
     matrice_niveau_1.afficherMatrice();
     //matrice_niveau_1.bougerBalle();
     //char touche; //touche appuyee par le joueur
+<<<<<<< HEAD
     //bool estPoussable;
     //Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
     //char touche; //touche appuyee par le joueur
     // bool estPoussable;
+=======
+   // bool estPoussable;
+>>>>>>> d932c2c61c2a432fc138261d1f384740c197bcdc
     Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
 
     // matrice_niveau_1.afficherMatrice();

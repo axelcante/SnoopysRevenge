@@ -11,7 +11,7 @@ class Matrice
 {
 private :
     std::vector<std::vector<Bloc> > m_matrice;
-    Balle m_balle = Balle(5,10,'B');
+    Balle m_balle; //= Balle(5,10,'B')
 
 public :
     //constructeur par défaut
@@ -25,6 +25,7 @@ public :
     Balle getBalle() const;
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
+
     //methodes
     void initialisationMatrice();
     void afficherMatrice();

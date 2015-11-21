@@ -6,7 +6,11 @@
 Matrice::Matrice(){}
 
 //desctructeur unique
+<<<<<<< HEAD
 Matrice::~Matrice(){}
+=======
+Matrice::~Matrice() {}
+>>>>>>> d932c2c61c2a432fc138261d1f384740c197bcdc
 
 //getters
 std::vector<std::vector<Bloc> > Matrice::getMatrice() const
@@ -35,6 +39,7 @@ void Matrice::initialisationMatrice()
     Bloc oiseau3(9,0,'O');
     Bloc oiseau4(9,19,'O');
     Bloc blocVide(0,0,' ');
+
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
