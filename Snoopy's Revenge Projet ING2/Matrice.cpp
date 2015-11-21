@@ -3,10 +3,10 @@
 #include "Bloc.h"
 
 //constructeur
-Matrice::Matrice(){}
+Matrice::Matrice() {}
 
 //desctructeur unique
-Matrice::~Matrice(){}
+Matrice::~Matrice() {}
 
 //getters
 std::vector<std::vector<Bloc> > Matrice::getMatrice() const
@@ -17,6 +17,10 @@ std::vector<std::vector<Bloc> > Matrice::getMatrice() const
 Balle Matrice::getBalle() const
 {
     return m_balle;
+}
+Poussable Matrice::getBlocPoussable()const
+{
+    return m_blocPoussable;
 }
 
 //setters
@@ -89,7 +93,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
     ///Vérification que bloc poussable faite AVANT "pousser"
     //Déclaration de variables
     int i=posXSnoopy,j=posYSnoopy;
-   // std::vector<Bloc*> bb;
+    // std::vector<Bloc*> bb;
     //bb.push_back(new Poussable);
     //bb.push_back(new Poussable);
 
@@ -99,42 +103,57 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
     case '2': //pousser "bloc" vers le bas
         if((i+2)<=N_LIGNES) //Pas sortir de la matrice
         {
-            //m_matrice[i][j]=blocvide;
-            matrice->getMatrice()[i][j].setType('V');
-            matrice->getMatrice()[i+1][j].setType('S');
-            matrice->getMatrice()[i+2][j].setType('P');
-            //Rendre ce bloc 'P' non-poussable
-            matrice->getMatrice()[i+2][j].setEstPoussable(false);
+            m_matrice[i][j]=m_blocVide;
+            m_matrice[i+1][j]=m_Snoopy;
+            m_matrice[i+2][j]=m_blocPoussable;
+            /* matrice->getMatrice()[i][j].setType('V');
+             matrice->getMatrice()[i+1][j].setType('S');
+             matrice->getMatrice()[i+2][j].setType('P');*/
+            ///Rendre ce bloc 'P' non-poussable
+            //matrice->getMatrice()[i+2][j].setEstPoussable(false);
+        ///    m_matrice[i+2][j].getBlocPoussable().setEstPoussable(false);
         }
         break;
     case '4'://pousser "bloc" vers gauche
         if((j-2)>=0) //Pas sortir de la matrice
         {
-            matrice->getMatrice()[i][j].setType('V');
-            matrice->getMatrice()[i][j-1].setType('S');
-            matrice->getMatrice()[i][j-2].setType('P');
-            //Rendre ce bloc 'P' non-poussable
-            matrice->getMatrice()[i][j-2].setEstPoussable(false);
+            m_matrice[i][j]=m_blocVide;
+            m_matrice[i][j-1]=m_Snoopy;
+            m_matrice[i][j-2]=m_blocPoussable;
+            /* matrice->getMatrice()[i][j].setType('V');
+             matrice->getMatrice()[i][j-1].setType('S');
+             matrice->getMatrice()[i][j-2].setType('P');*/
+            ///Rendre ce bloc 'P' non-poussable
+            // matrice->getMatrice()[i][j-2].setEstPoussable(false);
+         ///   m_matrice[i][j-2].getBlocPoussable().setEstPoussable(false);
         }
         break;
     case '6'://pousser "bloc" vers droite
         if((j+2)<=N_COLONNES) //Pas sortir de la matrice
         {
-            matrice->getMatrice()[i][j].setType('V');
+            m_matrice[i][j]=m_blocVide;
+            m_matrice[i][j+1]=m_Snoopy;
+            m_matrice[i][j+2]=m_blocPoussable;
+            /*matrice->getMatrice()[i][j].setType('V');
             matrice->getMatrice()[i][j+1].setType('S');
-            matrice->getMatrice()[i][j+2].setType('P');
-            //Rendre ce bloc 'P' non-poussable
-            matrice->getMatrice()[i][j+2].setEstPoussable(false);
+            matrice->getMatrice()[i][j+2].setType('P');*/
+            ///Rendre ce bloc 'P' non-poussable
+            // matrice->getMatrice()[i][j+2].setEstPoussable(false);
+         ///   m_matrice[i][j+2].getBlocPoussable().setEstPoussable(false);
         }
         break;
     case '8'://Pousser "bloc" vers haut
         if((i-2)>=0) //Pas sortir de la matrice
         {
-            matrice->getMatrice()[i][j].setType('V');
+            m_matrice[i][j]=m_blocVide;
+            m_matrice[i-1][j]=m_Snoopy;
+            m_matrice[i-2][j]=m_blocPoussable;
+            /*matrice->getMatrice()[i][j].setType('V');
             matrice->getMatrice()[i-1][j].setType('S');
-            matrice->getMatrice()[i-2][j].setType('P');
-            //Rendre ce bloc 'P' non-poussable
-            matrice->getMatrice()[i-2][j].setEstPoussable(false);
+            matrice->getMatrice()[i-2][j].setType('P');*/
+            ///Rendre ce bloc 'P' non-poussable
+            //matrice->getMatrice()[i-2][j].setEstPoussable(false);
+           /// m_matrice[i-2][j].getBlocPoussable().setEstPoussable(false);
         }
         break;
     case 's': //sauver la partie
