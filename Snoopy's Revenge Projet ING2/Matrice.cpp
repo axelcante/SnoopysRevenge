@@ -2,6 +2,10 @@
 #include "Matrice.h"
 #include "Bloc.h"
 
+<<<<<<< HEAD
+//constructeur
+Matrice::Matrice(){}
+=======
 //constructeur intialisant les positions de la Balle et de Snoopy (?)
 Matrice::Matrice()
 {
@@ -47,6 +51,7 @@ Matrice::Matrice(std::vector<std::vector<Bloc> > matrice)
 }
 //desctructeur unique
 Matrice::~Matrice() {}
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
 
 //getters
 std::vector<std::vector<Bloc> > Matrice::getMatrice() const
@@ -54,15 +59,42 @@ std::vector<std::vector<Bloc> > Matrice::getMatrice() const
     return m_matrice;
 }
 
+Balle Matrice::getBalle() const
+{
+    return m_balle;
+}
+
 //setters
 //Permet de modifier manuellement un bloc de la matrice
-void Matrice::setBloc(int posX, int posY, Bloc Bloc)
+void Matrice::setBloc(int posX, int posY, Bloc bloc)
 {
-    m_matrice[posX][posY] = Bloc;
+    m_matrice[posX][posY] = bloc;
 }
-//Methodes
 
-
+///Methodes
+//Cette méthode initialise les oiseaux
+void Matrice::initialisationMatrice()
+{
+    Bloc oiseau1(0,0,'O');
+    Bloc oiseau2(0,19,'O');
+    Bloc oiseau3(9,0,'O');
+    Bloc oiseau4(9,19,'O');
+    Bloc blocVide(0,0,' ');
+    std::vector<Bloc>column;
+    for (int i = 0; i < N_COLONNES; i++)
+    {
+        column.push_back(blocVide);
+    }
+    for (int i = 0; i < N_LIGNES; i++)
+    {
+        m_matrice.push_back(column);
+    }
+    m_matrice[oiseau1.getPosX()][oiseau1.getPosY()] = oiseau1;
+    m_matrice[oiseau2.getPosX()][oiseau2.getPosY()] = oiseau2;
+    m_matrice[oiseau3.getPosX()][oiseau3.getPosY()] = oiseau3;
+    m_matrice[oiseau4.getPosX()][oiseau4.getPosY()] = oiseau4;
+    m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+}
 
 void Matrice::afficherMatrice()
 {
@@ -75,6 +107,21 @@ void Matrice::afficherMatrice()
         std::cout <<"|\n";
     }
 }
+<<<<<<< HEAD
+
+void Matrice::bougerBalle()
+{
+    int decalage_X = 1, decalage_Y = 1;
+    m_balle.setPosX(m_balle.getPosX()+decalage_X);
+    m_balle.setPosY(m_balle.getPosY()+decalage_Y);
+    if(m_balle.getPosX() == 19 || m_balle.getPosX() == 0)
+    {
+        decalage_X *= -1;
+    }
+    if(m_balle.getPosY() == 9 || m_balle.getPosY() == 0)
+    {
+        decalage_Y *= -1;
+=======
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)
 {
     /****
@@ -129,5 +176,6 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
         break;
     case 's': //sauver la partie
         break;
+>>>>>>> e5b2097e364150214ffe830793f5d888984618a3
     }
 }
