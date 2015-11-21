@@ -13,7 +13,8 @@ private :
     std::vector<std::vector<Bloc> > m_matrice;
     Balle m_balle = Balle(5,10,'B');
     Bloc m_blocVide = Bloc(0,0,' ');
-    Snoopy m_Snoopy = Snoopy(4,4,'S')
+    //Snoopy m_Snoopy = Snoopy(4,4,'S');
+    Bloc m_Oiseau = Bloc(0,0,'O');
 
 public :
     //constructeur
