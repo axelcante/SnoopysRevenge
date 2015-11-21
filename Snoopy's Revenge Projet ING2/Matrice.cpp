@@ -6,11 +6,7 @@
 Matrice::Matrice(){}
 
 //desctructeur unique
-<<<<<<< HEAD
 Matrice::~Matrice(){}
-=======
-Matrice::~Matrice() {}
->>>>>>> d932c2c61c2a432fc138261d1f384740c197bcdc
 
 //getters
 std::vector<std::vector<Bloc> > Matrice::getMatrice() const
