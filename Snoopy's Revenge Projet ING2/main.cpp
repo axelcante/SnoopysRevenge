@@ -20,7 +20,7 @@ int main()
     //matrice_niveau_1.bougerBalle();
     //char touche; //touche appuyee par le joueur
     //bool estPoussable;
-    //Console* conso=Console::getInstance(); //Allocation mémoire du pointeur sur console
+    Console* console = Console::getInstance(); //Allocation mémoire du pointeur sur console
 
     // matrice_niveau_1.afficherMatrice();
     /* estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');
