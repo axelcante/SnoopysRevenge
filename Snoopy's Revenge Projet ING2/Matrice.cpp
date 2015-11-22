@@ -22,6 +22,10 @@ Poussable Matrice::getBlocPoussable()const
 {
     return m_blocPoussable;
 }
+Bloc Matrice::getBlocP()const
+{
+    return m_blocP;
+}
 
 //setters
 //Permet de modifier manuellement un bloc de la matrice
@@ -34,10 +38,10 @@ void Matrice::setBloc(int posX, int posY, Bloc bloc)
 //Cette méthode initialise les oiseaux
 void Matrice::initialisationMatrice()
 {
-    Bloc oiseau1(0,0,'O');
-    Bloc oiseau2(0,19,'O');
-    Bloc oiseau3(9,0,'O');
-    Bloc oiseau4(9,19,'O');
+    Bloc oiseau1(0,0,'O',false);
+    Bloc oiseau2(0,19,'O',false);
+    Bloc oiseau3(9,0,'O',false);
+    Bloc oiseau4(9,19,'O',false);
 
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
@@ -111,7 +115,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
              matrice->getMatrice()[i+2][j].setType('P');*/
             ///Rendre ce bloc 'P' non-poussable
             //matrice->getMatrice()[i+2][j].setEstPoussable(false);
-        ///    m_matrice[i+2][j].getBlocPoussable().setEstPoussable(false);
+        m_matrice[i+2][j].setEstPoussableblocmere(false);
         }
         break;
     case '4'://pousser "bloc" vers gauche
@@ -125,7 +129,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
              matrice->getMatrice()[i][j-2].setType('P');*/
             ///Rendre ce bloc 'P' non-poussable
             // matrice->getMatrice()[i][j-2].setEstPoussable(false);
-         ///   m_matrice[i][j-2].getBlocPoussable().setEstPoussable(false);
+         m_matrice[i][j-2].setEstPoussableblocmere(false);
         }
         break;
     case '6'://pousser "bloc" vers droite
@@ -139,7 +143,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
             matrice->getMatrice()[i][j+2].setType('P');*/
             ///Rendre ce bloc 'P' non-poussable
             // matrice->getMatrice()[i][j+2].setEstPoussable(false);
-         ///   m_matrice[i][j+2].getBlocPoussable().setEstPoussable(false);
+         m_matrice[i][j+2].setEstPoussableblocmere(false);
         }
         break;
     case '8'://Pousser "bloc" vers haut
@@ -153,7 +157,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
             matrice->getMatrice()[i-2][j].setType('P');*/
             ///Rendre ce bloc 'P' non-poussable
             //matrice->getMatrice()[i-2][j].setEstPoussable(false);
-           /// m_matrice[i-2][j].getBlocPoussable().setEstPoussable(false);
+           m_matrice[i-2][j].setEstPoussableblocmere(false);
         }
         break;
     case 's': //sauver la partie

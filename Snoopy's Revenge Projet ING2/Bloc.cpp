@@ -6,11 +6,12 @@
 //Constructeur par défaut
 Bloc::Bloc(){}
 //constructeur surchargé
-Bloc::Bloc(int posX, int posY, char type)
+Bloc::Bloc(int posX, int posY, char type,bool estPoussableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_estPoussableblocmere = estPoussableblocmere;
 }
 
 //destructeur
@@ -29,6 +30,10 @@ char Bloc::getType()const
 {
     return m_type;
 }
+bool Bloc::getEstPoussableblocmere()const
+{
+    return m_estPoussableblocmere;
+}
 
 //setters
 void Bloc::setPosX(int posX)
@@ -43,14 +48,19 @@ void Bloc::setType(char type)
 {
     m_type = type;
 }
+void Bloc::setEstPoussableblocmere(bool estPoussableblocmere)
+{
+    m_estPoussableblocmere = estPoussableblocmere;
+}
 
 ///----------------------------------------------------------------
 ///Bloc Cassable
-Cassable::Cassable(int posX, int posY, char type,bool estPiege) : Bloc(posX,posY, type)
+Cassable::Cassable(int posX, int posY, char type,bool estPoussableblocmere,bool estPiege) : Bloc(posX,posY, type,estPoussableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_estPoussableblocmere = estPoussableblocmere;
     m_estPiege = estPiege; //Savoir s'il est piégé ou pas
 }
 //Destructeur
@@ -69,11 +79,12 @@ void Cassable::setEstPiege(bool estPiege)
 ///----------------------------------------------------------------
 ///Bloc Poussable
 //constructeur surchargé
-Poussable::Poussable(int posX, int posY, char type,bool estPoussable) : Bloc(posX,posY,type)
+Poussable::Poussable(int posX, int posY, char type,bool estPoussableblocmere,bool estPoussable) : Bloc(posX,posY,type,estPoussableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_estPoussableblocmere = estPoussableblocmere;
     m_estPoussable = estPoussable;
 }
 
@@ -99,11 +110,12 @@ void Poussable::setEstPoussable(bool estPoussable)
 ///Bloc Snoopy
 //Initialisation: constructeurs & Destructeurs
 //constructeur surchargé
-Snoopy::Snoopy(int posX, int posY, char type,int vies,int score,int oiseaux) : Bloc(posX,posY,type)
+Snoopy::Snoopy(int posX, int posY, char type,bool estPoussableblocmere,int vies,int score,int oiseaux) : Bloc(posX,posY,type,estPoussableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_estPoussableblocmere = estPoussableblocmere;
     m_vies=vies;
     m_score=score;
     m_oiseaux=oiseaux;
@@ -153,10 +165,11 @@ void Snoopy::setOiseaux(int oiseaux)
 ///----------------------------------------------------------------
 ///Bloc Balle
 //Initialisation : Constructeur surchargé
-Balle::Balle(int posX, int posY, char type) : Bloc(posX,posY,type)
+Balle::Balle(int posX, int posY, char type,bool estPoussableblocmere) : Bloc(posX,posY,type,estPoussableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
+    m_estPoussableblocmere = estPoussableblocmere;
 }
 Balle::~Balle(){}
