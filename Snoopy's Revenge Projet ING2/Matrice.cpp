@@ -91,73 +91,73 @@ void Matrice::bougerBalle()
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)
 {
     /****
-    /// touche=conso->getInputKey(); //en commentaire car supposée déjà faite
-    ///saisie de la touche appuyée par le joueur faite AVANT "pousser", touche récupérée
+    /// Supposé fait :
+    ///     touche=conso->getInputKey(); // Touche récupéréé
+    ///     Vérifier que le "bloc" soit bien poussable AVANT de "pousser"
     ****/
-    ///Vérification que bloc poussable faite AVANT "pousser"
+
     //Déclaration de variables
     int i=posXSnoopy,j=posYSnoopy;
-    // std::vector<Bloc*> bb;
-    //bb.push_back(new Poussable);
-    //bb.push_back(new Poussable);
 
-    switch(touche)//
+    switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
-    case '2': //pousser "bloc" vers le bas
-        if((i+2)<=N_LIGNES) //Pas sortir de la matrice
+    case '2': ///Pousser "bloc" vers le bas
+        //Vérification que bloc poussable faite AVANT "pousser"
+        if(m_matrice[i+1][j].getEstPoussableblocmere()==true)
         {
-            m_matrice[i][j]=m_blocVide;
-            m_matrice[i+1][j]=m_Snoopy;
-            m_matrice[i+2][j]=m_blocPoussable;
-            /* matrice->getMatrice()[i][j].setType('V');
-             matrice->getMatrice()[i+1][j].setType('S');
-             matrice->getMatrice()[i+2][j].setType('P');*/
-            ///Rendre ce bloc 'P' non-poussable
-            //matrice->getMatrice()[i+2][j].setEstPoussable(false);
-        m_matrice[i+2][j].setEstPoussableblocmere(false);
+            if((i+2)<=N_LIGNES) //Pas sortir de la matrice
+            {
+                m_matrice[i][j]=m_blocVide;
+                m_matrice[i+1][j]=m_Snoopy;
+                m_matrice[i+2][j]=m_blocPoussable;
+                ///Rendre ce bloc 'P' non-poussable
+                m_matrice[i+2][j].setEstPoussableblocmere(false);
+            }
         }
         break;
-    case '4'://pousser "bloc" vers gauche
-        if((j-2)>=0) //Pas sortir de la matrice
+    case '4':///Pousser "bloc" vers gauche
+        //Vérification que bloc poussable faite AVANT "pousser"
+        if(m_matrice[i][j-1].getEstPoussableblocmere()==true)
         {
-            m_matrice[i][j]=m_blocVide;
-            m_matrice[i][j-1]=m_Snoopy;
-            m_matrice[i][j-2]=m_blocPoussable;
-            /* matrice->getMatrice()[i][j].setType('V');
-             matrice->getMatrice()[i][j-1].setType('S');
-             matrice->getMatrice()[i][j-2].setType('P');*/
-            ///Rendre ce bloc 'P' non-poussable
-            // matrice->getMatrice()[i][j-2].setEstPoussable(false);
-         m_matrice[i][j-2].setEstPoussableblocmere(false);
+            if((j-2)>=0) //Pas sortir de la matrice
+            {
+                m_matrice[i][j]=m_blocVide;
+                m_matrice[i][j-1]=m_Snoopy;
+                m_matrice[i][j-2]=m_blocPoussable;
+                ///Rendre ce bloc 'P' non-poussable
+                m_matrice[i][j-2].setEstPoussableblocmere(false);
+            }
         }
         break;
-    case '6'://pousser "bloc" vers droite
-        if((j+2)<=N_COLONNES) //Pas sortir de la matrice
+    case '6':///Pousser "bloc" vers droite
+        //Vérification que bloc poussable faite AVANT "pousser"
+        if(m_matrice[i][j+1].getEstPoussableblocmere()==true)
         {
-            m_matrice[i][j]=m_blocVide;
-            m_matrice[i][j+1]=m_Snoopy;
-            m_matrice[i][j+2]=m_blocPoussable;
-            /*matrice->getMatrice()[i][j].setType('V');
-            matrice->getMatrice()[i][j+1].setType('S');
-            matrice->getMatrice()[i][j+2].setType('P');*/
-            ///Rendre ce bloc 'P' non-poussable
-            // matrice->getMatrice()[i][j+2].setEstPoussable(false);
-         m_matrice[i][j+2].setEstPoussableblocmere(false);
+
+            if((j+2)<=N_COLONNES) //Pas sortir de la matrice
+            {
+                m_matrice[i][j]=m_blocVide;
+                m_matrice[i][j+1]=m_Snoopy;
+                m_matrice[i][j+2]=m_blocPoussable;
+                ///Rendre ce bloc 'P' non-poussable
+                m_matrice[i][j+2].setEstPoussableblocmere(false);
+            }
         }
         break;
-    case '8'://Pousser "bloc" vers haut
-        if((i-2)>=0) //Pas sortir de la matrice
+    case '8':///Pousser "bloc" vers haut
+        //Vérification que bloc poussable faite AVANT "pousser"
+        if(m_matrice[i-1][j].getEstPoussableblocmere()==true)
         {
-            m_matrice[i][j]=m_blocVide;
-            m_matrice[i-1][j]=m_Snoopy;
-            m_matrice[i-2][j]=m_blocPoussable;
-            /*matrice->getMatrice()[i][j].setType('V');
-            matrice->getMatrice()[i-1][j].setType('S');
-            matrice->getMatrice()[i-2][j].setType('P');*/
-            ///Rendre ce bloc 'P' non-poussable
-            //matrice->getMatrice()[i-2][j].setEstPoussable(false);
-           m_matrice[i-2][j].setEstPoussableblocmere(false);
+
+            if((i-2)>=0) //Pas sortir de la matrice
+            {
+                m_matrice[i][j]=m_blocVide;
+                m_matrice[i-1][j]=m_Snoopy;
+                m_matrice[i-2][j]=m_blocPoussable;
+                ///Rendre ce bloc 'P' non-poussable
+                m_matrice[i-2][j].setEstPoussableblocmere(false);
+            }
         }
         break;
     case 's': //sauver la partie
