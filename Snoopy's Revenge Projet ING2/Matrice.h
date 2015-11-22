@@ -32,6 +32,7 @@ public :
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
 
+
     //methodes
     void initialisationMatrice();
     void afficherMatrice(Console* conso);
