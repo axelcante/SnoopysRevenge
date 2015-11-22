@@ -34,11 +34,6 @@ void Matrice::setBloc(int posX, int posY, Bloc bloc)
 //Cette méthode initialise les oiseaux
 void Matrice::initialisationMatrice()
 {
-    Bloc oiseau1(0,0,'O');
-    Bloc oiseau2(0,19,'O');
-    Bloc oiseau3(9,0,'O');
-    Bloc oiseau4(9,19,'O');
-
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
@@ -48,32 +43,38 @@ void Matrice::initialisationMatrice()
     {
         m_matrice.push_back(column);
     }
-    m_matrice[oiseau1.getPosX()][oiseau1.getPosY()] = oiseau1;
-    m_matrice[oiseau2.getPosX()][oiseau2.getPosY()] = oiseau2;
-    m_matrice[oiseau3.getPosX()][oiseau3.getPosY()] = oiseau3;
-    m_matrice[oiseau4.getPosX()][oiseau4.getPosY()] = oiseau4;
+    m_matrice[0][0] = m_Oiseau;
+    m_matrice[9][19] = m_Oiseau;
+    m_matrice[0][19] = m_Oiseau;
+    m_matrice[9][0] = m_Oiseau;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
 
-void Matrice::afficherMatrice()
+void Matrice::afficherMatrice(Console* conso)
 {
+    conso->gotoLigCol(5,10);
+    int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
     {
         for (int j = 0; j < N_COLONNES; j++)
         {
+            /*if (m_matrice[i][j] == m_balle)
+            {
+                conso->setColor(COLOR_RED);
+            }*/
             std::cout << '|' << m_matrice[i][j].getType();
         }
-        std::cout <<"|\n";
+        std::cout <<"|";
+        lignes++;
+        conso->gotoLigCol(5+lignes,10);
     }
 }
 
 void Matrice::bougerBalle()
 {
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-    int decalage_X = 1, decalage_Y = 1;
-    m_balle.setPosX(m_balle.getPosX()+decalage_X);
-    m_balle.setPosY(m_balle.getPosY()+decalage_Y);
-    if(m_balle.getPosX() == 19 || m_balle.getPosX() == 0)
+    int decalage_X = -1, decalage_Y = 1;
+    if(m_balle.getPosX()==19 || m_balle.getPosX()==0)
     {
         decalage_X *= -1;
     }
@@ -81,6 +82,9 @@ void Matrice::bougerBalle()
     {
         decalage_Y *= -1;
     }
+    m_balle.setPosX(m_balle.getPosX()+decalage_X);
+    m_balle.setPosY(m_balle.getPosY()+decalage_Y);
+    std::cout << decalage_X << decalage_Y;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
 

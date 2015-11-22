@@ -11,16 +11,26 @@
 int main()
 {
     //initialisation de la matrice et du premier niveau
+    Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     Matrice matrice_niveau_1;
     matrice_niveau_1.initialisationMatrice();
-    matrice_niveau_1.afficherMatrice();
-    matrice_niveau_1.bougerBalle();
-    std::cout << std::endl;
-    matrice_niveau_1.afficherMatrice();
+    matrice_niveau_1.afficherMatrice(conso);
+    bool quit=false;
+    do
+    {
+        matrice_niveau_1.bougerBalle();
+        matrice_niveau_1.afficherMatrice(conso);
+        if(conso->ifKeyboardPressed()){
+        if(conso->getInputKey()==27){quit=true;}}
+        std::cout << std::endl;
+        std::cout << matrice_niveau_1.getBalle().getPosX() << std::endl;
+        std::cout << matrice_niveau_1.getBalle().getPosY();
+    }while(!quit);
+
+
     //matrice_niveau_1.bougerBalle();
     //char touche; //touche appuyee par le joueur
     //bool estPoussable;
-    Console* console = Console::getInstance(); //Allocation mémoire du pointeur sur console
 
     // matrice_niveau_1.afficherMatrice();
     /* estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');

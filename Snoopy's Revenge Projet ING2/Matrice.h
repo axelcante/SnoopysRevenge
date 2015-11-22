@@ -31,7 +31,7 @@ public :
 
     //methodes
     void initialisationMatrice();
-    void afficherMatrice();
+    void afficherMatrice(Console* conso);
     void bougerBalle();
     //void changerBloc();
     //pousser
