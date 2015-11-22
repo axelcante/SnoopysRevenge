@@ -60,7 +60,7 @@ void Matrice::initialisationMatrice()
 
 }
 
-void Matrice::afficherMatrice()
+void Matrice::afficherMatrice(Console* conso)
 {
     for (int i = 0; i < N_LIGNES; i++)
     {
