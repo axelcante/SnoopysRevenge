@@ -60,8 +60,10 @@ void Matrice::initialisationMatrice()
 
 }
 
-void Matrice::afficherMatrice()
+void Matrice::afficherMatrice(Console* conso)
 {
+    conso->gotoLigCol(5,10);
+    int lignes=0;
     for (int i = 0; i < N_LIGNES; i++)
     {
         for (int j = 0; j < N_COLONNES; j++)
@@ -69,7 +71,9 @@ void Matrice::afficherMatrice()
             std::cout << '|' << m_matrice[i][j].getType();
         }
 
-        std::cout <<"|\n";
+        std::cout <<"|";
+        lignes++;
+        conso->gotoLigCol(5+lignes,10);
     }
 }
 
