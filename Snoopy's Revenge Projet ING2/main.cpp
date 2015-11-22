@@ -20,8 +20,8 @@ int main()
     {
         matrice_niveau_1.bougerBalle();
         matrice_niveau_1.afficherMatrice(conso);
-        if(conso->ifKeyboardPressed()){
-        if(conso->getInputKey()==27){quit=true;}}
+        //if(conso->ifKeyboardPressed()){
+        if(conso->getInputKey()==27){quit=true;}//}
         std::cout << std::endl;
         std::cout << matrice_niveau_1.getBalle().getPosX() << std::endl;
         std::cout << matrice_niveau_1.getBalle().getPosY();
