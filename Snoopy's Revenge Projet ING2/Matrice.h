@@ -14,9 +14,10 @@ private :
     Balle m_balle = Balle(5,10,'B',false);
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
+    Bloc m_blocP = Bloc(0,0,'P',true);
     Snoopy m_Snoopy = Snoopy(4,4,'S',false,0,0,0);
     Poussable m_blocPoussable = Poussable(0,0,'P',true,true);
-    Bloc m_blocP = Bloc(0,0,'P',true);
+
 
 public :
     //constructeur

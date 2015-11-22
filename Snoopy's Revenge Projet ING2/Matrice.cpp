@@ -38,11 +38,6 @@ void Matrice::setBloc(int posX, int posY, Bloc bloc)
 //Cette méthode initialise les oiseaux
 void Matrice::initialisationMatrice()
 {
-    Bloc oiseau1(0,0,'O',false);
-    Bloc oiseau2(0,19,'O',false);
-    Bloc oiseau3(9,0,'O',false);
-    Bloc oiseau4(9,19,'O',false);
-
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
     {
@@ -52,11 +47,17 @@ void Matrice::initialisationMatrice()
     {
         m_matrice.push_back(column);
     }
-    m_matrice[oiseau1.getPosX()][oiseau1.getPosY()] = oiseau1;
-    m_matrice[oiseau2.getPosX()][oiseau2.getPosY()] = oiseau2;
-    m_matrice[oiseau3.getPosX()][oiseau3.getPosY()] = oiseau3;
-    m_matrice[oiseau4.getPosX()][oiseau4.getPosY()] = oiseau4;
+    //Oiseaux
+    m_matrice[0][0] = m_Oiseau;
+    m_matrice[0][19] = m_Oiseau;
+    m_matrice[9][0] = m_Oiseau;
+    m_matrice[9][19] = m_Oiseau;
+    //Balle position initiale
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+    //Blocs poussables
+    m_matrice[6][12] = m_blocPoussable;
+    m_matrice[3][7] = m_blocPoussable;
+
 }
 
 void Matrice::afficherMatrice()
