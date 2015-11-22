@@ -38,6 +38,7 @@ int main()
      int& posX= matrice_niveau_1.getMatrice().getPosX();
      int& posY= matrice_niveau_1.getMatrice().getPosY();*/
 
+
     //conso->gotoLigCol(POSLIGNE,POSCOLONNE);
 
     /***********************
