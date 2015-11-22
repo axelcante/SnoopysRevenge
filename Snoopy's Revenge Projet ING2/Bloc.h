@@ -10,21 +10,24 @@ protected:
     int m_pos_x;
     int m_pos_y;
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
+    bool m_estPoussableblocmere;
 public:
     //constructeur par défaut
     Bloc();
     //constructeur surchargé
-    Bloc(int posX, int posY, char type);
+    Bloc(int posX, int posY, char type, bool estPoussableblocmere);
     //destructeur
     ~Bloc();
     //getters
     int getPosX()const;
     int getPosY()const;
     char getType()const;
+    bool getEstPoussableblocmere()const;
     //setters
     void setPosX(int posX);
     void setPosY(int posY);
     void setType(char type);
+    void setEstPoussableblocmere(bool estPoussableblocmere);
 };
 
 ///----------------------------------------------------------------
@@ -35,7 +38,7 @@ private :
     bool m_estPiege;
 public:
     //constructeur surchargé
-    Cassable(int posX, int posY, char type,bool estPiege);
+    Cassable(int posX, int posY, char type,bool estPoussableblocmere,bool estPiege);
     //destructeur
     ~Cassable();
     //getters
@@ -52,7 +55,7 @@ private:
     bool m_estPoussable;
 public:
     //constructeur surchargé
-    Poussable(int posX, int posY, char type, bool estPoussable);
+    Poussable(int posX, int posY, char type,bool estPoussableblocmere, bool estPoussable);
     //destructeur
     ~Poussable();
     //getters
@@ -73,7 +76,7 @@ private :
 
 public :
     //Constructeurs
-    Snoopy(int posX, int posY, char type,int vies,int score,int oiseaux);
+    Snoopy(int posX, int posY, char type,bool estPoussableblocmere,int vies,int score,int oiseaux);
     //Destructeur
     ~Snoopy();
     //getters
@@ -97,7 +100,7 @@ class Balle : public Bloc
 {
 public :
     //Constructeur surchargé
-    Balle(int posX, int posY, char type);
+    Balle(int posX, int posY, char type,bool estPoussableblocmere);
     //Destructeur
     ~Balle();
     //Méthodes

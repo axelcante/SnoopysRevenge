@@ -11,11 +11,13 @@ class Matrice
 {
 private :
     std::vector<std::vector<Bloc> > m_matrice;
-    Balle m_balle = Balle(5,10,'B');
-    Bloc m_blocVide = Bloc(0,0,' ');
-    Bloc m_Oiseau = Bloc(0,0,'O');
-    Snoopy m_Snoopy = Snoopy(4,4,'S',0,0,0);
-    Poussable m_blocPoussable = Poussable(0,0,'P',true);
+    Balle m_balle = Balle(5,10,'B',false);
+    Bloc m_blocVide = Bloc(0,0,' ',false);
+    Bloc m_Oiseau = Bloc(0,0,'O',false);
+    Bloc m_blocP = Bloc(0,0,'P',true);
+    Snoopy m_Snoopy = Snoopy(4,4,'S',false,0,0,0);
+    Poussable m_blocPoussable = Poussable(0,0,'P',true,true);
+
 
 public :
     //constructeur
@@ -26,6 +28,7 @@ public :
     std::vector<std::vector<Bloc> > getMatrice()const;
     Balle getBalle() const;
     Poussable getBlocPoussable() const;
+    Bloc getBlocP()const;
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
 
