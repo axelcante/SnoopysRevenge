@@ -15,24 +15,6 @@ int main()
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     Matrice matrice_niveau_1;
     matrice_niveau_1.bougerElements(conso);
-    matrice_niveau_1.initialisationMatrice();
-    bool quit=false;
-
-    do
-    {
-
-        matrice_niveau_1.afficherMatrice(conso);
-        //matrice_niveau_1.bougerBalle();
-        matrice_niveau_1.bougerSnoopy(conso,touche);
-        matrice_niveau_1.afficherMatrice(conso);
-        //if(conso->ifKeyboardPressed()){
-        if(conso->getInputKey()=='a'){quit=true;}//}
-        std::cout << std::endl;
-        std::cout << matrice_niveau_1.getBalle().getPosX() << std::endl;
-        std::cout << matrice_niveau_1.getBalle().getPosY();
-
-    }
-    while(!quit);
 
 
     //matrice_niveau_1.bougerBalle();
