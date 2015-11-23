@@ -3,10 +3,10 @@
 #include "Bloc.h"
 
 //constructeur
-Matrice::Matrice(){}
+Matrice::Matrice() {}
 
 //desctructeur unique
-Matrice::~Matrice(){}
+Matrice::~Matrice() {}
 
 //getters
 std::vector<std::vector<Bloc>> Matrice::getMatrice()const
@@ -72,7 +72,7 @@ void Matrice::initialisationMatrice()
     //Balle position initiale
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
     //Snoopy
-    m_matrice[4][4] = m_Snoopy;
+    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
     //Blocs poussables TEST
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
@@ -84,6 +84,18 @@ void Matrice::afficherMatrice(Console* conso)
     int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
     {
+<<<<<<< HEAD
+=======
+        std::cout <<"|";
+=======
+<<<<<<< HEAD
+    {
+        std::cout << '|';
+=======
+    {std::cout <<"|";
+>>>>>>> 87adcbcba1cfd3da1baf75bb34a7e9c1a4929c26
+>>>>>>> 8df08490d204b07af170f1f7756877a7ef5aa239
+>>>>>>> 0e059ad43ecfa5a738c68be3ad7c70fe38e82676
         for (int j = 0; j < N_COLONNES; j++)
         {
             std::cout << m_matrice[i][j].getType();
@@ -145,39 +157,37 @@ void Matrice::bougerBalle()
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
 
-void Matrice::bougerSnoopy(Console* conso,char& touche)
+void Matrice::bougerSnoopy(char& touche)
 {
     //Ressources
     //Position de Snoopy par rapport au TABLEAU
     int poslig = m_Snoopy.getPosX(), poscol = m_Snoopy.getPosY(); // position initiale du TABLEAU indice = celle de Snoopy
-    int i = poslig-POSLIGNE,j = poscol-POSCOLONNE;//position de la ligne et de la colonne par rapport au tableau (CONSOLE)
+    //int i = poslig-POSLIGNE,j = poscol-POSCOLONNE;//position de la ligne et de la colonne par rapport au tableau (CONSOLE)
     //Nombre de lignes et colonnes par rapport A LA CONSOLE (affichage)
-    int nbl = N_LIGNES+POSLIGNE;
-    int nbc = N_COLONNES+POSCOLONNE+1;
-
-    touche = conso->getInputKey();//Saisie de la touche
+    int nbl = N_LIGNES;
+    int nbc = N_COLONNES;
     switch(touche)
     {
     case 's'://descendre
-        if ((poslig+1>=POSLIGNE)&&(poslig+1<=nbl)) //blindage
+        if ((poslig+1>=0)&&(poslig+1<nbl)) //blindage
         {
             poslig++; //incrementer la position de la ligne
         }
         break;
     case 'q'://aller a gauche
-        if ((poscol-1<=nbc)&&(poscol-1>=POSCOLONNE+1))//blindage
+        if ((poscol-1<nbc)&&(poscol-1>=0))//blindage
         {
             poscol--; //decrementer la position de la colonne
         }
         break;
     case 'd'://aller a droite
-        if ((poscol+1<=nbc)&&(poscol+1>=POSCOLONNE+1))//blindage
+        if ((poscol+1<nbc)&&(poscol+1>=0))//blindage
         {
             poscol++;//incrementer la position colonnne
         }
         break;
     case 'z'://monter
-        if((poslig-1>=POSLIGNE)&&(poslig-1<nbl))//blindage
+        if((poslig-1>=0)&&(poslig-1<nbl))//blindage
         {
             poslig--;//Decrementer la position de la ligne
         }
@@ -185,21 +195,20 @@ void Matrice::bougerSnoopy(Console* conso,char& touche)
     case 'w': //Sauvegarder
         break;
     }
-    //Reinitialiser les positions
-    i = poslig+POSLIGNE;
-    j = poscol+POSCOLONNE;
-    conso->gotoLigCol(i,j);//positionner le curseur a lendroit voulu
+    if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY()))
+    {
+    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
     m_Snoopy.setPosX(poslig);
     m_Snoopy.setPosY(poscol);
-    int x= m_Snoopy.getPosX();
-    int y= m_Snoopy.getPosY();
-    std::cout << x << std::endl << y;
+    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+    }
 }
 
 void Matrice::bougerElements(Console* conso)
 {
     afficherCadre(conso);
     bool quit = false;
+    char touche;
     initialisationMatrice();
     afficherMatrice(conso);
     do
@@ -212,8 +221,14 @@ void Matrice::bougerElements(Console* conso)
             {
                 quit = true;
             }
+            else
+            {
+                touche=conso->getInputKey();
+                bougerSnoopy(touche);
+            }
         }
-    } while(!quit);
+    }
+    while(!quit);
 }
 
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)

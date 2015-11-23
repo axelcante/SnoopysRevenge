@@ -9,8 +9,8 @@
 int main()
 {
     ///Déclaration variables
-    char var ='a';
-    char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
+    //char var ='a';
+    //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
     //initialisation de la matrice et du premier niveau
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     Matrice matrice_niveau_1;
