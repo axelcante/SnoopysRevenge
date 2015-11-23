@@ -40,12 +40,9 @@ public :
     void afficherMatrice(Console* conso);
     void bougerElements(Console* conso);
     void bougerBalle();
-<<<<<<< HEAD
     void bougerSnoopy(Console* conso, char& touche);
     //void changerBloc();
     //pousser
-=======
->>>>>>> e9097651414dd455332662ea222b8998310e188f
     void pousser(Console* conso, char& touche,Matrice* matrice, int& posXSnoopy, int& posYSnoopy);
 };
 

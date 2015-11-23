@@ -76,11 +76,6 @@ void Matrice::initialisationMatrice()
     //Blocs poussables TEST
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> e9097651414dd455332662ea222b8998310e188f
 }
 
 void Matrice::afficherMatrice(Console* conso)
@@ -91,11 +86,7 @@ void Matrice::afficherMatrice(Console* conso)
     {std::cout <<"|";
         for (int j = 0; j < N_COLONNES; j++)
         {
-<<<<<<< HEAD
             std::cout << m_matrice[i][j].getType();
-=======
-            std::cout << "|" << m_matrice[i][j].getType();
->>>>>>> e9097651414dd455332662ea222b8998310e188f
         }
         std::cout <<"|";
         lignes++;
@@ -119,7 +110,6 @@ void Matrice::bougerBalle()
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
 
-<<<<<<< HEAD
 void Matrice::bougerSnoopy(Console* conso,char& touche)
 {
     //Ressources
@@ -171,7 +161,6 @@ void Matrice::bougerSnoopy(Console* conso,char& touche)
     std::cout << x << std::endl << y;
 }
 
-=======
 void Matrice::bougerElements(Console* conso)
 {
     bool quit = false;
@@ -192,9 +181,6 @@ void Matrice::bougerElements(Console* conso)
     } while(!quit);
 }
 
-
-
->>>>>>> e9097651414dd455332662ea222b8998310e188f
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)
 {
     /****
