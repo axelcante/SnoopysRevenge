@@ -3,6 +3,11 @@
 #define N_COLONNES 20
 #define N_LIGNES 10
 
+//Décalage de tableau
+
+#define POSLIGNE 5
+#define POSCOLONNE 10
+
 //Librairies
 #include <iostream>
 

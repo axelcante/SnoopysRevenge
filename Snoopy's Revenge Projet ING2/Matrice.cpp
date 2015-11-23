@@ -71,7 +71,9 @@ void Matrice::initialisationMatrice()
     m_matrice[9][19] = m_Oiseau;
     //Balle position initiale
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
-    //Blocs poussables
+    //Snoopy
+    m_matrice[4][4] = m_Snoopy;
+    //Blocs poussables TEST
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
 }
@@ -85,8 +87,12 @@ void Matrice::afficherMatrice(Console* conso)
         std::cout << '_';
     }
     for (int i = 0; i < N_LIGNES; i++)
+<<<<<<< HEAD
     {
         std::cout << '|';
+=======
+    {std::cout <<"|";
+>>>>>>> 87adcbcba1cfd3da1baf75bb34a7e9c1a4929c26
         for (int j = 0; j < N_COLONNES; j++)
         {
             std::cout << m_matrice[i][j].getType();
@@ -113,6 +119,57 @@ void Matrice::bougerBalle()
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
 
+void Matrice::bougerSnoopy(Console* conso,char& touche)
+{
+    //Ressources
+    //Position de Snoopy par rapport au TABLEAU
+    int poslig = m_Snoopy.getPosX(), poscol = m_Snoopy.getPosY(); // position initiale du TABLEAU indice = celle de Snoopy
+    int i = poslig-POSLIGNE,j = poscol-POSCOLONNE;//position de la ligne et de la colonne par rapport au tableau (CONSOLE)
+    //Nombre de lignes et colonnes par rapport A LA CONSOLE (affichage)
+    int nbl = N_LIGNES+POSLIGNE;
+    int nbc = N_COLONNES+POSCOLONNE+1;
+
+    touche = conso->getInputKey();//Saisie de la touche
+    switch(touche)
+    {
+    case 's'://descendre
+        if ((poslig+1>=POSLIGNE)&&(poslig+1<=nbl)) //blindage
+        {
+            poslig++; //incrementer la position de la ligne
+        }
+        break;
+    case 'q'://aller a gauche
+        if ((poscol-1<=nbc)&&(poscol-1>=POSCOLONNE+1))//blindage
+        {
+            poscol--; //decrementer la position de la colonne
+        }
+        break;
+    case 'd'://aller a droite
+        if ((poscol+1<=nbc)&&(poscol+1>=POSCOLONNE+1))//blindage
+        {
+            poscol++;//incrementer la position colonnne
+        }
+        break;
+    case 'z'://monter
+        if((poslig-1>=POSLIGNE)&&(poslig-1<nbl))//blindage
+        {
+            poslig--;//Decrementer la position de la ligne
+        }
+        break;
+    case 'w': //Sauvegarder
+        break;
+    }
+    //Reinitialiser les positions
+    i = poslig+POSLIGNE;
+    j = poscol+POSCOLONNE;
+    conso->gotoLigCol(i,j);//positionner le curseur a lendroit voulu
+    m_Snoopy.setPosX(poslig);
+    m_Snoopy.setPosY(poscol);
+    int x= m_Snoopy.getPosX();
+    int y= m_Snoopy.getPosY();
+    std::cout << x << std::endl << y;
+}
+
 void Matrice::bougerElements(Console* conso)
 {
     bool quit = false;
@@ -131,8 +188,6 @@ void Matrice::bougerElements(Console* conso)
         }
     } while(!quit);
 }
-
-
 
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)
 {
