@@ -15,8 +15,8 @@ private :
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
     Bloc m_blocP = Bloc(0,0,'P',true);
-    Snoopy m_Snoopy = Snoopy(4,4,'S',false,0,0,0);
-    Poussable m_blocPoussable = Poussable(0,0,'P',true,true);
+    Snoopy m_Snoopy = Snoopy(4,4,'S',false,3,0,0);
+    Poussable m_blocPoussable = Poussable(0,0,'P',true,true); //sert à rien pour le moment (?)
 
 
 public :
@@ -37,6 +37,7 @@ public :
     void initialisationMatrice();
     void afficherMatrice(Console* conso);
     void bougerBalle();
+    void bougerSnoopy(Console* conso, char& touche);
     //void changerBloc();
     //pousser
     void pousser(Console* conso, char& touche,Matrice* matrice, int& posXSnoopy, int& posYSnoopy);
