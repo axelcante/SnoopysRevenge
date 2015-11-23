@@ -3,18 +3,17 @@
 #include "Bloc.h"
 
 //constructeur
-Matrice::Matrice() {}
+Matrice::Matrice(){}
 
 //desctructeur unique
-Matrice::~Matrice() {}
+Matrice::~Matrice(){}
 
 //getters
-std::vector<std::vector<Bloc> > Matrice::getMatrice() const
+std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
 }
-
-Balle Matrice::getBalle() const
+Balle Matrice::getBalle()const
 {
     return m_balle;
 }
@@ -26,12 +25,30 @@ Bloc Matrice::getBlocP()const
 {
     return m_blocP;
 }
+int Matrice::getDecalageX()const
+{
+    return m_decalage_X;
+}
+int Matrice::getDecalageY()const
+{
+    return m_decalage_Y;
+}
 
 //setters
 //Permet de modifier manuellement un bloc de la matrice
 void Matrice::setBloc(int posX, int posY, Bloc bloc)
 {
     m_matrice[posX][posY] = bloc;
+}
+
+void Matrice::setDecalageX(int decalageX)
+{
+    m_decalage_X = decalageX;
+}
+
+void Matrice::setDecalageY(int decalageY)
+{
+    m_decalage_Y = decalageY;
 }
 
 ///Methodes
@@ -57,20 +74,18 @@ void Matrice::initialisationMatrice()
     //Blocs poussables
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
-
 }
 
 void Matrice::afficherMatrice(Console* conso)
 {
     conso->gotoLigCol(5,10);
-    int lignes=0;
+    int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
     {
         for (int j = 0; j < N_COLONNES; j++)
         {
-            std::cout << '|' << m_matrice[i][j].getType();
+            std::cout << "|" << m_matrice[i][j].getType();
         }
-
         std::cout <<"|";
         lignes++;
         conso->gotoLigCol(5+lignes,10);
@@ -80,19 +95,40 @@ void Matrice::afficherMatrice(Console* conso)
 void Matrice::bougerBalle()
 {
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-    int decalage_X = 1, decalage_Y = 1;
-    m_balle.setPosX(m_balle.getPosX()+decalage_X);
-    m_balle.setPosY(m_balle.getPosY()+decalage_Y);
-    if(m_balle.getPosX() == 19 || m_balle.getPosX() == 0)
+    if((m_balle.getPosX() == 9) || (m_balle.getPosX() == 0))
     {
-        decalage_X *= -1;
+        m_decalage_X *= -1;
     }
-    if(m_balle.getPosY() == 9 || m_balle.getPosY() == 0)
+    if((m_balle.getPosY() == 19) || (m_balle.getPosY() == 0))
     {
-        decalage_Y *= -1;
+        m_decalage_Y *= -1;
     }
+    m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
+    m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
 }
+
+void Matrice::bougerElements(Console* conso)
+{
+    bool quit = false;
+    initialisationMatrice();
+    afficherMatrice(conso);
+    do
+    {
+        bougerBalle();
+        std::cout << m_balle.getPosX();
+        afficherMatrice(conso);
+        if(conso->ifKeyboardPressed())
+        {
+            if(conso->getInputKey() == 27)
+            {
+                quit = true;
+            }
+        }
+    } while(!quit);
+}
+
+
 
 void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)
 {
