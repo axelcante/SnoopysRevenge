@@ -3,14 +3,13 @@
 #include <vector>
 #include <iostream>
 #include <string>
-
-
 #include "Bloc.h"
 
 class Matrice
 {
 private :
     std::vector<std::vector<Bloc> > m_matrice;
+    int m_decalage_X = 1, m_decalage_Y = 1;
     Balle m_balle = Balle(5,10,'B',false);
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
@@ -29,17 +28,24 @@ public :
     Balle getBalle() const;
     Poussable getBlocPoussable() const;
     Bloc getBlocP()const;
+    int getDecalageX()const;
+    int getDecalageY()const;
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
-
+    void setDecalageX(int);
+    void setDecalageY(int);
 
     //methodes
     void initialisationMatrice();
     void afficherMatrice(Console* conso);
+    void bougerElements(Console* conso);
     void bougerBalle();
+<<<<<<< HEAD
     void bougerSnoopy(Console* conso, char& touche);
     //void changerBloc();
     //pousser
+=======
+>>>>>>> e9097651414dd455332662ea222b8998310e188f
     void pousser(Console* conso, char& touche,Matrice* matrice, int& posXSnoopy, int& posYSnoopy);
 };
 

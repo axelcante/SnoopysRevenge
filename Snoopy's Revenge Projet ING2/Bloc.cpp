@@ -56,7 +56,7 @@ void Bloc::setEstPoussableblocmere(bool estPoussableblocmere)
 
 ///----------------------------------------------------------------
 ///Bloc Cassable
-Cassable::Cassable(int posX, int posY, char type,bool estPoussableblocmere,bool estPiege) : Bloc(posX,posY, type,estPoussableblocmere)
+Cassable::Cassable(int posX, int posY, char type,bool estPoussableblocmere,bool estPiege) : Bloc(posX,posY,type,estPoussableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;

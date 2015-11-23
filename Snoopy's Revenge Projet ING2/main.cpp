@@ -14,6 +14,7 @@ int main()
     //initialisation de la matrice et du premier niveau
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     Matrice matrice_niveau_1;
+<<<<<<< HEAD
     matrice_niveau_1.initialisationMatrice();
     bool quit=false;
 
@@ -33,6 +34,9 @@ int main()
     }
     while(!quit);
 
+=======
+    matrice_niveau_1.bougerElements(conso);
+>>>>>>> e9097651414dd455332662ea222b8998310e188f
 
     //matrice_niveau_1.bougerBalle();
     //char touche; //touche appuyee par le joueur
