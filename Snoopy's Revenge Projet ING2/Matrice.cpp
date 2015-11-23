@@ -84,18 +84,6 @@ void Matrice::afficherMatrice(Console* conso)
     int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
     {
-<<<<<<< HEAD
-=======
-        std::cout <<"|";
-=======
-<<<<<<< HEAD
-    {
-        std::cout << '|';
-=======
-    {std::cout <<"|";
->>>>>>> 87adcbcba1cfd3da1baf75bb34a7e9c1a4929c26
->>>>>>> 8df08490d204b07af170f1f7756877a7ef5aa239
->>>>>>> 0e059ad43ecfa5a738c68be3ad7c70fe38e82676
         for (int j = 0; j < N_COLONNES; j++)
         {
             std::cout << m_matrice[i][j].getType();
