@@ -80,23 +80,58 @@ void Matrice::initialisationMatrice()
 
 void Matrice::afficherMatrice(Console* conso)
 {
-    conso->gotoLigCol(5,10);
+    conso->gotoLigCol(POSLIGNE,POSCOLONNE);
     int lignes = 0;
-    for (int j = 0; j < N_COLONNES; j++)
-    {
-        std::cout << '_';
-    }
     for (int i = 0; i < N_LIGNES; i++)
+<<<<<<< HEAD
 {
 
+=======
+    {
+>>>>>>> d488d161d8658d40675e7384fa4d1df672c2c88f
         for (int j = 0; j < N_COLONNES; j++)
         {
             std::cout << m_matrice[i][j].getType();
         }
         lignes++;
-        std::cout << '|';
-        conso->gotoLigCol(5+lignes,10);
+        conso->gotoLigCol(POSLIGNE+lignes,POSCOLONNE);
     }
+}
+
+void Matrice::afficherCadre(Console* conso)
+{
+    char horizontal=205,vertical=186;
+    char C_right_top=187,C_right_bottom=188;
+    char C_left_top=201,C_left_bottom=200;
+    int decalage = 0;
+
+    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE);
+    for (int i = 0; i < N_COLONNES; i ++)
+    {
+        std::cout << horizontal;
+    }
+    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE);
+    for (int i = 0; i < N_COLONNES; i++)
+    {
+        std::cout << horizontal;
+    }
+    for (int i = 0; i < N_LIGNES; i++)
+    {
+        conso->gotoLigCol(POSLIGNE+decalage, POSCOLONNE-1);
+        std::cout << vertical;
+        decalage++;
+    }
+    decalage = 0;
+    for (int i = 0; i < N_LIGNES; i++)
+    {
+        conso->gotoLigCol(POSLIGNE+decalage, POSCOLONNE+N_COLONNES);
+        std::cout << vertical;
+        decalage++;
+    }
+    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE-1); std::cout << C_left_top;
+    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE+N_COLONNES); std::cout << C_right_top;
+    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE-1); std::cout << C_left_bottom;
+    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE+N_COLONNES); std::cout << C_right_bottom;
 }
 
 void Matrice::bougerBalle()
@@ -164,6 +199,7 @@ void Matrice::bougerSnoopy(char& touche)
 
 void Matrice::bougerElements(Console* conso)
 {
+    afficherCadre(conso);
     bool quit = false;
     char touche;
     initialisationMatrice();
