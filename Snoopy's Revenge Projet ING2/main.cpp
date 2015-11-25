@@ -35,6 +35,7 @@ int main()
 
 
     //conso->gotoLigCol(POSLIGNE,POSCOLONNE);
-
+    conso->deleteInstance();
+    return 0;
 
 }

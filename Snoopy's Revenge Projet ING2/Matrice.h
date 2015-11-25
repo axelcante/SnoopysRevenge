@@ -41,8 +41,8 @@ public :
     void bougerElements(Console* conso);
     bool bougerBalle();
     void afficherCadre(Console* conso);
-    void bougerSnoopy(char& touche);
-    void pousser(Console* conso, char& touche,Matrice* matrice, int& posXSnoopy, int& posYSnoopy);
+    void bougerSnoopy(Console* conso,char& touche);
+    void pousser(Console* conso, char& touche);
 };
 
 #endif // MATRICE_H_INCLUDED

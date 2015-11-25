@@ -86,13 +86,16 @@ void Matrice::afficherMatrice(Console* conso)
     conso->gotoLigCol(POSLIGNE,POSCOLONNE);
     int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
+
     {
-        for (int j = 0; j < N_COLONNES; j++)
         {
-            std::cout << m_matrice[i][j].getType();
+            for (int j = 0; j < N_COLONNES; j++)
+            {
+                std::cout << m_matrice[i][j].getType();
+            }
+            lignes++;
+            conso->gotoLigCol(POSLIGNE+lignes,POSCOLONNE);
         }
-        lignes++;
-        conso->gotoLigCol(POSLIGNE+lignes,POSCOLONNE);
     }
 }
 
@@ -126,21 +129,33 @@ void Matrice::afficherCadre(Console* conso)
         std::cout << vertical;
         decalage++;
     }
-    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE-1); std::cout << C_left_top;
-    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE+N_COLONNES); std::cout << C_right_top;
-    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE-1); std::cout << C_left_bottom;
-    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE+N_COLONNES); std::cout << C_right_bottom;
+    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE-1);
+    std::cout << C_left_top;
+    conso->gotoLigCol(POSLIGNE-1, POSCOLONNE+N_COLONNES);
+    std::cout << C_right_top;
+    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE-1);
+    std::cout << C_left_bottom;
+    conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE+N_COLONNES);
+    std::cout << C_right_bottom;
 }
 
 bool Matrice::bougerBalle()
 {
     bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
+<<<<<<< HEAD
     if((m_balle.getPosX() == 9) || (m_balle.getPosX() == 0))    // si la balle touche un des deux côtés horizontaux de la matrice de jeu
     {
         m_decalage_X *= -1;
     }
     if((m_balle.getPosY() == 19) || (m_balle.getPosY() == 0))   // si la balle touche un des deux côtés latéraux de la matrice de jeu
+=======
+    if((m_balle.getPosX() == (N_LIGNES-1)) || (m_balle.getPosX() == 0))
+    {
+        m_decalage_X *= -1;
+    }
+    if((m_balle.getPosY() == (N_COLONNES-1)) || (m_balle.getPosY() == 0))
+>>>>>>> e09b1f6ea40cff25a8eb2ba12163abf05ce6a540
     {
         m_decalage_Y *= -1;
     }
@@ -166,21 +181,26 @@ bool Matrice::bougerBalle()
     return dead;
 }
 
-void Matrice::bougerSnoopy(char& touche)
+void Matrice::bougerSnoopy(Console*conso,char& touche)
 {
     //Ressources
     //Position de Snoopy par rapport au TABLEAU
     int poslig = m_Snoopy.getPosX(), poscol = m_Snoopy.getPosY(); // position initiale du TABLEAU indice = celle de Snoopy
-    //int i = poslig-POSLIGNE,j = poscol-POSCOLONNE;//position de la ligne et de la colonne par rapport au tableau (CONSOLE)
     //Nombre de lignes et colonnes par rapport A LA CONSOLE (affichage)
     int nbl = N_LIGNES;
     int nbc = N_COLONNES;
+
     switch(touche)
     {
     case 's'://descendre
         if ((poslig+1>=0)&&(poslig+1<nbl)) //blindage
         {
             poslig++; //incrementer la position de la ligne
+            if(m_matrice[poslig][poscol].getType() == 'P') //m_matrice[poslig][poscol].getEstPoussableblocmere()==true
+            {
+                std::cout<<"oui\n";
+                pousser(conso,touche);
+            }
         }
         break;
     case 'q'://aller a gauche
@@ -206,10 +226,10 @@ void Matrice::bougerSnoopy(char& touche)
     }
     if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY()))
     {
-    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
-    m_Snoopy.setPosX(poslig);
-    m_Snoopy.setPosY(poscol);
-    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+        m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
+        m_Snoopy.setPosX(poslig);
+        m_Snoopy.setPosY(poscol);
+        m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
     }
 }
 
@@ -227,14 +247,16 @@ void Matrice::bougerElements(Console* conso)
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
         {
-            if(conso->getInputKey() == 27)
+            touche=conso->getInputKey();
+            if(touche == 27)
             {
                 quit = true;
             }
             else
             {
-                touche=conso->getInputKey();
-                bougerSnoopy(touche);
+                std::cout<<"waiting\n";
+                std::cout<<touche;
+                bougerSnoopy(conso,touche);
             }
         }
         //if(dead == true) break;
@@ -242,35 +264,36 @@ void Matrice::bougerElements(Console* conso)
     while(!quit);
 }
 
-void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSnoopy, int& posYSnoopy)
+void Matrice::pousser(Console* conso, char& touche)
 {
     /****
     /// Supposé fait :
     ///     touche=conso->getInputKey(); // Touche récupéréé
     ///     Vérifier que le "bloc" soit bien poussable AVANT de "pousser"
     ****/
-
+    std::cout<<"entre\n";
     //Déclaration de variables
-    int i=posXSnoopy,j=posYSnoopy;
+    int i = m_Snoopy.getPosX(),j = m_Snoopy.getPosY();
 
     switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
-    case '2': ///Pousser "bloc" vers le bas
+    case 's': ///Pousser "bloc" vers le bas
         //Vérification que bloc poussable faite AVANT "pousser"
         if(m_matrice[i+1][j].getEstPoussableblocmere()==true)
-        {
+        { std::cout<<"poussable\n";
             if((i+2)<=N_LIGNES) //Pas sortir de la matrice
             {
+                std::cout<<"pousser";
                 m_matrice[i][j]=m_blocVide;
-                m_matrice[i+1][j]=m_Snoopy;
+               // m_matrice[i+1][j]=m_Snoopy;
                 m_matrice[i+2][j]=m_blocPoussable;
                 ///Rendre ce bloc 'P' non-poussable
                 m_matrice[i+2][j].setEstPoussableblocmere(false);
             }
         }
         break;
-    case '4':///Pousser "bloc" vers gauche
+    case 'q':///Pousser "bloc" vers gauche
         //Vérification que bloc poussable faite AVANT "pousser"
         if(m_matrice[i][j-1].getEstPoussableblocmere()==true)
         {
@@ -284,7 +307,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
             }
         }
         break;
-    case '6':///Pousser "bloc" vers droite
+    case 'd':///Pousser "bloc" vers droite
         //Vérification que bloc poussable faite AVANT "pousser"
         if(m_matrice[i][j+1].getEstPoussableblocmere()==true)
         {
@@ -299,7 +322,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
             }
         }
         break;
-    case '8':///Pousser "bloc" vers haut
+    case 'z':///Pousser "bloc" vers haut
         //Vérification que bloc poussable faite AVANT "pousser"
         if(m_matrice[i-1][j].getEstPoussableblocmere()==true)
         {
@@ -314,7 +337,7 @@ void Matrice::pousser(Console* conso, char& touche, Matrice* matrice,int& posXSn
             }
         }
         break;
-    case 's': //sauver la partie
+    case 'w': //sauver la partie
         break;
     }
 }
