@@ -4,7 +4,9 @@
 #include "Niveau.h"
 #include "console.h"
 #include <vector>
+#include <windows.h>
 //Si décalage du tableau sur console
+
 
 int main()
 {
@@ -13,8 +15,12 @@ int main()
     //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
     //initialisation de la matrice et du premier niveau
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
+    conso->ShowConsoleCursor(false);
     Matrice matrice_niveau_1;
+    matrice_niveau_1.afficherCadre(conso);
     matrice_niveau_1.bougerElements(conso);
+
+    ///Menu
 
 
     //matrice_niveau_1.bougerBalle();

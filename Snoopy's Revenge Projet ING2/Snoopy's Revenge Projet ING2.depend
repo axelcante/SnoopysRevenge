@@ -67,11 +67,11 @@
 1448370054 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
 	<iostream>
 
-1448236587 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.cpp
+1448369299 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.cpp
 	"console.h"
 	"Bloc.h"
 
-1447783559 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.h
+1448454356 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.h
 	<windows.h>
 	<conio.h>
 	<iostream>
@@ -80,18 +80,19 @@
 	<iostream>
 	"console.h"
 
-1447783559 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.cpp
+1448454393 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.cpp
 	"console.h"
 
-1448312479 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
+1448472420 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
 	<iostream>
 	"Bloc.h"
 	"Matrice.h"
 	"Niveau.h"
 	"console.h"
 	<vector>
+	<windows.h>
 
-1448317884 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
+1448472420 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
 	<vector>
 	<iostream>
 	<string>
@@ -99,10 +100,11 @@
 
 1447783559 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
 
-1448317884 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
+1448472420 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
 	"Constantes.h"
 	"Matrice.h"
 	"Bloc.h"
+	<windows.h>
 
 1448304244 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\constantes.h
 	<iostream>

@@ -1,6 +1,7 @@
 #include "Constantes.h"
 #include "Matrice.h"
 #include "Bloc.h"
+#include <windows.h>
 
 //constructeur
 Matrice::Matrice() {}
@@ -76,6 +77,8 @@ void Matrice::initialisationMatrice()
     //Blocs poussables TEST
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
+    m_matrice[6][6] = m_blocPoussable;
+    m_matrice[9][18] = m_blocPoussable;
 }
 
 void Matrice::afficherMatrice(Console* conso)
@@ -136,8 +139,9 @@ void Matrice::afficherCadre(Console* conso)
     std::cout << C_right_bottom;
 }
 
-void Matrice::bougerBalle()
+bool Matrice::bougerBalle()
 {
+    bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
     if((m_balle.getPosX() == (N_LIGNES-1)) || (m_balle.getPosX() == 0))
     {
@@ -147,9 +151,26 @@ void Matrice::bougerBalle()
     {
         m_decalage_Y *= -1;
     }
+    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_Snoopy.getType()))
+    {
+        m_decalage_X += 0;
+    }
+    else{m_decalage_X *= -1;}
+    if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
+    {
+        m_decalage_Y += 0;
+        dead = true;
+    }
+    else{m_decalage_Y *= -1;}
+    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
+    {
+        m_decalage_X += 0;
+    }
+    else{m_decalage_X *= -1; m_decalage_Y *= -1;}
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+    return dead;
 }
 
 void Matrice::bougerSnoopy(Console*conso,char& touche)
@@ -169,7 +190,6 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             poslig++; //incrementer la position de la ligne
             if(m_matrice[poslig][poscol].getType() == 'P') //m_matrice[poslig][poscol].getEstPoussableblocmere()==true
             {
-                std::cout<<"oui\n";
                 pousser(conso,touche);
             }
         }
@@ -206,14 +226,15 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
 
 void Matrice::bougerElements(Console* conso)
 {
-    afficherCadre(conso);
     bool quit = false;
+    bool dead = false;
     char touche;
     initialisationMatrice();
     afficherMatrice(conso);
     do
     {
-        bougerBalle();
+        Sleep(80);  //Le sleep permet de ralentir le mouvement automatique de la balle
+        dead = bougerBalle();
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
         {
@@ -224,11 +245,10 @@ void Matrice::bougerElements(Console* conso)
             }
             else
             {
-                std::cout<<"waiting\n";
-                std::cout<<touche;
                 bougerSnoopy(conso,touche);
             }
         }
+        //if(dead == true) break;
     }
     while(!quit);
 }
@@ -240,20 +260,17 @@ void Matrice::pousser(Console* conso, char& touche)
     ///     touche=conso->getInputKey(); // Touche récupéréé
     ///     Vérifier que le "bloc" soit bien poussable AVANT de "pousser"
     ****/
-    std::cout<<"entre\n";
     //Déclaration de variables
     int i = m_Snoopy.getPosX(),j = m_Snoopy.getPosY();
-
     switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
     case 's': ///Pousser "bloc" vers le bas
         //Vérification que bloc poussable faite AVANT "pousser"
         if(m_matrice[i+1][j].getEstPoussableblocmere()==true)
-        { std::cout<<"poussable\n";
+        {
             if((i+2)<=N_LIGNES) //Pas sortir de la matrice
             {
-                std::cout<<"pousser";
                 m_matrice[i][j]=m_blocVide;
                // m_matrice[i+1][j]=m_Snoopy;
                 m_matrice[i+2][j]=m_blocPoussable;
