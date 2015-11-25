@@ -143,19 +143,11 @@ bool Matrice::bougerBalle()
 {
     bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-<<<<<<< HEAD
-    if((m_balle.getPosX() == 9) || (m_balle.getPosX() == 0))    // si la balle touche un des deux côtés horizontaux de la matrice de jeu
-    {
-        m_decalage_X *= -1;
-    }
-    if((m_balle.getPosY() == 19) || (m_balle.getPosY() == 0))   // si la balle touche un des deux côtés latéraux de la matrice de jeu
-=======
     if((m_balle.getPosX() == (N_LIGNES-1)) || (m_balle.getPosX() == 0))
     {
         m_decalage_X *= -1;
     }
     if((m_balle.getPosY() == (N_COLONNES-1)) || (m_balle.getPosY() == 0))
->>>>>>> e09b1f6ea40cff25a8eb2ba12163abf05ce6a540
     {
         m_decalage_Y *= -1;
     }
@@ -198,7 +190,6 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             poslig++; //incrementer la position de la ligne
             if(m_matrice[poslig][poscol].getType() == 'P') //m_matrice[poslig][poscol].getEstPoussableblocmere()==true
             {
-                std::cout<<"oui\n";
                 pousser(conso,touche);
             }
         }
@@ -254,8 +245,6 @@ void Matrice::bougerElements(Console* conso)
             }
             else
             {
-                std::cout<<"waiting\n";
-                std::cout<<touche;
                 bougerSnoopy(conso,touche);
             }
         }
@@ -271,20 +260,17 @@ void Matrice::pousser(Console* conso, char& touche)
     ///     touche=conso->getInputKey(); // Touche récupéréé
     ///     Vérifier que le "bloc" soit bien poussable AVANT de "pousser"
     ****/
-    std::cout<<"entre\n";
     //Déclaration de variables
     int i = m_Snoopy.getPosX(),j = m_Snoopy.getPosY();
-
     switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
     case 's': ///Pousser "bloc" vers le bas
         //Vérification que bloc poussable faite AVANT "pousser"
         if(m_matrice[i+1][j].getEstPoussableblocmere()==true)
-        { std::cout<<"poussable\n";
+        {
             if((i+2)<=N_LIGNES) //Pas sortir de la matrice
             {
-                std::cout<<"pousser";
                 m_matrice[i][j]=m_blocVide;
                // m_matrice[i+1][j]=m_Snoopy;
                 m_matrice[i+2][j]=m_blocPoussable;
