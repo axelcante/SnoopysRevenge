@@ -1,8 +1,8 @@
 #ifndef CONSOLE_H_INCLUDED
 #define CONSOLE_H_INCLUDED
-#include <windows.h>
-#include <conio.h>
+
 #include <iostream>
+#include <mscorelib>
 
 enum Color
 {
@@ -39,10 +39,13 @@ class Console
 
         // Méthodes publiques
         void gotoLigCol(int lig, int col);
-        bool ifKeyboardPressed();
-        char getInputKey();
+        bool isKeyboardPressed();
+        int getInputKey();
         void setColor(Color col);
-        void ShowConsoleCursor(bool showFlag);
+        propreties bool CursorVisible {
+        static bool get();
+        static void set(bool value);
+}
 };
 
 #endif // CONSOLE_H_INCLUDED

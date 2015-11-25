@@ -39,7 +39,7 @@ public :
     void initialisationMatrice();
     void afficherMatrice(Console* conso);
     void bougerElements(Console* conso);
-    void bougerBalle();
+    bool bougerBalle();
     void afficherCadre(Console* conso);
     void bougerSnoopy(char& touche);
     void pousser(Console* conso, char& touche,Matrice* matrice, int& posXSnoopy, int& posYSnoopy);

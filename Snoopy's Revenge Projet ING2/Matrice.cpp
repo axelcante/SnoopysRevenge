@@ -1,6 +1,7 @@
 #include "Constantes.h"
 #include "Matrice.h"
 #include "Bloc.h"
+#include <windows.h>
 
 //constructeur
 Matrice::Matrice() {}
@@ -76,6 +77,8 @@ void Matrice::initialisationMatrice()
     //Blocs poussables TEST
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
+    m_matrice[6][6] = m_blocPoussable;
+    m_matrice[9][18] = m_blocPoussable;
 }
 
 void Matrice::afficherMatrice(Console* conso)
@@ -129,20 +132,38 @@ void Matrice::afficherCadre(Console* conso)
     conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE+N_COLONNES); std::cout << C_right_bottom;
 }
 
-void Matrice::bougerBalle()
+bool Matrice::bougerBalle()
 {
+    bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-    if((m_balle.getPosX() == 9) || (m_balle.getPosX() == 0))
+    if((m_balle.getPosX() == 9) || (m_balle.getPosX() == 0))    // si la balle touche un des deux côtés horizontaux de la matrice de jeu
     {
         m_decalage_X *= -1;
     }
-    if((m_balle.getPosY() == 19) || (m_balle.getPosY() == 0))
+    if((m_balle.getPosY() == 19) || (m_balle.getPosY() == 0))   // si la balle touche un des deux côtés latéraux de la matrice de jeu
     {
         m_decalage_Y *= -1;
     }
+    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_Snoopy.getType()))
+    {
+        m_decalage_X += 0;
+    }
+    else{m_decalage_X *= -1;}
+    if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
+    {
+        m_decalage_Y += 0;
+        dead = true;
+    }
+    else{m_decalage_Y *= -1;}
+    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
+    {
+        m_decalage_X += 0;
+    }
+    else{m_decalage_X *= -1; m_decalage_Y *= -1;}
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+    return dead;
 }
 
 void Matrice::bougerSnoopy(char& touche)
@@ -194,14 +215,15 @@ void Matrice::bougerSnoopy(char& touche)
 
 void Matrice::bougerElements(Console* conso)
 {
-    afficherCadre(conso);
     bool quit = false;
+    bool dead = false;
     char touche;
     initialisationMatrice();
     afficherMatrice(conso);
     do
     {
-        bougerBalle();
+        Sleep(80);  //Le sleep permet de ralentir le mouvement automatique de la balle
+        dead = bougerBalle();
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
         {
@@ -215,6 +237,7 @@ void Matrice::bougerElements(Console* conso)
                 bougerSnoopy(touche);
             }
         }
+        //if(dead == true) break;
     }
     while(!quit);
 }

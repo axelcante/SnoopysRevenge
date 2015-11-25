@@ -14,7 +14,6 @@ Bloc::Bloc(int posX, int posY, char type,bool estPoussableblocmere)
     m_estPoussableblocmere = estPoussableblocmere;
 }
 
-
 //destructeur
 Bloc::~Bloc(){}
 

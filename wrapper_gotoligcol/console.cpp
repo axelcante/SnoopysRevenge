@@ -1,5 +1,6 @@
 #include "console.h"
-
+#include <conio.h>
+#include <windows.h>
 
 Console* Console::m_instance = NULL;
 
@@ -37,12 +38,12 @@ void Console::gotoLigCol(int lig, int col)
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
 
-char Console::getInputKey()
+int Console::getInputKey()
 {
     return getch();
 }
 
-bool Console::ifKeyboardPressed()
+bool Console::isKeyboardPressed()
 {
     return kbhit();
 }
@@ -69,17 +70,6 @@ void Console::_setColor(int back, int front)
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,front*16+back);
-}
-
-void Console::ShowConsoleCursor(bool showFlag)
-{
-    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    CONSOLE_CURSOR_INFO     cursorInfo;
-
-    GetConsoleCursorInfo(out, &cursorInfo);
-    cursorInfo.bVisible = showFlag; // set the cursor visibility
-    SetConsoleCursorInfo(out, &cursorInfo);
 }
 
 void Console::setColor(Color col)
