@@ -380,9 +380,12 @@ void Matrice::bougerElements(Console* conso)
         }
         if(m_Snoopy.getOiseaux()==4)
         {
-            //Gagner partie
+            ///Gagner partie : bouger le score
+           // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
+            ///Afficher qu'on a gagné
             system("cls");
             std::cout<<"Gagne\n";
+            std::cout<<"Score: "<<m_Snoopy.getScore();
             system("pause");
             quit=true;
         }
