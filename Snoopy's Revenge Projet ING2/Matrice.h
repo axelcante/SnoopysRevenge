@@ -5,12 +5,13 @@
 #include <string>
 #include "Bloc.h"
 
+///Matrice de blocs
 class Matrice
 {
 private :
     std::vector<std::vector<Bloc> > m_matrice;
     int m_decalage_X = 1, m_decalage_Y = 1;
-    Balle m_balle = Balle(5,10,'B',false);
+    Balle m_balle = Balle(5,10,'B',false); //On a C++11
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
     Bloc m_blocP = Bloc(0,0,'P',true);

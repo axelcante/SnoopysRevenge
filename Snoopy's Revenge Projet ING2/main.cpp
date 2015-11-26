@@ -13,9 +13,12 @@ int main()
     ///Déclaration variables
     //char var ='a';
     //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
-    //initialisation de la matrice et du premier niveau
+
+    ///Test
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
-    conso->ShowConsoleCursor(false);
+    conso->ShowConsoleCursor(false); //Ne pas montrer le curseur, c'est moche
+
+    //initialisation de la matrice et du premier niveau
     Matrice matrice_niveau_1;
     matrice_niveau_1.afficherCadre(conso);
     matrice_niveau_1.bougerElements(conso);
@@ -23,18 +26,8 @@ int main()
     ///Menu
 
 
-    //matrice_niveau_1.bougerBalle();
-    //char touche; //touche appuyee par le joueur
-    //bool estPoussable;
 
-    // matrice_niveau_1.afficherMatrice();
-    /* estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');
-     //réference
-     int& posX= matrice_niveau_1.getMatrice().getPosX();
-     int& posY= matrice_niveau_1.getMatrice().getPosY();*/
-
-
-    //conso->gotoLigCol(POSLIGNE,POSCOLONNE);
+    //Désallocation mémoire
     conso->deleteInstance();
     return 0;
 

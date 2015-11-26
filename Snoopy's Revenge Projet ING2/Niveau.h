@@ -16,6 +16,7 @@ public :
     //Idees Diedler
     //gérer blocs  (pousser, casser ,..)
     //Deplacer (ennemis balle et snoopy)
+    ///METTRE LA SAUVEGARDE ICI ?
 };
 
 
