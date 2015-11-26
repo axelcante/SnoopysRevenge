@@ -14,7 +14,6 @@ void lancerJeu(Console* conso);
 
 int main()
 {
-<<<<<<< HEAD
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     conso->ShowConsoleCursor(false); //On rend le curseur de la console invisible pour ne pas avoir de clignotements
     int menu_choix = 0;
@@ -25,7 +24,7 @@ int main()
     conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
     std::cout << "Un jeu concu par Juliette HEUANGTHEP et Axel CANTE !";
     conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+1);
-    std::cout << "Utilisez les touches Z et S pour naviguer le menu.";
+    std::cout << "Utilisez les touches Z et S poaur naviguer le menu.";
     conso->setColor(COLOR_DEFAULT);
     conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
     std::cout << "1. Nouvelle partie";
@@ -75,26 +74,16 @@ int main()
             {
                 quit = true;
             }
-            if(key == 27)
+            if(key == 27) ///attention : appuyer sur échap c'est chelou
             {
                 quit = true;
             }
         }
     }
-=======
+
     ///Déclaration variables
     //char var ='a';
     //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
-
-    ///Test
-    Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
-    conso->ShowConsoleCursor(false); //Ne pas montrer le curseur, c'est moche
-
-    //initialisation de la matrice et du premier niveau
-    Matrice matrice_niveau_1;
-    matrice_niveau_1.afficherCadre(conso);
-    matrice_niveau_1.bougerElements(conso);
->>>>>>> cb4633ae14292bf36e1e3772059312bb73689b22
 
     /*
      ___                        _   ___
@@ -109,26 +98,6 @@ int main()
 //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
 //initialisation de la matrice et du premier niveau
 
-<<<<<<< HEAD
-///Menu
-
-
-//matrice_niveau_1.bougerBalle();
-//char touche; //touche appuyee par le joueur
-//bool estPoussable;
-
-// matrice_niveau_1.afficherMatrice();
-    /* estPoussable = (matrice_niveau_1.getMatrice().getType()=='P');
-     //réference
-     int& posX= matrice_niveau_1.getMatrice().getPosX();
-     int& posY= matrice_niveau_1.getMatrice().getPosY();*/
-
-
-//conso->gotoLigCol(POSLIGNE,POSCOLONNE);
-=======
-
-    //Désallocation mémoire
->>>>>>> cb4633ae14292bf36e1e3772059312bb73689b22
     conso->deleteInstance();
     return 0;
 

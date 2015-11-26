@@ -75,7 +75,7 @@
 1448370054 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
 	<iostream>
 
-1448369299 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.cpp
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.cpp
 	"console.h"
 	"Bloc.h"
 
@@ -84,14 +84,14 @@
 	<conio.h>
 	<iostream>
 
-1448226585 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.h
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.h
 	<iostream>
 	"console.h"
 
-1448454393 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.cpp
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.cpp
 	"console.h"
 
-1448500394 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
+1448562338 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
 	<iostream>
 	"Bloc.h"
 	"Matrice.h"
@@ -102,19 +102,23 @@
 	"Constantes.h"
 	<time.h>
 
-1448472420 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
 	<vector>
 	<iostream>
 	<string>
-	"Bloc.h"
-
-1447783559 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
-
-1448496229 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
-	"Constantes.h"
-	"Matrice.h"
-	"Bloc.h"
 	<windows.h>
+	"Constantes.h"
+	"Bloc.h"
+	"Snoopy.h"
+	"Cassable.h"
+	"Balle.h"
+	"Poussable.h"
+
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
+	"Matrice.h"
+
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
+	"Matrice.h"
 
 1448304244 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\constantes.h
 	<iostream>
@@ -145,4 +149,28 @@
 
 1448558459 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.cpp
 	"Niveau.h"
+
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\balle.cpp
+	"Balle.h"
+
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\balle.h
+	"Bloc.h"
+
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\cassable.cpp
+	"Cassable.h"
+
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\cassable.h
+	"Bloc.h"
+
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\snoopy.h
+	"Bloc.h"
+
+1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\poussable.h
+	"Bloc.h"
+
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\poussable.cpp
+	"Poussable.h"
+
+1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\snoopy.cpp
+	"Snoopy.h"
 
