@@ -6,7 +6,7 @@ Matrice::Matrice() {}
 //desctructeur unique
 Matrice::~Matrice() {}
 
-//getters
+///getters
 std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
@@ -32,7 +32,7 @@ int Matrice::getDecalageY()const
     return m_decalage_Y;
 }
 
-//setters
+///setters
 //Permet de modifier manuellement un bloc de la matrice
 void Matrice::setBloc(int posX, int posY, Bloc bloc)
 {
@@ -206,14 +206,9 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
     //Nombre de lignes et colonnes par rapport A LA CONSOLE (affichage)
     int nbl = N_LIGNES;
     int nbc = N_COLONNES;
-
-    /********
-    QUE FAIRE SI BALLE TOUCHE ? : faire une condition dans balle directement.
-    **********/
-
     switch(touche)
     {
-    case 's'://descendre
+    case 0x50://descendre
         if ((poslig+1>=0)&&(poslig+1<nbl)) //blindage
         {
             poslig++; //incrementer la position de la ligne
@@ -240,7 +235,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 'q'://aller a gauche
+    case 0x4b://aller a gauche
         if ((poscol-1<nbc)&&(poscol-1>=0))//blindage
         {
             poscol--; //decrementer la position de la colonne
@@ -267,7 +262,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 'd'://aller a droite
+    case 0x4d://aller a droite
         if ((poscol+1<nbc)&&(poscol+1>=0))//blindage
         {
             poscol++;//incrementer la position colonnne
@@ -294,7 +289,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 'z'://monter
+    case 0x48://monter
         if((poslig-1>=0)&&(poslig-1<nbl))//blindage
         {
             poslig--;//Decrementer la position de la ligne
@@ -321,7 +316,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 'w': //Sauvegarder
+    case 's': //Sauvegarder
         break;
     }
     if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY())) ///Si changement de position : remplacement de bloc.
@@ -381,7 +376,7 @@ void Matrice::bougerElements(Console* conso)
         if(m_Snoopy.getOiseaux()==4)
         {
             ///Gagner partie : bouger le score
-           // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
+            // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
             ///Afficher qu'on a gagné
             system("cls");
             std::cout<<"Gagne\n";
@@ -408,7 +403,7 @@ void Matrice::pousser(Console* conso, char& touche)
     switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
-    case 's': ///Pousser "bloc" vers le bas
+    case 0x50: ///Pousser "bloc" vers le bas
         if((i+2)<=N_LIGNES) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -418,7 +413,7 @@ void Matrice::pousser(Console* conso, char& touche)
             m_matrice[i+2][j].setEstPoussableblocmere(false);
         }
         break;
-    case 'q':///Pousser "bloc" vers gauche
+    case 0x4b:///Pousser "bloc" vers gauche
         if((j-2)>=0) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -428,7 +423,7 @@ void Matrice::pousser(Console* conso, char& touche)
             m_matrice[i][j-2].setEstPoussableblocmere(false);
         }
         break;
-    case 'd':///Pousser "bloc" vers droite
+    case 0x4d:///Pousser "bloc" vers droite
         if((j+2)<=N_COLONNES) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -438,7 +433,7 @@ void Matrice::pousser(Console* conso, char& touche)
             m_matrice[i][j+2].setEstPoussableblocmere(false);
         }
         break;
-    case 'z':///Pousser "bloc" vers haut
+    case 0x48:///Pousser "bloc" vers haut
         if((i-2)>=0) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -447,8 +442,6 @@ void Matrice::pousser(Console* conso, char& touche)
             ///Rendre ce bloc 'P' non-poussable
             m_matrice[i-2][j].setEstPoussableblocmere(false);
         }
-        break;
-    case 'w': //sauver la partie
         break;
     }
 }
