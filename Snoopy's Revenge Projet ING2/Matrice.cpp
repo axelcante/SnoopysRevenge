@@ -1,7 +1,4 @@
-#include "Constantes.h"
 #include "Matrice.h"
-#include "Bloc.h"
-#include <windows.h>
 
 //constructeur
 Matrice::Matrice() {}
@@ -191,8 +188,13 @@ bool Matrice::bougerBalle()
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+    ///Diminuer nombre de vies de Snoopy si Balle touche Snoopy : mettre du sang :D
     if((m_balle.getPosX()==m_Snoopy.getPosX())&&(m_balle.getPosY()==m_Snoopy.getPosY()))
-    {return dead;}
+    {
+        return dead;
+    }
+    else dead = false;
+    return dead;
 }
 
 ///_________________________________________________________________________
@@ -351,6 +353,14 @@ void Matrice::bougerElements(Console* conso)
             {
                 quit = true;
             }
+            else if(touche == 'p') //pause
+            {
+                do
+                {
+                    touche = conso->getInputKey();
+                }
+                while (touche != 'p'); ///Stopper le timer aussi
+            }
             else
             {
                 bougerSnoopy(conso,touche);
@@ -367,6 +377,14 @@ void Matrice::bougerElements(Console* conso)
                 system("pause");
                 quit=true;
             }
+        }
+        if(m_Snoopy.getOiseaux()==4)
+        {
+            //Gagner partie
+            system("cls");
+            std::cout<<"Gagne\n";
+            system("pause");
+            quit=true;
         }
     }
     while(!quit);

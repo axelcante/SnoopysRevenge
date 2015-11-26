@@ -20,12 +20,6 @@ Snoopy::~Snoopy() {}
 
 //Méthodes
 
-/*  void moveSnoopy();
-    void breakbloc(Bloc &bloc);
-    void saveGame();
-    void loadGame();
-*/
-
 //Accesseurs
 //Getters
 int Snoopy::getVies() const

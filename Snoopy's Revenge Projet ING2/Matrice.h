@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <windows.h>
+#include "Constantes.h"
 #include "Bloc.h"
 #include "Snoopy.h"
 #include "Cassable.h"
