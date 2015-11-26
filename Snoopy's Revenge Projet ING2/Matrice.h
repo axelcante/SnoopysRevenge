@@ -4,6 +4,10 @@
 #include <iostream>
 #include <string>
 #include "Bloc.h"
+#include "Snoopy.h"
+#include "Cassable.h"
+#include "Balle.h"
+#include "Poussable.h"
 
 ///Matrice de blocs
 class Matrice
