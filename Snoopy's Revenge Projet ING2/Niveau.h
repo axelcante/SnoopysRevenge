@@ -7,6 +7,7 @@ class Niveau
 private :
     float m_temps; //Pas dans matrice ça ? :0
     Matrice m_matriceDeJeu; //Avec ses caractéristiques spécifiques
+    std::string m_mdp; //Mot de passe
     ///Idees Diedler en cours :
     //balle ennemis s'il y a
     //Snoopy
@@ -19,11 +20,12 @@ public :
     //Getters
     float getTemps() const;
     Matrice getMatrice() const;
+    std::string getMdp() const;
 
     //Setters
     void setTemps(float temps);
     void setMatrice(Matrice matriceDeJeu);
-
+    void setMdp(std::string mdp);
     //passerNiveau();
     ///Idees Diedler en cours :
     //gérer blocs  (pousser, casser ,..)
