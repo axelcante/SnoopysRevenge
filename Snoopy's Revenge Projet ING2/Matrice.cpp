@@ -52,6 +52,7 @@ void Matrice::setDecalageY(int decalageY)
     m_decalage_Y = decalageY;
 }
 
+///_________________________________________________________________________
 ///Methodes
 //Cette méthode initialise les oiseaux
 void Matrice::initialisationMatrice()
@@ -81,6 +82,7 @@ void Matrice::initialisationMatrice()
     m_matrice[9][18] = m_blocPoussable;
 }
 
+///_________________________________________________________________________
 void Matrice::afficherMatrice(Console* conso)
 {
     conso->gotoLigCol(POSLIGNE,POSCOLONNE);
@@ -106,6 +108,7 @@ void Matrice::afficherMatrice(Console* conso)
     std::cout <<"Nombre de vies : "<< m_Snoopy.getVies();
 }
 
+///_________________________________________________________________________
 void Matrice::afficherCadre(Console* conso)
 {
     char horizontal=205,vertical=186;
@@ -146,6 +149,7 @@ void Matrice::afficherCadre(Console* conso)
     std::cout << C_right_bottom;
 }
 
+///_________________________________________________________________________
 bool Matrice::bougerBalle()
 {
     bool dead = false;
@@ -187,9 +191,11 @@ bool Matrice::bougerBalle()
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
-    return dead;
+    if((m_balle.getPosX()==m_Snoopy.getPosX())&&(m_balle.getPosY()==m_Snoopy.getPosY()))
+    {return dead;}
 }
 
+///_________________________________________________________________________
 void Matrice::bougerSnoopy(Console*conso,char& touche)
 {
     //Ressources
@@ -325,6 +331,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
     }
 }
 
+///_________________________________________________________________________
 void Matrice::bougerElements(Console* conso)
 {
     bool quit = false;
@@ -349,11 +356,23 @@ void Matrice::bougerElements(Console* conso)
                 bougerSnoopy(conso,touche);
             }
         }
-        //if(dead == true) break;
+        if(dead == true)
+        {
+            m_Snoopy.setVies(m_Snoopy.getVies()-1);
+            dead = false;
+            if (m_Snoopy.getVies()<=0)
+            {
+                system("cls");
+                std::cout<<"Euh mort\n";
+                system("pause");
+                quit=true;
+            }
+        }
     }
     while(!quit);
 }
 
+///_________________________________________________________________________
 void Matrice::pousser(Console* conso, char& touche)
 {
     /****
