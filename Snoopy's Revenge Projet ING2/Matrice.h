@@ -3,19 +3,26 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <windows.h>
+#include "Constantes.h"
 #include "Bloc.h"
+#include "Snoopy.h"
+#include "Cassable.h"
+#include "Balle.h"
+#include "Poussable.h"
 
+///Matrice de blocs
 class Matrice
 {
 private :
     std::vector<std::vector<Bloc> > m_matrice;
     int m_decalage_X = 1, m_decalage_Y = 1;
-    Balle m_balle = Balle(5,10,'B',false);
+    Balle m_balle = Balle(5,10,'B',false); //On a C++11
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
     Bloc m_blocP = Bloc(0,0,'P',true);
     Snoopy m_Snoopy = Snoopy(4,4,'S',false,3,0,0);
-    Poussable m_blocPoussable = Poussable(0,0,'P',true,true); //sert à rien pour le moment (?)
+    Poussable m_blocPoussable = Poussable(0,0,'P',true,true); ///sert à rien pour le moment (?)
 
 
 public :

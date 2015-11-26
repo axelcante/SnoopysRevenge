@@ -86,28 +86,28 @@ void Console::setColor(Color col)
 {
     switch (col)
     {
-        case COLOR_WHITE:
-            this->_setColor(15, 0);
-            break;
-        case COLOR_BLACK:
-            this->_setColor(0, 0);
-            break;
-        case COLOR_RED:
-            this->_setColor(12, 0);
-            break;
-        case COLOR_GREEN:
-            this->_setColor(10, 0);
-            break;
-        case COLOR_BLUE:
-            this->_setColor(9, 0);
-            break;
-        case COLOR_YELLOW:
-            this->_setColor(14, 0);
-            break;
-        case COLOR_PURPLE:
-            this->_setColor(5, 0);
-            break;
-        default:
-            this->_setColor(7, 0);
+    case COLOR_WHITE:
+        this->_setColor(15, 0);
+        break;
+    case COLOR_BLACK:
+        this->_setColor(0, 0);
+        break;
+    case COLOR_RED:
+        this->_setColor(12, 0);
+        break;
+    case COLOR_GREEN:
+        this->_setColor(10, 0);
+        break;
+    case COLOR_BLUE:
+        this->_setColor(9, 0);
+        break;
+    case COLOR_YELLOW:
+        this->_setColor(14, 0);
+        break;
+    case COLOR_PURPLE:
+        this->_setColor(5, 0);
+        break;
+    default:
+        this->_setColor(7, 0);
     }
 }

@@ -14,6 +14,7 @@ void lancerJeu(Console* conso);
 
 int main()
 {
+<<<<<<< HEAD
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     conso->ShowConsoleCursor(false); //On rend le curseur de la console invisible pour ne pas avoir de clignotements
     int menu_choix = 0;
@@ -80,6 +81,20 @@ int main()
             }
         }
     }
+=======
+    ///Déclaration variables
+    //char var ='a';
+    //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
+
+    ///Test
+    Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
+    conso->ShowConsoleCursor(false); //Ne pas montrer le curseur, c'est moche
+
+    //initialisation de la matrice et du premier niveau
+    Matrice matrice_niveau_1;
+    matrice_niveau_1.afficherCadre(conso);
+    matrice_niveau_1.bougerElements(conso);
+>>>>>>> cb4633ae14292bf36e1e3772059312bb73689b22
 
     /*
      ___                        _   ___
@@ -94,6 +109,7 @@ int main()
 //char& touche = var; //Touche utilisée pour les interactions avec l'utilisateur
 //initialisation de la matrice et du premier niveau
 
+<<<<<<< HEAD
 ///Menu
 
 
@@ -109,6 +125,10 @@ int main()
 
 
 //conso->gotoLigCol(POSLIGNE,POSCOLONNE);
+=======
+
+    //Désallocation mémoire
+>>>>>>> cb4633ae14292bf36e1e3772059312bb73689b22
     conso->deleteInstance();
     return 0;
 
