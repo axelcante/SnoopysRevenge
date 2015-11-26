@@ -208,7 +208,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
     int nbc = N_COLONNES;
     switch(touche)
     {
-    case 0x50://descendre
+    case 80://descendre
         if ((poslig+1>=0)&&(poslig+1<nbl)) //blindage
         {
             poslig++; //incrementer la position de la ligne
@@ -235,7 +235,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 0x4b://aller a gauche
+    case 75://aller a gauche
         if ((poscol-1<nbc)&&(poscol-1>=0))//blindage
         {
             poscol--; //decrementer la position de la colonne
@@ -262,7 +262,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 0x4d://aller a droite
+    case 77://aller a droite
         if ((poscol+1<nbc)&&(poscol+1>=0))//blindage
         {
             poscol++;//incrementer la position colonnne
@@ -289,7 +289,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             }
         }
         break;
-    case 0x48://monter
+    case 72://monter
         if((poslig-1>=0)&&(poslig-1<nbl))//blindage
         {
             poslig--;//Decrementer la position de la ligne
@@ -403,7 +403,7 @@ void Matrice::pousser(Console* conso, char& touche)
     switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
-    case 0x50: ///Pousser "bloc" vers le bas
+    case 80: ///Pousser "bloc" vers le bas
         if((i+2)<=N_LIGNES) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -413,7 +413,7 @@ void Matrice::pousser(Console* conso, char& touche)
             m_matrice[i+2][j].setEstPoussableblocmere(false);
         }
         break;
-    case 0x4b:///Pousser "bloc" vers gauche
+    case 75:///Pousser "bloc" vers gauche
         if((j-2)>=0) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -423,7 +423,7 @@ void Matrice::pousser(Console* conso, char& touche)
             m_matrice[i][j-2].setEstPoussableblocmere(false);
         }
         break;
-    case 0x4d:///Pousser "bloc" vers droite
+    case 77:///Pousser "bloc" vers droite
         if((j+2)<=N_COLONNES) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
@@ -433,7 +433,7 @@ void Matrice::pousser(Console* conso, char& touche)
             m_matrice[i][j+2].setEstPoussableblocmere(false);
         }
         break;
-    case 0x48:///Pousser "bloc" vers haut
+    case 72:///Pousser "bloc" vers haut
         if((i-2)>=0) //Pas sortir de la matrice
         {
             m_matrice[i][j]=m_blocVide;
