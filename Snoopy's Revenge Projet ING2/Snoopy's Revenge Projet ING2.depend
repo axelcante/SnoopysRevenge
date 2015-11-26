@@ -62,10 +62,11 @@
 
 1448206154 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.h
 
-1448444226 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.cpp
+1448496175 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.cpp
 	"Constantes.h"
 	"Matrice.h"
 	"Bloc.h"
+	<windows.h>
 
 1448370054 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
 	<iostream>

@@ -97,6 +97,13 @@ void Matrice::afficherMatrice(Console* conso)
             conso->gotoLigCol(POSLIGNE+lignes,POSCOLONNE);
         }
     }
+    ///Affichage nombre d'oiseaux
+    conso->gotoLigCol(POSLIGNE+N_LIGNES+5, POSCOLONNE);
+    std::cout <<"Nombre d'oiseaux : "<< m_Snoopy.getOiseaux();
+    conso->gotoLigCol(POSLIGNE+N_LIGNES+6, POSCOLONNE);
+    std::cout <<"Score : "<< m_Snoopy.getScore();
+    conso->gotoLigCol(POSLIGNE+N_LIGNES+7, POSCOLONNE);
+    std::cout <<"Nombre de vies : "<< m_Snoopy.getVies();
 }
 
 void Matrice::afficherCadre(Console* conso)
@@ -192,15 +199,36 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
     int nbl = N_LIGNES;
     int nbc = N_COLONNES;
 
+    /********
+    QUE FAIRE SI BALLE TOUCHE ? : faire une condition dans balle directement.
+    **********/
+
     switch(touche)
     {
     case 's'://descendre
         if ((poslig+1>=0)&&(poslig+1<nbl)) //blindage
         {
             poslig++; //incrementer la position de la ligne
+            ///Pousser si poussable
             if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
             {
                 pousser(conso,touche);
+            }
+            ///Ne pas pousser si AUTRE blocs non poussables
+            else
+            {
+                if(m_matrice[poslig][poscol].getType()=='O')
+                {
+                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
+                }
+                else if(m_matrice[poslig][poscol].getType()!=' ')
+                {
+                    poslig--;
+                    //Si 'C' : cassable
+                    /// if((m_matrice[poslig][poscol].getType()=='C'))
+                    //Si 'T' : piégé
+                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
+                }
             }
         }
         break;
@@ -208,9 +236,26 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
         if ((poscol-1<nbc)&&(poscol-1>=0))//blindage
         {
             poscol--; //decrementer la position de la colonne
+            ///Pousser si poussable
             if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
             {
                 pousser(conso,touche);
+            }
+            ///Ne pas pousser si AUTRE blocs non poussables
+            else
+            {
+                if(m_matrice[poslig][poscol].getType()=='O')
+                {
+                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
+                }
+                else if(m_matrice[poslig][poscol].getType()!=' ')
+                {
+                    poscol++;
+                    //Si 'C' : cassable
+                    /// if((m_matrice[poslig][poscol].getType()=='C'))
+                    //Si 'T' : piégé
+                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
+                }
             }
         }
         break;
@@ -218,9 +263,26 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
         if ((poscol+1<nbc)&&(poscol+1>=0))//blindage
         {
             poscol++;//incrementer la position colonnne
+            ///Pousser si poussable
             if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
             {
                 pousser(conso,touche);
+            }
+            ///Ne pas pousser si AUTRE blocs non poussables
+            else
+            {
+                if(m_matrice[poslig][poscol].getType()=='O')
+                {
+                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
+                }
+                else if(m_matrice[poslig][poscol].getType()!=' ')
+                {
+                    poscol--;
+                    //Si 'C' : cassable
+                    /// if((m_matrice[poslig][poscol].getType()=='C'))
+                    //Si 'T' : piégé
+                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
+                }
             }
         }
         break;
@@ -228,16 +290,33 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
         if((poslig-1>=0)&&(poslig-1<nbl))//blindage
         {
             poslig--;//Decrementer la position de la ligne
+            ///Pousser si poussable
             if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
             {
                 pousser(conso,touche);
+            }
+            ///Ne pas pousser si AUTRE blocs non poussables
+            else
+            {
+                if(m_matrice[poslig][poscol].getType()=='O')
+                {
+                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
+                }
+                else if(m_matrice[poslig][poscol].getType()!=' ')
+                {
+                    poslig++;
+                    //Si 'C' : cassable
+                    /// if((m_matrice[poslig][poscol].getType()=='C'))
+                    //Si 'T' : piégé
+                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
+                }
             }
         }
         break;
     case 'w': //Sauvegarder
         break;
     }
-    if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY())) //SI changement
+    if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY())) ///Si changement de position : remplacement de bloc.
     {
         m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
         m_Snoopy.setPosX(poslig);
@@ -290,44 +369,44 @@ void Matrice::pousser(Console* conso, char& touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
     case 's': ///Pousser "bloc" vers le bas
-            if((i+2)<=N_LIGNES) //Pas sortir de la matrice
-            {
-                m_matrice[i][j]=m_blocVide;
-                // m_matrice[i+1][j]=m_Snoopy; //fait
-                m_matrice[i+2][j]=m_blocPoussable;
-                ///Rendre ce bloc 'P' non-poussable
-                m_matrice[i+2][j].setEstPoussableblocmere(false);
-            }
+        if((i+2)<=N_LIGNES) //Pas sortir de la matrice
+        {
+            m_matrice[i][j]=m_blocVide;
+            // m_matrice[i+1][j]=m_Snoopy; //fait
+            m_matrice[i+2][j]=m_blocPoussable;
+            ///Rendre ce bloc 'P' non-poussable
+            m_matrice[i+2][j].setEstPoussableblocmere(false);
+        }
         break;
     case 'q':///Pousser "bloc" vers gauche
-            if((j-2)>=0) //Pas sortir de la matrice
-            {
-                m_matrice[i][j]=m_blocVide;
-                //m_matrice[i][j-1]=m_Snoopy; //fait
-                m_matrice[i][j-2]=m_blocPoussable;
-                ///Rendre ce bloc 'P' non-poussable
-                m_matrice[i][j-2].setEstPoussableblocmere(false);
-            }
+        if((j-2)>=0) //Pas sortir de la matrice
+        {
+            m_matrice[i][j]=m_blocVide;
+            //m_matrice[i][j-1]=m_Snoopy; //fait
+            m_matrice[i][j-2]=m_blocPoussable;
+            ///Rendre ce bloc 'P' non-poussable
+            m_matrice[i][j-2].setEstPoussableblocmere(false);
+        }
         break;
     case 'd':///Pousser "bloc" vers droite
         if((j+2)<=N_COLONNES) //Pas sortir de la matrice
-            {
-                m_matrice[i][j]=m_blocVide;
-              //m_matrice[i][j+1]=m_Snoopy; //fait
-                m_matrice[i][j+2]=m_blocPoussable;
-                ///Rendre ce bloc 'P' non-poussable
-                m_matrice[i][j+2].setEstPoussableblocmere(false);
-            }
+        {
+            m_matrice[i][j]=m_blocVide;
+            //m_matrice[i][j+1]=m_Snoopy; //fait
+            m_matrice[i][j+2]=m_blocPoussable;
+            ///Rendre ce bloc 'P' non-poussable
+            m_matrice[i][j+2].setEstPoussableblocmere(false);
+        }
         break;
     case 'z':///Pousser "bloc" vers haut
-         if((i-2)>=0) //Pas sortir de la matrice
-            {
-                m_matrice[i][j]=m_blocVide;
-               //m_matrice[i-1][j]=m_Snoopy; //fait
-                m_matrice[i-2][j]=m_blocPoussable;
-                ///Rendre ce bloc 'P' non-poussable
-                m_matrice[i-2][j].setEstPoussableblocmere(false);
-            }
+        if((i-2)>=0) //Pas sortir de la matrice
+        {
+            m_matrice[i][j]=m_blocVide;
+            //m_matrice[i-1][j]=m_Snoopy; //fait
+            m_matrice[i-2][j]=m_blocPoussable;
+            ///Rendre ce bloc 'P' non-poussable
+            m_matrice[i-2][j].setEstPoussableblocmere(false);
+        }
         break;
     case 'w': //sauver la partie
         break;
