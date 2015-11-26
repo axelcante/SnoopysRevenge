@@ -2,7 +2,6 @@
 #define CONSOLE_H_INCLUDED
 
 #include <iostream>
-#include <mscorelib>
 
 enum Color
 {
@@ -42,10 +41,6 @@ class Console
         bool isKeyboardPressed();
         int getInputKey();
         void setColor(Color col);
-        propreties bool CursorVisible {
-        static bool get();
-        static void set(bool value);
-}
 };
 
 #endif // CONSOLE_H_INCLUDED

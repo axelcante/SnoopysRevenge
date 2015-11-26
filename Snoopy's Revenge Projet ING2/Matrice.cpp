@@ -91,7 +91,24 @@ void Matrice::afficherMatrice(Console* conso)
         {
             for (int j = 0; j < N_COLONNES; j++)
             {
+                if(m_matrice[i][j].getType() == 'S')
+                {
+                    conso->setColor(COLOR_YELLOW);
+                }
+                if(m_matrice[i][j].getType() == 'T')
+                {
+                    conso->setColor(COLOR_RED);
+                }
+                if(m_matrice[i][j].getType() == 'P')
+                {
+                    conso->setColor(COLOR_BLUE);
+                }
+                if(m_matrice[i][j].getType() == 'B')
+                {
+                    conso->setColor(COLOR_RED);
+                }
                 std::cout << m_matrice[i][j].getType();
+                conso->setColor(COLOR_DEFAULT);
             }
             lignes++;
             conso->gotoLigCol(POSLIGNE+lignes,POSCOLONNE);
@@ -107,6 +124,7 @@ void Matrice::afficherCadre(Console* conso)
     int decalage = 0;
 
     conso->gotoLigCol(POSLIGNE-1, POSCOLONNE);
+    conso->setColor(COLOR_PURPLE);
     for (int i = 0; i < N_COLONNES; i ++)
     {
         std::cout << horizontal;
@@ -137,6 +155,7 @@ void Matrice::afficherCadre(Console* conso)
     std::cout << C_left_bottom;
     conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE+N_COLONNES);
     std::cout << C_right_bottom;
+    conso->setColor(COLOR_DEFAULT);
 }
 
 bool Matrice::bougerBalle()

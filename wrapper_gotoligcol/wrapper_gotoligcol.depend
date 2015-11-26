@@ -16,7 +16,10 @@
 	<conio.h>
 	<windows.h>
 
-1448443047 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\wrapper_gotoligcol\console.h
+1448492957 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\wrapper_gotoligcol\console.h
 	<iostream>
-	<mscorelib>
+
+1448497052 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\wrapper_gotoligcol\main.cpp
+	<iostream>
+	"console.h"
 
