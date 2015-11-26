@@ -11,6 +11,8 @@ protected:
     int m_pos_y;
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
     bool m_estPoussableblocmere;
+    /*bool m_estCassableblocmere;
+    bool m_estPiegeblocmere;*/
 
 public:
     //constructeur par défaut
