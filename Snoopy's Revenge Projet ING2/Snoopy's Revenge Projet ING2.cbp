@@ -41,6 +41,7 @@
 		<Unit filename="Constantes.h" />
 		<Unit filename="Matrice.cpp" />
 		<Unit filename="Matrice.h" />
+		<Unit filename="Niveau.cpp" />
 		<Unit filename="Niveau.h" />
 		<Unit filename="Poussable.cpp" />
 		<Unit filename="Poussable.h" />
