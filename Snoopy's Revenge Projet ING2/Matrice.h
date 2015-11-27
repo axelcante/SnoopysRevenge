@@ -52,6 +52,8 @@ public :
     void afficherCadre(Console* conso);
     void bougerSnoopy(Console* conso,char& touche);
     void pousser(Console* conso, char& touche);
+    void ecranMort(Console* conso);
+    void ecranVictoire(Console* conso);
 };
 
 #endif // MATRICE_H_INCLUDED

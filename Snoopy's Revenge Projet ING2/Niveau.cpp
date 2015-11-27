@@ -43,7 +43,7 @@ int Niveau::lancerJeu(Console* conso)
     Matrice matrice_niveau_1;
     matrice_niveau_1.afficherCadre(conso);
     matrice_niveau_1.bougerElements(conso);
-    conso->gotoLigCol(20,30);
+    conso->gotoLigCol(40,30);
     system("pause");
     system("cls");
     afficherMenu(conso);
@@ -172,10 +172,11 @@ void Niveau::afficherMenu(Console* conso)
 
 void Niveau::play(Console* conso)
 {
-    int menu_choix = 0;
+    int menu_choix = 1;
     bool quit = false;
 
     afficherMenu(conso);
+    effetMenu(menu_choix,conso);
 
     while(!quit)
     {

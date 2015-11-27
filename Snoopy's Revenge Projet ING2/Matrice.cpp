@@ -441,7 +441,7 @@ void Matrice::bougerElements(Console* conso)
             if (m_Snoopy.getVies()<=0)
             {
                 system("cls");
-                std::cout<<"Euh mort\n";
+                ecranMort(conso);
                 quit=true;
             }
         }
@@ -451,8 +451,7 @@ void Matrice::bougerElements(Console* conso)
            // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
             ///Afficher qu'on a gagné
             system("cls");
-            std::cout<<"Gagne\n";
-            std::cout<<"Score: "<<m_Snoopy.getScore();
+            ecranVictoire(conso);
             quit=true;
         }
     }
@@ -517,4 +516,24 @@ void Matrice::pousser(Console* conso, char& touche)
     case 'w': //sauver la partie
         break;
     }
+}
+
+void Matrice::ecranMort(Console* conso)
+{
+    conso->gotoLigCol(20,30);
+    conso->setColor(COLOR_RED);
+    std::cout << "VOUS AVEZ PERDU ! QUEL DOMMAGE !";
+    conso->gotoLigCol(25,30);
+    std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore();
+    conso->setColor(COLOR_DEFAULT);
+}
+
+void Matrice::ecranVictoire(Console* conso)
+{
+    conso->gotoLigCol(20,30);
+    conso->setColor(COLOR_YELLOW);
+    std::cout << "EXCELLENT ! VOUS AVEZ REMPORTE LA PARTIE !";
+    conso->gotoLigCol(25,30);
+    std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore();
+    conso->setColor(COLOR_DEFAULT);
 }
