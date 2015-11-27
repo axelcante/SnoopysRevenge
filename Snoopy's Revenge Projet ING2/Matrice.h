@@ -17,11 +17,11 @@ class Matrice
 private :
     std::vector<std::vector<Bloc> > m_matrice;
     int m_decalage_X = 1, m_decalage_Y = 1;
-    Balle m_balle = Balle(5,10,'B',false); //On a C++11
+    Balle m_balle = Balle(BALLPOSX,BALLPOSY,'B',false); //On a C++11
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
     Bloc m_blocP = Bloc(0,0,'P',true);
-    Snoopy m_Snoopy = Snoopy(4,4,'S',false,3,0,0);
+    Snoopy m_Snoopy = Snoopy(SNOOPYPOSX,SNOOPYPOSY,'S',false,3,0,0);
     Poussable m_blocPoussable = Poussable(0,0,'P',true,true); ///sert à rien pour le moment (?)
 
 
@@ -35,6 +35,7 @@ public :
     Balle getBalle() const;
     Poussable getBlocPoussable() const;
     Bloc getBlocP()const;
+    Snoopy getSnoopy()const;
     int getDecalageX()const;
     int getDecalageY()const;
     //setters
@@ -44,6 +45,7 @@ public :
 
     //methodes
     void initialisationMatrice();
+    void initialisationElements();
     void afficherMatrice(Console* conso);
     void bougerElements(Console* conso);
     bool bougerBalle();

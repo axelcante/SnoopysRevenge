@@ -1,4 +1,5 @@
 #include "Matrice.h"
+#include <time.h>
 
 //constructeur
 Matrice::Matrice() {}
@@ -31,6 +32,10 @@ int Matrice::getDecalageY()const
 {
     return m_decalage_Y;
 }
+Snoopy Matrice::getSnoopy()const
+{
+    return m_Snoopy;
+}
 
 //setters
 //Permet de modifier manuellement un bloc de la matrice
@@ -51,7 +56,6 @@ void Matrice::setDecalageY(int decalageY)
 
 ///_________________________________________________________________________
 ///Methodes
-//Cette méthode initialise les oiseaux
 void Matrice::initialisationMatrice()
 {
     std::vector<Bloc>column;
@@ -62,6 +66,21 @@ void Matrice::initialisationMatrice()
     for (int i = 0; i < N_LIGNES; i++)
     {
         m_matrice.push_back(column);
+    }
+    initialisationElements();
+
+}
+
+///_________________________________________________________________________
+void Matrice::initialisationElements()
+{
+    //Matrice vide
+    for(int i = 0; i < N_LIGNES; i++)
+    {
+        for(int j = 0; j < N_COLONNES; j++)
+        {
+            m_matrice[i][j] = m_blocVide;
+        }
     }
     //Oiseaux
     m_matrice[0][0] = m_Oiseau;
@@ -77,6 +96,9 @@ void Matrice::initialisationMatrice()
     m_matrice[3][7] = m_blocPoussable;
     m_matrice[6][6] = m_blocPoussable;
     m_matrice[9][18] = m_blocPoussable;
+    m_decalage_X = 1;
+    m_decalage_Y = 1;
+    m_Snoopy.setOiseaux(0);
 }
 
 ///_________________________________________________________________________
@@ -360,9 +382,27 @@ void Matrice::bougerElements(Console* conso)
     char touche;
     initialisationMatrice();
     afficherMatrice(conso);
+    int timer;
+
     do
     {
-        Sleep(80);  //Le sleep permet de ralentir le mouvement automatique de la balle
+        timer = (clock()/(CLOCKS_PER_SEC));
+        if(60-timer>=0)
+        {
+            conso->setColor(COLOR_YELLOW);
+            if(60-timer < 10)
+        {
+            conso->gotoLigCol(12,45);
+            conso->setColor(COLOR_RED);
+            std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+            conso->gotoLigCol(10,46); std::cout << ' ';
+        }
+            conso->gotoLigCol(10,45);
+            std::cout << (60-timer);
+            conso->setColor(COLOR_DEFAULT);
+
+        }
+        Sleep(40);
         dead = bougerBalle();
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
@@ -371,6 +411,7 @@ void Matrice::bougerElements(Console* conso)
             if(touche == 27)
             {
                 quit = true;
+                system("cls");
             }
             else if(touche == 'p') //pause
             {
@@ -389,11 +430,18 @@ void Matrice::bougerElements(Console* conso)
         {
             m_Snoopy.setVies(m_Snoopy.getVies()-1);
             dead = false;
+            //Réinitialisation de la matrice de départ;
+            Sleep(1000);
+            m_Snoopy.setPosX(SNOOPYPOSX);
+            m_Snoopy.setPosY(SNOOPYPOSY);
+            m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
+            m_balle.setPosX(BALLPOSX);
+            m_balle.setPosY(BALLPOSY);
+            initialisationElements();
             if (m_Snoopy.getVies()<=0)
             {
                 system("cls");
                 std::cout<<"Euh mort\n";
-                system("pause");
                 quit=true;
             }
         }
@@ -405,7 +453,6 @@ void Matrice::bougerElements(Console* conso)
             system("cls");
             std::cout<<"Gagne\n";
             std::cout<<"Score: "<<m_Snoopy.getScore();
-            system("pause");
             quit=true;
         }
     }

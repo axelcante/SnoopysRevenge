@@ -7,6 +7,10 @@
 
 #define POSLIGNE 5
 #define POSCOLONNE 10
+#define BALLPOSX 6
+#define BALLPOSY 11
+#define SNOOPYPOSX 4
+#define SNOOPYPOSY 9
 
 //Librairies
 #include <iostream>
