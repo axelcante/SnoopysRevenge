@@ -30,7 +30,6 @@ public :
     int lancerJeu(Console* conso);
     void afficherMenu(Console* conso);
     void play(Console* conso);
-    //std::string lireFichier(std::ifstream& Fichier);
 
     //passerNiveau();
     ///Idees Diedler en cours :

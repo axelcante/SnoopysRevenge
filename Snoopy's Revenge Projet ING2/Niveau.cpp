@@ -143,12 +143,22 @@ void Niveau::effetMenu(int choix, Console* conso)
 void Niveau::afficherMenu(Console* conso)
 {
     conso->setColor(COLOR_YELLOW);
-    conso->gotoLigCol(30,30);       //affichage du titre stylé de Snoopy's Revenge
 
-    /*std::ifstream lecture ("SnoopyTitle.txt");      //ouverture du fichier (s'il existe)
-    std::string titre = lireFichier(lecture);
-    std::cout << titre;
-    lecture.close();*/
+    conso->gotoLigCol(15,60);       //affichage du titre stylé de Snoopy's Revenge
+    std::cout <<
+              " ___                        _   ___";
+    conso->gotoLigCol(16,60);
+    std::cout <<
+              "/ __|_ _  ___ ___ _ __ _  _( __| _ \\_____ _____ _ _  __ _ ___";
+    conso->gotoLigCol(17,60);
+    std::cout <<
+              "\\__ | ' \\/ _ / _ | '_ | || |(_-|   / -_\\ V / -_| ' \\/ _` / -_)";
+    conso->gotoLigCol(18,60);
+    std::cout <<
+              "|___|_||_\\___\\___| .__/\\_, |/__|_|_\\___|\\_/\\___|_||_\\__, \\___|";
+    conso->gotoLigCol(19,60);
+    std::cout <<
+              "                 |_|   |__/                         |___/";
 
     conso->gotoLigCol(POSLIGNE,POSCOLONNE+3);       //affichage du menu normal des choix proposés
     std::cout << "Bienvenue dans l'incroyable monde de Snoopy !";
@@ -216,23 +226,3 @@ void Niveau::play(Console* conso)
         }
     }
 }
-
-/*std::string Niveau::lireFichier(std::ifstream& Fichier)
-{
-    std::string Lignes = "";
-
-    if(Fichier)
-    {
-        while(Fichier.good())
-        {
-            std::string ligne_tmp;
-            std::getline(Fichier,ligne_tmp);
-            Lignes += ligne_tmp;
-        }
-        return Lignes;
-    }
-    else        //Erreur de lecture ou fichier n'existe pas
-    {
-        return "ERREUR : fichier n'existe pas";
-    }
-}*/

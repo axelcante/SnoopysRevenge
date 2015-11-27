@@ -128,6 +128,10 @@ void Matrice::afficherMatrice(Console* conso)
                 {
                     conso->setColor(COLOR_RED);
                 }
+                if(m_matrice[i][j].getType() == 'O')
+                {
+                    conso->setColor(COLOR_GREEN);
+                }
                 std::cout << m_matrice[i][j].getType();
                 conso->setColor(COLOR_DEFAULT);
             }
@@ -136,12 +140,19 @@ void Matrice::afficherMatrice(Console* conso)
         }
     }
     ///Affichage nombre d'oiseaux
+    conso->gotoLigCol(POSLIGNE+N_LIGNES+3, POSCOLONNE);
+    conso->setColor(COLOR_YELLOW);
+    std::cout <<"Nombre d'oiseaux : ";
+    conso->setColor(COLOR_GREEN);
+    std::cout<< m_Snoopy.getOiseaux();
     conso->gotoLigCol(POSLIGNE+N_LIGNES+5, POSCOLONNE);
-    std::cout <<"Nombre d'oiseaux : "<< m_Snoopy.getOiseaux();
-    conso->gotoLigCol(POSLIGNE+N_LIGNES+6, POSCOLONNE);
+    conso->setColor(COLOR_YELLOW);
     std::cout <<"Score : "<< m_Snoopy.getScore();
     conso->gotoLigCol(POSLIGNE+N_LIGNES+7, POSCOLONNE);
-    std::cout <<"Nombre de vies : "<< m_Snoopy.getVies();
+    std::cout <<"Nombre de vies : ";
+    conso->setColor(COLOR_RED);
+    std::cout << m_Snoopy.getVies();
+    conso->setColor(COLOR_DEFAULT);
 }
 
 ///_________________________________________________________________________
@@ -185,6 +196,14 @@ void Matrice::afficherCadre(Console* conso)
     conso->gotoLigCol(POSLIGNE+N_LIGNES, POSCOLONNE+N_COLONNES);
     std::cout << C_right_bottom;
     conso->setColor(COLOR_DEFAULT);
+
+    for(int i = 0; i < 60; i++)
+    {
+        conso->setColor(COLOR_PURPLE);
+        conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+i);
+        std::cout << (char)254u;
+        conso->setColor(COLOR_DEFAULT);
+    }
 }
 
 ///_________________________________________________________________________
@@ -387,22 +406,27 @@ void Matrice::bougerElements(Console* conso)
     do
     {
         timer = (clock()/(CLOCKS_PER_SEC));
+        for(int j = 60-timer; j < 60; j++) //efface les carrés de temps
+        {
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
+            std::cout << ' ';
+        }
         if(60-timer>=0)
         {
             conso->setColor(COLOR_YELLOW);
             if(60-timer < 10)
-        {
-            conso->gotoLigCol(12,45);
-            conso->setColor(COLOR_RED);
-            std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
-            conso->gotoLigCol(10,46); std::cout << ' ';
-        }
+            {
+                conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+                conso->setColor(COLOR_RED);
+                std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+                conso->gotoLigCol(10,46);
+                std::cout << ' ';
+            }
             conso->gotoLigCol(10,45);
             std::cout << (60-timer);
             conso->setColor(COLOR_DEFAULT);
-
         }
-        Sleep(40);
+        Sleep(50);
         dead = bougerBalle();
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
@@ -448,7 +472,7 @@ void Matrice::bougerElements(Console* conso)
         if(m_Snoopy.getOiseaux()==4)
         {
             ///Gagner partie : bouger le score
-           // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
+            // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
             ///Afficher qu'on a gagné
             system("cls");
             ecranVictoire(conso);
