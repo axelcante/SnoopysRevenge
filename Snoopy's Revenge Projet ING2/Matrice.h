@@ -10,6 +10,7 @@
 #include "Cassable.h"
 #include "Balle.h"
 #include "Poussable.h"
+#include "Cassable.h"
 #include "Piege.h"
 
 ///Matrice de blocs
@@ -18,13 +19,14 @@ class Matrice
 private :
     std::vector<std::vector<Bloc> > m_matrice;
     int m_decalage_X = 1, m_decalage_Y = 1;
-    Balle m_balle = Balle(BALLPOSX,BALLPOSY,'B',false); //On a C++11
-    Bloc m_blocVide = Bloc(0,0,' ',false);
-    Bloc m_Oiseau = Bloc(0,0,'O',false);
-    Bloc m_blocP = Bloc(0,0,'P',true);
-    Bloc m_blocT = Bloc(0,0,'T',false);
-    Snoopy m_Snoopy = Snoopy(SNOOPYPOSX,SNOOPYPOSY,'S',false,3,0,0);
-    Poussable m_blocPoussable = Poussable(0,0,'P',true,true); ///sert à rien pour le moment (?)
+    Balle m_balle = Balle(BALLPOSX,BALLPOSY,'B',false,false); //On a C++11
+    Bloc m_blocVide = Bloc(0,0,' ',false,false);
+    Bloc m_Oiseau = Bloc(0,0,'O',false,false);
+    Bloc m_blocP = Bloc(0,0,'P',true,false);
+    Bloc m_blocT = Bloc(0,0,'T',false,false);
+    Bloc m_blocC = Bloc(0,0,'C',false,true);
+    Snoopy m_Snoopy = Snoopy(SNOOPYPOSX,SNOOPYPOSY,'S',false,false,3,0,0);
+    Poussable m_blocPoussable = Poussable(0,0,'P',true,false,true); ///sert à rien pour le moment (?)
 
 
 
@@ -55,6 +57,7 @@ public :
     void afficherCadre(Console* conso);
     void bougerSnoopy(Console* conso,char& touche);
     void pousser(Console* conso, char& touche);
+    void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
 };

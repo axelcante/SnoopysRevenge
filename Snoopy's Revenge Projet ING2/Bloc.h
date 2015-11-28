@@ -11,6 +11,7 @@ protected:
     int m_pos_y;
     char m_type; //cet attribut permet de choisir quel type de bloc nous voulons créer
     bool m_estPoussableblocmere;
+    bool m_estCassableblocmere;
     /*bool m_estCassableblocmere;
     bool m_estPiegeblocmere;*/ ///Si on met ça dans BLOC, on n'a plus vraiment besoin de blocs filles, si ? sauf pour faire joli
 
@@ -18,7 +19,7 @@ public:
     //constructeur par défaut
     Bloc();
     //constructeur surchargé
-    Bloc(int posX, int posY, char type, bool estPoussableblocmere);
+    Bloc(int posX, int posY, char type, bool estPoussableblocmere, bool estCassableblocmere);
     //destructeur
     ~Bloc();
     //getters
@@ -26,11 +27,13 @@ public:
     int getPosY()const;
     char getType()const;
     bool getEstPoussableblocmere()const;
+    bool getEstCassableblocmere()const;
     //setters
     void setPosX(int posX);
     void setPosY(int posY);
     void setType(char type);
     void setEstPoussableblocmere(bool estPoussableblocmere);
+    void setEstCassableblocmere(bool estCassableblocmere);
 };
 
 #endif // BLOC_H_INCLUDED

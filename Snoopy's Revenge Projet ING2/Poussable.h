@@ -9,7 +9,7 @@ private:
     bool m_estPoussable;
 public:
     //constructeur surchargé
-    Poussable(int posX, int posY, char type,bool estPoussableblocmere, bool estPoussable);
+    Poussable(int posX, int posY, char type,bool estPoussableblocmere,bool estCassableblocmere, bool estPoussable);
     //destructeur
     ~Poussable();
     //getters

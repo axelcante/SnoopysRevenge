@@ -7,7 +7,7 @@ class Balle : public Bloc
 {
 public :
     //Constructeur surchargé
-    Balle(int posX, int posY, char type,bool estPoussableblocmere);
+    Balle(int posX, int posY, char type,bool estPoussableblocmere, bool estCassableblocmere);
     //Destructeur
     ~Balle();
     //Méthodes

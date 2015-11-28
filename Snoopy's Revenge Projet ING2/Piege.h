@@ -11,7 +11,7 @@ class Piege : public Bloc
 {
 public:
     //constructeur surchargé
-    Piege(int posX, int posY, char type,bool estPoussableblocmere);
+    Piege(int posX, int posY, char type,bool estPoussableblocmere,bool estCassableblocmere);
     //destructeur
     ~Piege();
 };

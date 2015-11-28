@@ -6,12 +6,13 @@
 //Constructeur par défaut
 Bloc::Bloc() {}
 //constructeur surchargé
-Bloc::Bloc(int posX, int posY, char type,bool estPoussableblocmere)
+Bloc::Bloc(int posX, int posY, char type,bool estPoussableblocmere,bool estCassableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
     m_estPoussableblocmere = estPoussableblocmere;
+    m_estCassableblocmere = estCassableblocmere;
 }
 
 //destructeur
@@ -34,6 +35,10 @@ bool Bloc::getEstPoussableblocmere()const
 {
     return m_estPoussableblocmere;
 }
+bool Bloc::getEstCassableblocmere()const
+{
+    return m_estCassableblocmere;
+}
 
 //setters
 void Bloc::setPosX(int posX)
@@ -51,4 +56,8 @@ void Bloc::setType(char type)
 void Bloc::setEstPoussableblocmere(bool estPoussableblocmere)
 {
     m_estPoussableblocmere = estPoussableblocmere;
+}
+void Bloc::setEstCassableblocmere(bool estCassableblocmere)
+{
+    m_estPoussableblocmere = estCassableblocmere;
 }

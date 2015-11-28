@@ -12,7 +12,7 @@ private :
 
 public :
     //Constructeurs
-    Snoopy(int posX, int posY, char type,bool estPoussableblocmere,int vies,int score,int oiseaux);
+    Snoopy(int posX, int posY, char type,bool estPoussableblocmere, bool estCassableblocmere,int vies,int score,int oiseaux);
     //Destructeur
     ~Snoopy();
     //getters

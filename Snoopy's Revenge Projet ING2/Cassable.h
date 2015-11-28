@@ -6,16 +6,16 @@
 class Cassable : public Bloc
 {
 private :
-    bool m_estPiege;
+    bool m_estCassable;
 public:
     //constructeur surchargé
-    Cassable(int posX, int posY, char type,bool estPoussableblocmere,bool estPiege);
+    Cassable(int posX, int posY, char type,bool estPoussableblocmere,bool estCassableblocmere,bool estCassable);
     //destructeur
     ~Cassable();
     //getters
-    bool getEstPiege()const;
+    bool getEstCassable()const;
     //setters
-    void setEstPiege(bool estPiege);
+    void setEstCassable(bool estCassable);
 };
 
 

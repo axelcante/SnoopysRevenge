@@ -3,16 +3,16 @@
 ///Bloc Snoopy
 //Initialisation: constructeurs & Destructeurs
 //constructeur surchargé
-Snoopy::Snoopy(int posX, int posY, char type,bool estPoussableblocmere,int vies,int score,int oiseaux) : Bloc(posX,posY,type,estPoussableblocmere)
+Snoopy::Snoopy(int posX, int posY, char type,bool estPoussableblocmere, bool estCassableblocmere,int vies,int score,int oiseaux) : Bloc(posX,posY,type,estPoussableblocmere,estCassableblocmere)
 {
     m_pos_x = posX;
     m_pos_y = posY;
     m_type = type;
     m_estPoussableblocmere = estPoussableblocmere;
+    m_estCassableblocmere = estCassableblocmere;
     m_vies=vies;
     m_score=score;
     m_oiseaux=oiseaux;
-
 }
 
 //Destructeur unique
