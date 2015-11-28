@@ -57,7 +57,7 @@ void Matrice::setDecalageY(int decalageY)
 
 ///_________________________________________________________________________
 ///Methodes
-void Matrice::initialisationMatrice()
+void Matrice::initialisationMatrice(int& niv)
 {
     std::vector<Bloc>column;
     for (int i = 0; i < N_COLONNES; i++)
@@ -68,12 +68,12 @@ void Matrice::initialisationMatrice()
     {
         m_matrice.push_back(column);
     }
-    initialisationElements();
+    initialisationElements(niv);
 
 }
 
 ///_________________________________________________________________________
-void Matrice::initialisationElements()
+void Matrice::initialisationElements(int& niv)
 {
     //Matrice vide
     for(int i = 0; i < N_LIGNES; i++)
@@ -83,6 +83,7 @@ void Matrice::initialisationElements()
             m_matrice[i][j] = m_blocVide;
         }
     }
+    ///TOUJOURS LA
     //Oiseaux
     m_matrice[0][0] = m_Oiseau;
     m_matrice[0][19] = m_Oiseau;
@@ -90,19 +91,40 @@ void Matrice::initialisationElements()
     m_matrice[9][19] = m_Oiseau;
     //Balle position initiale
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
-    //Snoopy
-    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
-    //Blocs poussables TEST
-    m_matrice[6][12] = m_blocPoussable;
-    m_matrice[3][7] = m_blocPoussable;
-    m_matrice[6][6] = m_blocPoussable;
-    //Blocs Piégés TEST
-    m_matrice[5][8] = m_blocT;
-    //Blocs Cassables TEST
-    m_matrice[6][8] = m_blocC;
     m_decalage_X = 1;
     m_decalage_Y = 1;
+    //Snoopy
+    m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
     m_Snoopy.setOiseaux(0);
+    ///Architecture spéciale
+    switch(niv)
+    {
+    case 1:
+        //Blocs poussables TEST
+        m_matrice[6][12] = m_blocPoussable;
+        m_matrice[3][7] = m_blocPoussable;
+        m_matrice[6][6] = m_blocPoussable;
+        //Blocs Piégés TEST
+        m_matrice[5][8] = m_blocT;
+        //Blocs Cassables TEST
+        m_matrice[6][8] = m_blocC;
+        break;
+    case 2:
+        //Blocs poussables TEST
+        m_matrice[0][5] = m_blocPoussable;
+        m_matrice[1][5] = m_blocPoussable;
+        m_matrice[0][17] = m_blocPoussable;
+        m_matrice[1][17] = m_blocPoussable;
+        //Blocs Piégés TEST
+        m_matrice[3][5] = m_blocT;
+        m_matrice[3][15] = m_blocT;
+        //Blocs Cassables TEST
+        m_matrice[6][8] = m_blocC;
+        m_matrice[7][8] = m_blocC;
+        break;
+    case 3:
+        break;
+    }
 }
 
 ///_________________________________________________________________________
@@ -253,7 +275,8 @@ bool Matrice::bougerBalle()
         m_decalage_X *= -1;
     }
     if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
-    {                                   //euuh
+    {
+        //euuh
         m_decalage_Y += 0;
         dead = true;
     }
@@ -283,7 +306,7 @@ bool Matrice::bougerBalle()
 }
 
 ///_________________________________________________________________________
-void Matrice::bougerSnoopy(Console*conso,char& touche)
+void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
 {
     //Ressources
     //Position de Snoopy par rapport au TABLEAU
@@ -336,48 +359,56 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
         break;
     }
 
-        ///Si 'P' : pousser si poussable
-        if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
-            pousser(conso,touche);
-        else
+    ///Si 'P' : pousser si poussable
+    if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
+        pousser(conso,touche);
+    else
+    {
+        ///Si 'O' : oiseau à récupérer
+        if(m_matrice[poslig][poscol].getType()=='O')
+            m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
+        ///Si 'T' : piégé
+        else if(m_matrice[poslig][poscol].getType()=='T')
+            dead = true;
+        ///Si 'C' :
+        else if (m_matrice[poslig][poscol].getType()!=' ')
         {
-            ///Si 'O' : oiseau à récupérer
-            if(m_matrice[poslig][poscol].getType()=='O')
-                m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
-            ///Si 'T' : piégé
-            else if(m_matrice[poslig][poscol].getType()=='T')
-                m_Snoopy.setVies(m_Snoopy.getVies()-1);
-            ///Si 'C' :
-            else if (m_matrice[poslig][poscol].getType()!=' ')
+            if(m_matrice[poslig][poscol].getType()=='C')
             {
-                if(m_matrice[poslig][poscol].getType()=='C')
-                {
-                       ///Afficher si cassable
-                    conso->gotoLigCol(12, 45);
-                    std::cout << "'a' pour casser";
-                }
-                poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
-                poscol = m_Snoopy.getPosY();
+                ///Afficher si cassable
+                conso->gotoLigCol(12, 45);
+                std::cout << "'a' pour casser";
             }
-        }
-        ///Si changement de position : remplacement de bloc.
-        if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY()))
-        {
-            conso->gotoLigCol(12, 45);
-            std::cout << "                 ";
-            m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
-            m_Snoopy.setPosX(poslig);
-            m_Snoopy.setPosY(poscol);
-            m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+            poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
+            poscol = m_Snoopy.getPosY();
         }
     }
-
-
+    ///Si changement de position : remplacement de bloc.
+    if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY()))
+    {
+        conso->gotoLigCol(12, 45);
+        std::cout << "                 ";
+        m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
+        m_Snoopy.setPosX(poslig);
+        m_Snoopy.setPosY(poscol);
+        m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+    }
+}
 
 ///_________________________________________________________________________
-void Matrice::bougerElements(Console* conso)
+void Matrice::bougerElements(Console* conso,int& niv)
 {
     bool quit = false;
+<<<<<<< HEAD
+        bool dead = false;
+        char touche;
+        initialisationMatrice(niv);
+        afficherCadre(conso);
+        afficherMatrice(conso);
+        int start = clock();
+
+        do
+=======
     bool dead = false;
     char touche;
     initialisationMatrice();
@@ -388,54 +419,80 @@ void Matrice::bougerElements(Console* conso)
     {
         m_time = (clock()-start);
         for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
+>>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
         {
-            conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
-            std::cout << ' ';
-        }
-        if(60000-m_time >= 0)
-        {
-            conso->setColor(COLOR_YELLOW);
-            if(60000-m_time < 10000)
+
+            m_time = (clock()-start);
+            for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
             {
-                conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
-                conso->setColor(COLOR_RED);
-                std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
-                conso->gotoLigCol(10,46);
+                conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
                 std::cout << ' ';
             }
+<<<<<<< HEAD
+            if(60000-m_time >= 0)
+=======
             conso->gotoLigCol(10,45);
             //std::cout << (60-(m_time/CLOCKS_PER_SEC));    ligne qui permet d'afficher les secondes : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
             if(60000-m_time <= 200)
+>>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
             {
-                dead = true;
-                m_Snoopy.setVies(0);
-            }
-        }
-        if(fmod(m_time,100) < 52)
-        {
-            dead = bougerBalle();
-        }
-        afficherMatrice(conso);
-        if(conso->ifKeyboardPressed())
-        {
-            touche=conso->getInputKey();
-            if(touche == 27)
-            {
-                quit = true;
-                system("cls");
-            }
-            else if(touche == 'p') //pause
-            {
-                do
+                conso->setColor(COLOR_YELLOW);
+                if(60000-m_time < 10000)
                 {
-                    touche = conso->getInputKey();
+                    conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+                    conso->setColor(COLOR_RED);
+                    std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+                    conso->gotoLigCol(10,46);
+                    std::cout << ' ';
                 }
-                while (touche != 'p'); ///Stopper le timer aussi
+                conso->gotoLigCol(10,45);
+                std::cout << (60-(m_time/CLOCKS_PER_SEC));
+                conso->setColor(COLOR_DEFAULT);
+                if(60000-m_time <= 200)
+                {
+                    dead = true;
+                    m_Snoopy.setVies(0);
+                }
             }
-            else
+            if(fmod(m_time,100) < 52)
             {
-                bougerSnoopy(conso,touche);
+                dead = bougerBalle();
+            }
+            afficherMatrice(conso);
+            if(conso->ifKeyboardPressed())
+            {
+                touche=conso->getInputKey();
+                if(touche == 27)
+                {
+                    quit = true;
+                    system("cls");
+                }
+                else if(touche == 'p') //pause
+                {
+                    do
+                    {
+                        touche = conso->getInputKey();
+                    }
+                    while (touche != 'p'); ///Stopper le timer aussi
+                }
+                else
+                {
+                    bougerSnoopy(conso,touche,dead);
+                }
+            }
+            if(dead == true)
+            {
+                m_Snoopy.setVies(m_Snoopy.getVies()-1);
+                dead = false;
+                //Réinitialisation de la matrice de départ;
+                Sleep(1000);
+                m_Snoopy.setPosX(SNOOPYPOSX);
+                m_Snoopy.setPosY(SNOOPYPOSY);
+                m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
+                m_balle.setPosX(BALLPOSX);
+                m_balle.setPosY(BALLPOSY);
+                initialisationElements(niv);
                 if (m_Snoopy.getVies()<=0)
                 {
                     system("cls");
@@ -443,37 +500,18 @@ void Matrice::bougerElements(Console* conso)
                     quit=true;
                 }
             }
-        }
-        if(dead == true)
-        {
-            m_Snoopy.setVies(m_Snoopy.getVies()-1);
-            dead = false;
-            //Réinitialisation de la matrice de départ;
-            Sleep(1000);
-            m_Snoopy.setPosX(SNOOPYPOSX);
-            m_Snoopy.setPosY(SNOOPYPOSY);
-            m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-            m_balle.setPosX(BALLPOSX);
-            m_balle.setPosY(BALLPOSY);
-            initialisationElements();
-            if (m_Snoopy.getVies()<=0)
+            if(m_Snoopy.getOiseaux()==4)
             {
+                ///Gagner partie : bouger le score
+                m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
+                ///Afficher qu'on a gagné
                 system("cls");
-                ecranMort(conso);
+                ecranVictoire(conso);
                 quit=true;
+                system("cls");
             }
         }
-        if(m_Snoopy.getOiseaux()==4)
-        {
-            ///Gagner partie : bouger le score
-            // m_Snoopy.setScore(m_Snoopy.getScore()+(TEMPSRESTANT*100));
-            ///Afficher qu'on a gagné
-            system("cls");
-            ecranVictoire(conso);
-            quit=true;
-        }
-    }
-    while(!quit);
+        while(!quit);
 }
 
 ///_________________________________________________________________________
@@ -548,8 +586,10 @@ void Matrice::ecranMort(Console* conso)
     conso->setColor(COLOR_RED);
     std::cout << "VOUS AVEZ PERDU ! QUEL DOMMAGE !";
     conso->gotoLigCol(25,30);
-    std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore();
+    std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore()<<std::endl<<std::endl;
+    system("pause");
     conso->setColor(COLOR_DEFAULT);
+
 }
 
 void Matrice::ecranVictoire(Console* conso)
@@ -558,7 +598,8 @@ void Matrice::ecranVictoire(Console* conso)
     conso->setColor(COLOR_YELLOW);
     std::cout << "EXCELLENT ! VOUS AVEZ REMPORTE LA PARTIE !";
     conso->gotoLigCol(25,30);
-    std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore();
+    std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore()<<std::endl<<std::endl;
+    system("pause");
     conso->setColor(COLOR_DEFAULT);
 }
 

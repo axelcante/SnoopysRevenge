@@ -55,19 +55,28 @@ public :
     void setTableau(int);
 
     //methodes
-    void initialisationMatrice();
-    void initialisationElements();
+    void initialisationMatrice(int& niv);
+    void initialisationElements(int& niv);
     void afficherMatrice(Console* conso);
-    void bougerElements(Console* conso);
+    void bougerElements(Console* conso,int& niv);
     bool bougerBalle();
     void afficherCadre(Console* conso);
-    void bougerSnoopy(Console* conso,char& touche);
+    void bougerSnoopy(Console* conso,char& touche, bool& dead);
     void pousser(Console* conso, char& touche);
     void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
+<<<<<<< HEAD
     void traduireMatrice();
     void traduireTableau();
+=======
+<<<<<<< HEAD
+
+=======
+    void traduireMatrice(char tableau[N_LIGNES][N_COLONNES]);
+    void traduireTableau(char tableau[N_LIGNES][N_COLONNES]);
+>>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
+>>>>>>> fedeb077f2a56b624e490928a25504d6f7a0f64f
 };
 
 #endif // MATRICE_H_INCLUDED
