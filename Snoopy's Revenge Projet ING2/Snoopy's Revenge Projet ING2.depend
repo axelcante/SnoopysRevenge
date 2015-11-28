@@ -102,7 +102,7 @@
 	"Constantes.h"
 	<time.h>
 
-1448639089 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
+1448718956 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
 	<vector>
 	<iostream>
 	<string>
@@ -114,13 +114,14 @@
 	"Balle.h"
 	"Poussable.h"
 
-1448642765 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
+1448717531 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
 	"Matrice.h"
 	<fstream>
 
-1448644515 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
+1448721610 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
 	"Matrice.h"
 	<time.h>
+	<cmath>
 
 1448623418 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\constantes.h
 	<iostream>
@@ -176,6 +177,6 @@
 1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\snoopy.cpp
 	"Snoopy.h"
 
-1448643232 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.cpp
+1448717599 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.cpp
 	"Niveau.h"
 

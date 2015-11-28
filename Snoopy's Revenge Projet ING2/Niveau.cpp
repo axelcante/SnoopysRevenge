@@ -8,10 +8,6 @@ Niveau::Niveau() {};
 Niveau::~Niveau() {};
 
 //Accesseurs
-float Niveau::getTemps() const
-{
-    return m_temps;
-}
 Matrice Niveau::getMatrice() const
 {
     return m_matriceDeJeu;
@@ -22,10 +18,6 @@ std::string Niveau::getMdp() const
 }
 
 //Setters
-void Niveau::setTemps(float temps)
-{
-    m_temps = temps;
-}
 void Niveau::setMatrice(Matrice matriceDeJeu)
 {
     m_matriceDeJeu = matriceDeJeu;

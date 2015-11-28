@@ -1,5 +1,6 @@
 #include "Matrice.h"
 #include <time.h>
+#include <cmath>
 
 //constructeur
 Matrice::Matrice() {}
@@ -147,8 +148,11 @@ void Matrice::afficherMatrice(Console* conso)
     std::cout<< m_Snoopy.getOiseaux();
     conso->gotoLigCol(POSLIGNE+N_LIGNES+5, POSCOLONNE);
     conso->setColor(COLOR_YELLOW);
-    std::cout <<"Score : "<< m_Snoopy.getScore();
+    std::cout <<"Score : ";
+    conso->setColor(COLOR_BLUE);
+    std::cout << m_Snoopy.getScore();
     conso->gotoLigCol(POSLIGNE+N_LIGNES+7, POSCOLONNE);
+    conso->setColor(COLOR_YELLOW);
     std::cout <<"Nombre de vies : ";
     conso->setColor(COLOR_RED);
     std::cout << m_Snoopy.getVies();
@@ -204,6 +208,24 @@ void Matrice::afficherCadre(Console* conso)
         std::cout << (char)254u;
         conso->setColor(COLOR_DEFAULT);
     }
+
+    conso->setColor(COLOR_YELLOW);
+
+    conso->gotoLigCol(15,60);       //affichage du titre stylé de Snoopy's Revenge
+    std::cout <<
+              " ___                        _   ___";
+    conso->gotoLigCol(16,60);
+    std::cout <<
+              "/ __|_ _  ___ ___ _ __ _  _( __| _ \\_____ _____ _ _  __ _ ___";
+    conso->gotoLigCol(17,60);
+    std::cout <<
+              "\\__ | ' \\/ _ / _ | '_ | || |(_-|   / -_\\ V / -_| ' \\/ _` / -_)";
+    conso->gotoLigCol(18,60);
+    std::cout <<
+              "|___|_||_\\___\\___| .__/\\_, |/__|_|_\\___|\\_/\\___|_||_\\__, \\___|";
+    conso->gotoLigCol(19,60);
+    std::cout <<
+              "                 |_|   |__/                         |___/";
 }
 
 ///_________________________________________________________________________
@@ -228,7 +250,7 @@ bool Matrice::bougerBalle()
         m_decalage_X *= -1;
     }
     if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
-    {
+    {                                   //euuh
         m_decalage_Y += 0;
         dead = true;
     }
@@ -401,20 +423,21 @@ void Matrice::bougerElements(Console* conso)
     char touche;
     initialisationMatrice();
     afficherMatrice(conso);
-    int timer;
+    int start = clock();
 
     do
     {
-        timer = (clock()/(CLOCKS_PER_SEC));
-        for(int j = 60-timer; j < 60; j++) //efface les carrés de temps
+
+        m_time = (clock()-start);
+        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
         {
             conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
             std::cout << ' ';
         }
-        if(60-timer>=0)
+        if(60000-m_time >= 0)
         {
             conso->setColor(COLOR_YELLOW);
-            if(60-timer < 10)
+            if(60000-m_time < 10000)
             {
                 conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
                 conso->setColor(COLOR_RED);
@@ -423,11 +446,18 @@ void Matrice::bougerElements(Console* conso)
                 std::cout << ' ';
             }
             conso->gotoLigCol(10,45);
-            std::cout << (60-timer);
+            std::cout << (60-(m_time/CLOCKS_PER_SEC));
             conso->setColor(COLOR_DEFAULT);
+            if(60000-m_time <= 200)
+            {
+                dead = true;
+                m_Snoopy.setVies(0);
+            }
         }
-        Sleep(50);
-        dead = bougerBalle();
+        if(fmod(m_time,100) < 52)
+        {
+            dead = bougerBalle();
+        }
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
         {
