@@ -44,6 +44,7 @@ public :
     int getDecalageX()const;
     int getDecalageY()const;
     float getTime()const;
+
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
     void setDecalageX(int);
@@ -62,7 +63,12 @@ public :
     void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
+<<<<<<< HEAD
 
+=======
+    void traduireMatrice(char tableau[N_LIGNES][N_COLONNES]);
+    void traduireTableau(char tableau[N_LIGNES][N_COLONNES]);
+>>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
 };
 
 #endif // MATRICE_H_INCLUDED

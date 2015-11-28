@@ -3,8 +3,13 @@
 #include <windows.h>
 #include <conio.h>
 #include <iostream>
+<<<<<<< HEAD
 #include <limits>
 #include <stdexcept>
+=======
+#include <fstream>
+#include "Constantes.h"
+>>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
 
 enum Color
 {
@@ -45,6 +50,7 @@ class Console
         char getInputKey();
         void setColor(Color col);
         void ShowConsoleCursor(bool showFlag);
+        void writeFile(const std::string& name, char matrice_traduite[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY);
 };
 
 struct console
