@@ -19,6 +19,7 @@ class Matrice
 private :
     std::vector<std::vector<Bloc> > m_matrice;
     int m_decalage_X = 1, m_decalage_Y = 1;
+    int m_tableau_sauvegarde[N_LIGNES][N_COLONNES];
     Balle m_balle = Balle(BALLPOSX,BALLPOSY,'B',false,false); //On a C++11
     Bloc m_blocVide = Bloc(0,0,' ',false,false);
     Bloc m_Oiseau = Bloc(0,0,'O',false,false);
@@ -37,6 +38,7 @@ public :
     ~Matrice();
     //getters
     std::vector<std::vector<Bloc> > getMatrice()const;
+    int getTableau()const;
     Balle getBalle() const;
     Poussable getBlocPoussable() const;
     Bloc getBlocP()const;
@@ -50,6 +52,7 @@ public :
     void setDecalageX(int);
     void setDecalageY(int);
     void setTime(float);
+    void setTableau(int);
 
     //methodes
     void initialisationMatrice();
@@ -63,8 +66,8 @@ public :
     void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
-    void traduireMatrice(char tableau[N_LIGNES][N_COLONNES]);
-    void traduireTableau(char tableau[N_LIGNES][N_COLONNES]);
+    void traduireMatrice();
+    void traduireTableau();
 };
 
 #endif // MATRICE_H_INCLUDED

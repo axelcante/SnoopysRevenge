@@ -562,51 +562,50 @@ void Matrice::ecranVictoire(Console* conso)
     conso->setColor(COLOR_DEFAULT);
 }
 
-void Matrice::traduireMatrice(char tableau[N_LIGNES][N_COLONNES])
+void Matrice::traduireMatrice()
 {
     for(int i = 0; i < N_LIGNES; i++)
     {
         for(int j = 0; j < N_COLONNES; j++)
         {
-            tableau[i][j] = m_matrice[i][j].getType();
+            m_tableau_sauvegarde[i][j] = m_matrice[i][j].getType();
         }
     }
 }
 
-
-void Matrice::traduireTableau(char tableau[N_LIGNES][N_COLONNES])
+void Matrice::traduireTableau()
 {
     for(int i = 0; i < N_LIGNES; i++)
     {
         for(int j = 0; j < N_COLONNES; j++)
         {
-            if((tableau[i][j] == 'O'))
+            if((m_tableau_sauvegarde[i][j] == 'O'))
             {
                 m_matrice[i][j] = m_Oiseau;
             }
-            if((tableau[i][j] = ' '))
+            if((m_tableau_sauvegarde[i][j] = ' '))
             {
                 m_matrice[i][j] = m_blocVide;
             }
-            if((tableau[i][j] = 'P'))
+            if((m_tableau_sauvegarde[i][j] = 'P'))
             {
                 m_matrice[i][j] = m_blocP;
             }
-            if((tableau[i][j] = 'T'))
+            if((m_tableau_sauvegarde[i][j] = 'T'))
             {
                 m_matrice[i][j] = m_blocT;
             }
-            if((tableau[i][j] = 'C'))
+            if((m_tableau_sauvegarde[i][j] = 'C'))
             {
                 m_matrice[i][j] = m_blocC;
             }
-            if((tableau[i][j] = 'S'))
+            if((m_tableau_sauvegarde[i][j] = 'S'))
             {
                 m_Snoopy.setPosX(i);
                 m_Snoopy.setPosY(j);
                 m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
             }
-            if((tableau[i][j] = 'B'))
+            if((m_tableau_sauvegarde[i][j] = 'B'))
             {
                 m_balle.setPosX(i);
                 m_balle.setPosY(j);

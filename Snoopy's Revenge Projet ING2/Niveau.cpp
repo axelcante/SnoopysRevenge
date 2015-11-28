@@ -25,9 +25,9 @@ int Niveau::lancerJeu(Console* conso)
 {
     int choix = 0;
     system("cls");
-    Matrice matrice_niveau_1;
-    matrice_niveau_1.afficherCadre(conso);
-    matrice_niveau_1.bougerElements(conso);
+    Matrice MatriceDeJeu;
+    MatriceDeJeu.afficherCadre(conso);
+    MatriceDeJeu.bougerElements(conso);
     conso->gotoLigCol(40,30);
     system("pause");
     system("cls");
@@ -211,3 +211,8 @@ void Niveau::play(Console* conso)
         }
     }
 }
+
+//void Niveau::sauvegarde(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY, Console* conso)
+//{
+//}
+
