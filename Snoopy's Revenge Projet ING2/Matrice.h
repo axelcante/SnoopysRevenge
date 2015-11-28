@@ -43,6 +43,7 @@ public :
     int getDecalageX()const;
     int getDecalageY()const;
     float getTime()const;
+
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
     void setDecalageX(int);
@@ -60,6 +61,8 @@ public :
     void pousser(Console* conso, char& touche);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
+    void traduireMatrice(char tableau[N_LIGNES][N_COLONNES]);
+    void traduireTableau(char tableau[N_LIGNES][N_COLONNES]);
 };
 
 #endif // MATRICE_H_INCLUDED

@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <conio.h>
 #include <iostream>
+#include <fstream>
+#include "Constantes.h"
 
 enum Color
 {
@@ -43,6 +45,7 @@ class Console
         char getInputKey();
         void setColor(Color col);
         void ShowConsoleCursor(bool showFlag);
+        void writeFile(const std::string& name, char matrice_traduite[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY);
 };
 
 #endif // CONSOLE_H_INCLUDED

@@ -84,19 +84,21 @@
 	"console.h"
 	"Bloc.h"
 
-1448454356 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.h
+1448741529 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.h
 	<windows.h>
 	<conio.h>
 	<iostream>
+	<fstream>
+	"Constantes.h"
 
 1448559353 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.h
 	<iostream>
 	"console.h"
 
-1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.cpp
+1448741528 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\console.cpp
 	"console.h"
 
-1448628499 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
+1448721973 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\main.cpp
 	<iostream>
 	"Bloc.h"
 	"Matrice.h"
@@ -107,7 +109,7 @@
 	"Constantes.h"
 	<time.h>
 
-1448718956 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
+1448741570 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.h
 	<vector>
 	<iostream>
 	<string>
@@ -118,12 +120,14 @@
 	"Cassable.h"
 	"Balle.h"
 	"Poussable.h"
+	"Piege.h"
 
-1448717531 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
+1448740671 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.h
 	"Matrice.h"
+	"Bloc.h"
 	<fstream>
 
-1448721610 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
+1448723326 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\matrice.cpp
 	"Matrice.h"
 	<time.h>
 	<cmath>
@@ -191,4 +195,8 @@
 
 1448719306 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\piege.cpp
 	"Piege.h"
+
+1448722042 c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\piege.h
+	"Bloc.h"
+	"Bloc.h"
 

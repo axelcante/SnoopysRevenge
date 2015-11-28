@@ -1,13 +1,14 @@
 #ifndef NIVEAU_H_INCLUDED
 #define NIVEAU_H_INCLUDED
 #include "Matrice.h"
+#include "Bloc.h"
 #include <fstream>
 
 class Niveau
 {
 private :
-    Matrice m_matriceDeJeu; //Avec ses caractéristiques spécifiques
     std::string m_mdp; //Mot de passe
+    char matrice_traduite[N_LIGNES][N_COLONNES];
 
 public :
     ///Constructeurs et destructeur
@@ -15,11 +16,9 @@ public :
     ~Niveau();
     ///Accesseurs
     //Getters
-    Matrice getMatrice() const;
     std::string getMdp() const;
 
     //Setters
-    void setMatrice(Matrice matriceDeJeu);
     void setMdp(std::string mdp);
 
     ///Methods

@@ -1,6 +1,5 @@
 #include "console.h"
 
-
 Console* Console::m_instance = NULL;
 
 Console::Console()
@@ -69,6 +68,31 @@ void Console::_setColor(int back, int front)
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,front*16+back);
+}
+
+//procedure qui écrit dans un fichier .txt
+void writeFile(const std::string& name, char m_matrice[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY)
+{
+    // Ouverture fichier en mode "w"
+    // Cette fonction recoit un tableau de chars qui sera représentatif de la matrice de jeu
+    std::ofstream ofs(name.c_str(), std::ios::out);
+    if (ofs)
+    {
+        // Ecriture dans le fichier
+        for(int i = 0; i < N_LIGNES; i++)
+        {
+            for(int j = 0; j < N_COLONNES; j++)
+            {
+                ofs << m_matrice[i][j];
+            }
+            ofs << std::endl;
+        }
+        ofs << vies << std::endl;
+        ofs << score << std::endl;
+        ofs << oiseaux << std::endl;
+        ofs << time << std::endl;
+        ofs.close(); // fermeture du flux
+    }
 }
 
 void Console::ShowConsoleCursor(bool showFlag)

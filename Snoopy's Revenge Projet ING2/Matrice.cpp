@@ -170,7 +170,7 @@ void Matrice::afficherCadre(Console* conso)
     int decalage = 0;
 
     conso->gotoLigCol(POSLIGNE-1, POSCOLONNE);
-    conso->setColor(COLOR_PURPLE);
+    conso->setColor(COLOR_WHITE);
     for (int i = 0; i < N_COLONNES; i ++)
     {
         std::cout << horizontal;
@@ -205,7 +205,7 @@ void Matrice::afficherCadre(Console* conso)
 
     for(int i = 0; i < 60; i++)
     {
-        conso->setColor(COLOR_PURPLE);
+        conso->setColor(COLOR_WHITE);
         conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+i);
         std::cout << (char)254u;
         conso->setColor(COLOR_DEFAULT);
@@ -435,7 +435,6 @@ void Matrice::bougerElements(Console* conso)
 
     do
     {
-
         m_time = (clock()-start);
         for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
         {
@@ -454,7 +453,7 @@ void Matrice::bougerElements(Console* conso)
                 std::cout << ' ';
             }
             conso->gotoLigCol(10,45);
-            std::cout << (60-(m_time/CLOCKS_PER_SEC));
+            //std::cout << (60-(m_time/CLOCKS_PER_SEC));    ligne qui permet d'afficher les secondes : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
             if(60000-m_time <= 200)
             {
@@ -604,4 +603,58 @@ void Matrice::ecranVictoire(Console* conso)
     conso->gotoLigCol(25,30);
     std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore();
     conso->setColor(COLOR_DEFAULT);
+}
+
+void Matrice::traduireMatrice(char tableau[N_LIGNES][N_COLONNES])
+{
+    for(int i = 0; i < N_LIGNES; i++)
+    {
+        for(int j = 0; j < N_COLONNES; j++)
+        {
+            tableau[i][j] = m_matrice[i][j].getType();
+        }
+    }
+}
+
+
+void Matrice::traduireTableau(char tableau[N_LIGNES][N_COLONNES])
+{
+    for(int i = 0; i < N_LIGNES; i++)
+    {
+        for(int j = 0; j < N_COLONNES; j++)
+        {
+            if((tableau[i][j] == 'O'))
+            {
+                m_matrice[i][j] = m_Oiseau;
+            }
+            if((tableau[i][j] = ' '))
+            {
+                m_matrice[i][j] = m_blocVide;
+            }
+            if((tableau[i][j] = 'P'))
+            {
+                m_matrice[i][j] = m_blocP;
+            }
+            if((tableau[i][j] = 'T'))
+            {
+                m_matrice[i][j] = m_blocT;
+            }
+            if((tableau[i][j] = 'C'))
+            {
+                m_matrice[i][j] = m_blocC;
+            }
+            if((tableau[i][j] = 'S'))
+            {
+                m_Snoopy.setPosX(i);
+                m_Snoopy.setPosY(j);
+                m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+            }
+            if((tableau[i][j] = 'B'))
+            {
+                m_balle.setPosX(i);
+                m_balle.setPosY(j);
+                m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+            }
+        }
+    }
 }
