@@ -10,6 +10,7 @@
 #include "Cassable.h"
 #include "Balle.h"
 #include "Poussable.h"
+#include "Piege.h"
 
 ///Matrice de blocs
 class Matrice
@@ -21,9 +22,11 @@ private :
     Bloc m_blocVide = Bloc(0,0,' ',false);
     Bloc m_Oiseau = Bloc(0,0,'O',false);
     Bloc m_blocP = Bloc(0,0,'P',true);
+    Bloc m_blocT = Bloc(0,0,'T',false);
     Snoopy m_Snoopy = Snoopy(SNOOPYPOSX,SNOOPYPOSY,'S',false,3,0,0);
     Poussable m_blocPoussable = Poussable(0,0,'P',true,true); ///sert à rien pour le moment (?)
     double m_time;
+
 
 
 public :

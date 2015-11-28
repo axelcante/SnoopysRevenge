@@ -42,7 +42,7 @@
 	<iostream>
 	"console.h"
 
-1448554491 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.h
+1448718760 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.h
 	<vector>
 	<iostream>
 	<string>
@@ -53,11 +53,12 @@
 	"Cassable.h"
 	"Balle.h"
 	"Poussable.h"
+	"Piege.h"
 
 1448500594 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\console.cpp
 	"console.h"
 
-1448500457 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\main.cpp
+1448715710 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\main.cpp
 	<iostream>
 	"Bloc.h"
 	"Matrice.h"
@@ -65,14 +66,18 @@
 	"console.h"
 	<vector>
 	<windows.h>
+	"Constantes.h"
+	<time.h>
 
-1448558119 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.h
+1448715710 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.h
 	"Matrice.h"
+	<fstream>
 
-1448557499 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.cpp
+1448718818 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\matrice.cpp
 	"Matrice.h"
+	<time.h>
 
-1448370054 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
+1448715710 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\constantes.h
 	<iostream>
 
 1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\bloc.cpp
@@ -150,7 +155,7 @@
 1448549167 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\snoopy.cpp
 	"Snoopy.h"
 
-1448558459 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.cpp
+1448718354 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\niveau.cpp
 	"Niveau.h"
 
 1448559353 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\balle.cpp
@@ -179,4 +184,11 @@
 
 1448717599 source:c:\users\utilisateur\contacts\desktop\ing2\info\projet info s3\projet info snoopy\snoopy's revenge projet ing2\niveau.cpp
 	"Niveau.h"
+
+1448716993 c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\piege.h
+	"Bloc.h"
+	"Bloc.h"
+
+1448719306 source:c:\users\juliette\documents\it-class-project-snoopys-revenge\snoopy's revenge projet ing2\piege.cpp
+	"Piege.h"
 
