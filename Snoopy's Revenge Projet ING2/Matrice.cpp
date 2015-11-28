@@ -96,9 +96,10 @@ void Matrice::initialisationElements()
     m_matrice[6][12] = m_blocPoussable;
     m_matrice[3][7] = m_blocPoussable;
     m_matrice[6][6] = m_blocPoussable;
-    m_matrice[9][18] = m_blocPoussable;
     //Blocs Piégés TEST
     m_matrice[5][8] = m_blocT;
+    //Blocs Cassables TEST
+    m_matrice[6][8] = m_blocC;
     m_decalage_X = 1;
     m_decalage_Y = 1;
     m_Snoopy.setOiseaux(0);
@@ -286,7 +287,8 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
 {
     //Ressources
     //Position de Snoopy par rapport au TABLEAU
-    int poslig = m_Snoopy.getPosX(), poscol = m_Snoopy.getPosY(); // position initiale du TABLEAU indice = celle de Snoopy
+    int poslig = m_Snoopy.getPosX();
+    int poscol = m_Snoopy.getPosY(); // position initiale du TABLEAU indice = celle de Snoopy
     //Nombre de lignes et colonnes par rapport A LA CONSOLE (affichage)
     int nbl = N_LIGNES;
     int nbc = N_COLONNES;
@@ -295,133 +297,82 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
     {
     case 's'://descendre
         if ((poslig+1>=0)&&(poslig+1<nbl)) //blindage
-        {
             poslig++; //incrementer la position de la ligne
-            ///Pousser si poussable
-            if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
-            {
-                pousser(conso,touche);
-            }
-            ///Ne pas pousser si AUTRE blocs non poussables
-            else
-            {
-                if(m_matrice[poslig][poscol].getType()=='O') // Si 'O' : oiseau à récupérer
-                {
-                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
-                }
-                else if(m_matrice[poslig][poscol].getType()!=' ')
-                {
-                     if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
-                    {
-                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
-                    }
-                    else
-                    poslig--;
-                    //Si 'C' : cassable
-                    /// if((m_matrice[poslig][poscol].getType()=='C'))
-                }
-            }
-        }
         break;
     case 'q'://aller a gauche
         if ((poscol-1<nbc)&&(poscol-1>=0))//blindage
-        {
             poscol--; //decrementer la position de la colonne
-            ///Pousser si poussable
-            if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
-            {
-                pousser(conso,touche);
-            }
-            ///Ne pas pousser si AUTRE blocs non poussables
-            else
-            {
-                if(m_matrice[poslig][poscol].getType()=='O')
-                {
-                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
-                }
-                else if(m_matrice[poslig][poscol].getType()!=' ')
-                {if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
-                    {
-                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
-                    }
-                    else
-                    poscol++;
-                    //Si 'C' : cassable
-                    /// if((m_matrice[poslig][poscol].getType()=='C'))
-                }
-            }
-        }
         break;
     case 'd'://aller a droite
         if ((poscol+1<nbc)&&(poscol+1>=0))//blindage
-        {
             poscol++;//incrementer la position colonnne
-            ///Pousser si poussable
-            if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
-            {
-                pousser(conso,touche);
-            }
-            ///Ne pas pousser si AUTRE blocs non poussables
-            else
-            {
-                if(m_matrice[poslig][poscol].getType()=='O')
-                {
-                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
-                }
-                else if(m_matrice[poslig][poscol].getType()!=' ')
-                {
-                    if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
-                    {
-                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
-                    }
-                    else
-                    poscol--;
-                    //Si 'C' : cassable
-                    /// if((m_matrice[poslig][poscol].getType()=='C'))
-                }
-            }
-        }
         break;
     case 'z'://monter
         if((poslig-1>=0)&&(poslig-1<nbl))//blindage
-        {
             poslig--;//Decrementer la position de la ligne
-            ///Pousser si poussable
-            if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
+        break;
+    case 'a'://Casser ?
+        if((poslig+1<nbl)&&(poscol-1>=0)&&(poscol+1<nbc)&&(poslig-1>=0))
+        {
+            if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
             {
-                pousser(conso,touche);
-            }
-            ///Ne pas pousser si AUTRE blocs non poussables
-            else
-            {
-                if(m_matrice[poslig][poscol].getType()=='O')
-                {
-                    m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
-                }
-                else if(m_matrice[poslig][poscol].getType()!=' ')
-                {
-                    if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
-                    {
-                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
-                    }
-                    else poslig++;
-                    //Si 'C' : cassable
-                    /// if((m_matrice[poslig][poscol].getType()=='C'))
-                }
+                if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
+                    poslig=poslig+1;
+                else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
+                    poscol=poscol+1;
+                else if(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)
+                    poslig=poslig-1;
+                else if(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true)
+                    poscol=poscol-1;
+                casser(conso, poslig, poscol);
+                poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
+                poscol = m_Snoopy.getPosY();
+                conso->gotoLigCol(12, 45);
+                std::cout << "                 ";
             }
         }
         break;
     case 'w': //Sauvegarder
         break;
     }
-    if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY())) ///Si changement de position : remplacement de bloc.
-    {
-        m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
-        m_Snoopy.setPosX(poslig);
-        m_Snoopy.setPosY(poscol);
-        m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+
+        ///Si 'P' : pousser si poussable
+        if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
+            pousser(conso,touche);
+        else
+        {
+            ///Si 'O' : oiseau à récupérer
+            if(m_matrice[poslig][poscol].getType()=='O')
+                m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
+            ///Si 'T' : piégé
+            else if(m_matrice[poslig][poscol].getType()=='T')
+                m_Snoopy.setVies(m_Snoopy.getVies()-1);
+            ///Si 'C' :
+            else if (m_matrice[poslig][poscol].getType()!=' ')
+            {
+                if(m_matrice[poslig][poscol].getType()=='C')
+                {
+                       ///Afficher si cassable
+                    conso->gotoLigCol(12, 45);
+                    std::cout << "'a' pour casser";
+                }
+                poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
+                poscol = m_Snoopy.getPosY();
+            }
+        }
+        ///Si changement de position : remplacement de bloc.
+        if((poslig != m_Snoopy.getPosX())||(poscol != m_Snoopy.getPosY()))
+        {
+            conso->gotoLigCol(12, 45);
+            std::cout << "                 ";
+            m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_blocVide;
+            m_Snoopy.setPosX(poslig);
+            m_Snoopy.setPosY(poscol);
+            m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+        }
     }
-}
+
+
 
 ///_________________________________________________________________________
 void Matrice::bougerElements(Console* conso)
@@ -485,12 +436,12 @@ void Matrice::bougerElements(Console* conso)
             else
             {
                 bougerSnoopy(conso,touche);
-                 if (m_Snoopy.getVies()<=0)
-            {
-                system("cls");
-                ecranMort(conso);
-                quit=true;
-            }
+                if (m_Snoopy.getVies()<=0)
+                {
+                    system("cls");
+                    ecranMort(conso);
+                    quit=true;
+                }
             }
         }
         if(dead == true)
@@ -523,6 +474,12 @@ void Matrice::bougerElements(Console* conso)
         }
     }
     while(!quit);
+}
+
+///_________________________________________________________________________
+void Matrice::casser(Console* conso, int& poslig, int& poscol)
+{
+    m_matrice[poslig][poscol] = m_blocVide;
 }
 
 ///_________________________________________________________________________
