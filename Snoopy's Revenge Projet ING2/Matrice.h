@@ -51,17 +51,18 @@ public :
     void setTime(float);
 
     //methodes
-    void initialisationMatrice();
-    void initialisationElements();
+    void initialisationMatrice(int& niv);
+    void initialisationElements(int& niv);
     void afficherMatrice(Console* conso);
-    void bougerElements(Console* conso);
+    void bougerElements(Console* conso,int& niv);
     bool bougerBalle();
     void afficherCadre(Console* conso);
-    void bougerSnoopy(Console* conso,char& touche);
+    void bougerSnoopy(Console* conso,char& touche, bool& dead);
     void pousser(Console* conso, char& touche);
     void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
+
 };
 
 #endif // MATRICE_H_INCLUDED

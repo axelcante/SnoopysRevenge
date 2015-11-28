@@ -31,13 +31,20 @@ void Niveau::setMdp(std::string mdp)
 int Niveau::lancerJeu(Console* conso)
 {
     int choix = 0;
+    int niv=0;
     system("cls");
+    do{
+    niv++;
     Matrice matrice_niveau_1;
     matrice_niveau_1.afficherCadre(conso);
-    matrice_niveau_1.bougerElements(conso);
+    matrice_niveau_1.bougerElements(conso,niv);
     conso->gotoLigCol(40,30);
+    std::cout<<"Niveau suivant : "<<niv<<"\n";
     system("pause");
     system("cls");
+    ///juste: pas réinitialiser score à chaque niveau
+    }
+    while (niv<3);
     afficherMenu(conso);
     return choix;
 }
@@ -157,7 +164,7 @@ void Niveau::afficherMenu(Console* conso)
     conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
     std::cout << "Un jeu concu par Juliette HEUANGTHEP et Axel CANTE !";
     conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+1);
-    std::cout << "Utilisez les touches Z et S poaur naviguer le menu.";
+    std::cout << "Utilisez les touches Z et S pour naviguer le menu.";
     conso->setColor(COLOR_DEFAULT);
     conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
     std::cout << "1. Nouvelle partie";
@@ -176,7 +183,6 @@ void Niveau::play(Console* conso)
 {
     int menu_choix = 1;
     bool quit = false;
-
     afficherMenu(conso);
     effetMenu(menu_choix,conso);
 
