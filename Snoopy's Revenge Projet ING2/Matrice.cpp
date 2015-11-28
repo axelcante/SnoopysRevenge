@@ -96,6 +96,8 @@ void Matrice::initialisationElements()
     m_matrice[3][7] = m_blocPoussable;
     m_matrice[6][6] = m_blocPoussable;
     m_matrice[9][18] = m_blocPoussable;
+    //Blocs Piégés TEST
+    m_matrice[5][8] = m_blocT;
     m_decalage_X = 1;
     m_decalage_Y = 1;
     m_Snoopy.setOiseaux(0);
@@ -267,10 +269,6 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
     int nbl = N_LIGNES;
     int nbc = N_COLONNES;
 
-    /********
-    QUE FAIRE SI BALLE TOUCHE ? : faire une condition dans balle directement.
-    **********/
-
     switch(touche)
     {
     case 's'://descendre
@@ -285,17 +283,20 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
             ///Ne pas pousser si AUTRE blocs non poussables
             else
             {
-                if(m_matrice[poslig][poscol].getType()=='O')
+                if(m_matrice[poslig][poscol].getType()=='O') // Si 'O' : oiseau à récupérer
                 {
                     m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
                 }
                 else if(m_matrice[poslig][poscol].getType()!=' ')
                 {
+                     if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
+                    {
+                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
+                    }
+                    else
                     poslig--;
                     //Si 'C' : cassable
                     /// if((m_matrice[poslig][poscol].getType()=='C'))
-                    //Si 'T' : piégé
-                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
                 }
             }
         }
@@ -317,12 +318,14 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
                     m_Snoopy.setOiseaux(m_Snoopy.getOiseaux()+1);
                 }
                 else if(m_matrice[poslig][poscol].getType()!=' ')
-                {
+                {if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
+                    {
+                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
+                    }
+                    else
                     poscol++;
                     //Si 'C' : cassable
                     /// if((m_matrice[poslig][poscol].getType()=='C'))
-                    //Si 'T' : piégé
-                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
                 }
             }
         }
@@ -345,11 +348,14 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
                 }
                 else if(m_matrice[poslig][poscol].getType()!=' ')
                 {
+                    if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
+                    {
+                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
+                    }
+                    else
                     poscol--;
                     //Si 'C' : cassable
                     /// if((m_matrice[poslig][poscol].getType()=='C'))
-                    //Si 'T' : piégé
-                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
                 }
             }
         }
@@ -372,11 +378,13 @@ void Matrice::bougerSnoopy(Console*conso,char& touche)
                 }
                 else if(m_matrice[poslig][poscol].getType()!=' ')
                 {
-                    poslig++;
+                    if(m_matrice[poslig][poscol].getType()=='T') // Si 'T' : piégé
+                    {
+                        m_Snoopy.setVies(m_Snoopy.getVies()-1);
+                    }
+                    else poslig++;
                     //Si 'C' : cassable
                     /// if((m_matrice[poslig][poscol].getType()=='C'))
-                    //Si 'T' : piégé
-                    /// else if((m_matrice[poslig][poscol].getType()=='T'))
                 }
             }
         }
@@ -448,6 +456,12 @@ void Matrice::bougerElements(Console* conso)
             else
             {
                 bougerSnoopy(conso,touche);
+                 if (m_Snoopy.getVies()<=0)
+            {
+                system("cls");
+                ecranMort(conso);
+                quit=true;
+            }
             }
         }
         if(dead == true)
