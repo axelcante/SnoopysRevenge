@@ -19,5 +19,4 @@ int main()
     conso->deleteInstance();
 
     return 0;
-
 }

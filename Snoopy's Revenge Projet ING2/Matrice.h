@@ -27,7 +27,7 @@ private :
     Bloc m_blocC = Bloc(0,0,'C',false,true);
     Snoopy m_Snoopy = Snoopy(SNOOPYPOSX,SNOOPYPOSY,'S',false,false,3,0,0);
     Poussable m_blocPoussable = Poussable(0,0,'P',true,false,true); ///sert à rien pour le moment (?)
-
+    double m_time;
 
 
 public :
@@ -43,10 +43,12 @@ public :
     Snoopy getSnoopy()const;
     int getDecalageX()const;
     int getDecalageY()const;
+    float getTime()const;
     //setters
     void setBloc(int posX, int posY, Bloc bloc);
     void setDecalageX(int);
     void setDecalageY(int);
+    void setTime(float);
 
     //methodes
     void initialisationMatrice();
