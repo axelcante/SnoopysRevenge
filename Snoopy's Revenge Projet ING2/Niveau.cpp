@@ -32,7 +32,8 @@ int Niveau::lancerJeu(Console* conso)
         MatriceDeJeu.afficherCadre(conso);
         MatriceDeJeu.bougerElements(conso,niv);
         conso->gotoLigCol(40,30);
-        std::cout<<"Niveau suivant : " << niv << "\n";
+        if(niv<=3)
+        std::cout<<"Niveau suivant : " << niv+1 << "\n";
         system("pause");
         system("cls");
         ///juste: pas réinitialiser score à chaque niveau
