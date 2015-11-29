@@ -67,13 +67,8 @@ public :
     void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
-<<<<<<< HEAD
-    void traduireMatrice(char tableau[N_LIGNES][N_COLONNES]);
-    void traduireTableau(char tableau[N_LIGNES][N_COLONNES]);
-=======
     void traduireMatrice();
     void traduireTableau();
->>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
 };
 
 #endif // MATRICE_H_INCLUDED

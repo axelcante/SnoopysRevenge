@@ -26,22 +26,8 @@ int Niveau::lancerJeu(Console* conso)
     int choix = 0;
     int niv=1;
     system("cls");
-<<<<<<< HEAD
-    do{
-    Matrice matrice_niveau_1;
-    matrice_niveau_1.afficherCadre(conso);
-    matrice_niveau_1.bougerElements(conso,niv);
-    conso->gotoLigCol(40,30);
-    std::cout<<"Niveau suivant : "<<niv<<"\n";
-    system("pause");
-    system("cls");
-    ///juste: pas réinitialiser score à chaque niveau
-    }
-    while (niv<3);
-=======
     do
     {
-        niv++;
         Matrice MatriceDeJeu;
         MatriceDeJeu.afficherCadre(conso);
         MatriceDeJeu.bougerElements(conso,niv);
@@ -51,8 +37,6 @@ int Niveau::lancerJeu(Console* conso)
         system("cls");
         ///juste: pas réinitialiser score à chaque niveau
     }while (niv<3);
-
->>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
     afficherMenu(conso);
     return choix;
 }
