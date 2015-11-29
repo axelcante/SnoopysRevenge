@@ -399,19 +399,9 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
 void Matrice::bougerElements(Console* conso,int& niv)
 {
     bool quit = false;
-<<<<<<< HEAD
-        bool dead = false;
-        char touche;
-        initialisationMatrice(niv);
-        afficherCadre(conso);
-        afficherMatrice(conso);
-        int start = clock();
-
-        do
-=======
     bool dead = false;
     char touche;
-    initialisationMatrice();
+    initialisationMatrice(niv);
     afficherMatrice(conso);
     int start = clock();
 
@@ -419,41 +409,35 @@ void Matrice::bougerElements(Console* conso,int& niv)
     {
         m_time = (clock()-start);
         for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
->>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
         {
-
-            m_time = (clock()-start);
+            //m_time = (clock()-start); hein ?
             for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
             {
                 conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
                 std::cout << ' ';
             }
-<<<<<<< HEAD
-            if(60000-m_time >= 0)
-=======
+            /*if(60000-m_time >= 0)
+            {
+                conso->gotoLigCol(10,45);
+                //std::cout << (60-(m_time/CLOCKS_PER_SEC));    lignes qui permettent d'afficher les secondes : ne sert que pour debugger
+                conso->setColor(COLOR_DEFAULT);
+            }*/
+            if(60000-m_time < 10000)
+            {
+                conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+                conso->setColor(COLOR_RED);
+                std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+                conso->gotoLigCol(10,46);
+                std::cout << ' ';
+            }
             conso->gotoLigCol(10,45);
-            //std::cout << (60-(m_time/CLOCKS_PER_SEC));    ligne qui permet d'afficher les secondes : ne sert que pour debugger
+            std::cout << (60-(m_time/CLOCKS_PER_SEC));
             conso->setColor(COLOR_DEFAULT);
             if(60000-m_time <= 200)
->>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
             {
-                conso->setColor(COLOR_YELLOW);
-                if(60000-m_time < 10000)
-                {
-                    conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
-                    conso->setColor(COLOR_RED);
-                    std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
-                    conso->gotoLigCol(10,46);
-                    std::cout << ' ';
-                }
-                conso->gotoLigCol(10,45);
-                std::cout << (60-(m_time/CLOCKS_PER_SEC));
-                conso->setColor(COLOR_DEFAULT);
-                if(60000-m_time <= 200)
-                {
-                    dead = true;
-                    m_Snoopy.setVies(0);
-                }
+                dead = true;
+                m_Snoopy.setVies(0);
+            }
             }
             if(fmod(m_time,100) < 52)
             {
@@ -616,9 +600,12 @@ void Matrice::traduireMatrice()
 
 void Matrice::traduireTableau()
 {
-    for(int i = 0; i < N_LIGNES; i++)
+    int i = 0;
+    int j = 0;
+
+    for(i = 0; i < N_LIGNES; i++)
     {
-        for(int j = 0; j < N_COLONNES; j++)
+        for(j = 0; j < N_COLONNES; j++)
         {
             if((m_tableau_sauvegarde[i][j] == 'O'))
             {
@@ -655,3 +642,4 @@ void Matrice::traduireTableau()
         }
     }
 }
+
