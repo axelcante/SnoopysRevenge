@@ -26,7 +26,6 @@ public :
     int lancerJeu(Console* conso);
     void afficherMenu(Console* conso);
     void play(Console* conso);
-    void sauvegarde(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY);
 
     //passerNiveau();
     ///Idees Diedler en cours :

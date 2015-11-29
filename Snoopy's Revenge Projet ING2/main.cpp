@@ -10,7 +10,6 @@
 
 int main()
 {
-
     console con( 100, 100 );
     Console* conso = Console::getInstance(); //Allocation mémoire du pointeur sur console
     conso->ShowConsoleCursor(false); //On rend le curseur de la console invisible pour ne pas avoir de clignotements

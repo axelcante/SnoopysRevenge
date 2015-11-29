@@ -17,6 +17,7 @@ Balle Matrice::getBalle()const
 {
     return m_balle;
 }
+
 Poussable Matrice::getBlocPoussable()const
 {
     return m_blocPoussable;
@@ -258,48 +259,48 @@ bool Matrice::bougerBalle()
 {
     bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-    if((m_balle.getPosX() == (N_LIGNES-1)) || (m_balle.getPosX() == 0))
+
+    ///REBOND SUR MATRICE
+    if((m_balle.getPosX()<=0)||(m_balle.getPosX()>=N_LIGNES-1)) //BAS ou HAUT de la matrice
+        m_decalage_X = -m_decalage_X;
+    if((m_balle.getPosY()<=0)||(m_balle.getPosY()>=N_COLONNES-1)) //DROITE ou GAUCHE de la matrice
+        m_decalage_Y = -m_decalage_Y;
+
+    ///REBOND SUR BLOCS
+    if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType()!='S'))
+        m_decalage_Y = -m_decalage_Y;
+    if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()].getType()!='S'))
+        m_decalage_X = -m_decalage_Y;
+    if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()!='S'))
     {
-        m_decalage_X *= -1;
+        m_decalage_Y = -m_decalage_Y;
+        m_decalage_X = -m_decalage_Y;
+        if (((m_balle.getPosX()+m_decalage_X<=0)||(m_balle.getPosX()+m_decalage_Y>=N_LIGNES))||((m_balle.getPosY()+m_decalage_Y<=0)||(m_balle.getPosY()+m_decalage_Y>=N_COLONNES)))
+        {
+            m_decalage_Y = -m_decalage_Y;
+            m_decalage_X = -m_decalage_Y;
+        }
     }
-    if((m_balle.getPosY() == (N_COLONNES-1)) || (m_balle.getPosY() == 0))
-    {
-        m_decalage_Y *= -1;
-    }
-    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_Snoopy.getType()))
-    {
-        m_decalage_X += 0;
-    }
-    else
-    {
-        m_decalage_X *= -1;
-    }
-    if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
-    {
-        //euuh
-        m_decalage_Y += 0;
-        dead = true;
-    }
-    else
-    {
-        m_decalage_Y *= -1;
-    }
-    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
-    {
-        m_decalage_X += 0;
-    }
-    else
-    {
-        m_decalage_X *= -1;
-        m_decalage_Y *= -1;
-    }
+
+    ///SI COINCE
+    if((m_balle.getPosX()+m_decalage_X==-1)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))//à l'interieur
+        m_decalage_X = -m_decalage_X;
+   else if((m_balle.getPosX()+m_decalage_X==N_LIGNES)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))
+        m_decalage_X = -m_decalage_X;
+   else if((m_balle.getPosY()+m_decalage_Y==-1)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))
+        m_decalage_Y = -m_decalage_Y;
+    else if((m_balle.getPosY()+m_decalage_Y==N_COLONNES-1)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))
+        m_decalage_Y = -m_decalage_Y;
+
+    ///REMPLACEMENT
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
-    ///Diminuer nombre de vies de Snoopy si Balle touche Snoopy : mettre du sang :D
+
+    ///Diminuer nombre de vies de Snoopy si Balle touche Snoopy : mettre du sang :D ?
     if((m_balle.getPosX()==m_Snoopy.getPosX())&&(m_balle.getPosY()==m_Snoopy.getPosY()))
     {
-        return dead;
+        dead = true;
     }
     else dead = false;
     return dead;
@@ -410,92 +411,91 @@ void Matrice::bougerElements(Console* conso,int& niv)
         m_time = (clock()-start);
         for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
         {
-            //m_time = (clock()-start); hein ?
-            for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
-            {
-                conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
-                std::cout << ' ';
-            }
-            /*if(60000-m_time >= 0)
-            {
-                conso->gotoLigCol(10,45);
-                //std::cout << (60-(m_time/CLOCKS_PER_SEC));    lignes qui permettent d'afficher les secondes : ne sert que pour debugger
-                conso->setColor(COLOR_DEFAULT);
-            }*/
-            if(60000-m_time < 10000)
-            {
-                conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
-                conso->setColor(COLOR_RED);
-                std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
-                conso->gotoLigCol(10,46);
-                std::cout << ' ';
-            }
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
+            std::cout << ' ';
+        }
+        /*if(60000-m_time >= 0)
+        {
             conso->gotoLigCol(10,45);
-            std::cout << (60-(m_time/CLOCKS_PER_SEC));
+            //std::cout << (60-(m_time/CLOCKS_PER_SEC));    lignes qui permettent d'afficher les secondes : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
-            if(60000-m_time <= 200)
+        }*/
+        if(60000-m_time < 10000)
+        {
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+            conso->setColor(COLOR_RED);
+            std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+            conso->gotoLigCol(10,46);
+            std::cout << ' ';
+        }
+        conso->gotoLigCol(10,45);
+        std::cout << (60-(m_time/CLOCKS_PER_SEC));
+        conso->setColor(COLOR_DEFAULT);
+        if(60000-m_time <= 200)
+        {
+            dead = true;
+            m_Snoopy.setVies(0);
+        }
+        if(fmod(m_time,100) < 52)
+        {
+            dead = bougerBalle();
+        }
+        afficherMatrice(conso);
+        if(conso->ifKeyboardPressed())
+        {
+            touche=conso->getInputKey();
+            if(touche == 27)
             {
-                dead = true;
-                m_Snoopy.setVies(0);
-            }
-            }
-            if(fmod(m_time,100) < 52)
-            {
-                dead = bougerBalle();
-            }
-            afficherMatrice(conso);
-            if(conso->ifKeyboardPressed())
-            {
-                touche=conso->getInputKey();
-                if(touche == 27)
-                {
-                    quit = true;
-                    system("cls");
-                }
-                else if(touche == 'p') //pause
-                {
-                    do
-                    {
-                        touche = conso->getInputKey();
-                    }
-                    while (touche != 'p'); ///Stopper le timer aussi
-                }
-                else
-                {
-                    bougerSnoopy(conso,touche,dead);
-                }
-            }
-            if(dead == true)
-            {
-                m_Snoopy.setVies(m_Snoopy.getVies()-1);
-                dead = false;
-                //Réinitialisation de la matrice de départ;
-                Sleep(1000);
-                m_Snoopy.setPosX(SNOOPYPOSX);
-                m_Snoopy.setPosY(SNOOPYPOSY);
-                m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-                m_balle.setPosX(BALLPOSX);
-                m_balle.setPosY(BALLPOSY);
-                initialisationElements(niv);
-                if (m_Snoopy.getVies()<=0)
-                {
-                    system("cls");
-                    ecranMort(conso);
-                    quit=true;
-                }
-            }
-            if(m_Snoopy.getOiseaux()==4)
-            {
-                ///Gagner partie : bouger le score
-                m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
-                ///Afficher qu'on a gagné
+                quit = true;
                 system("cls");
-                ecranVictoire(conso);
-                quit=true;
+            }
+            else if(touche == 'p') //pause
+            {
                 system("cls");
+                do
+                {
+                    touche = conso->getInputKey();
+                }
+                while (touche != 'p'); ///Stopper le timer aussi
+                afficherMatrice(conso);
+                afficherCadre(conso);
+            }
+            else
+            {
+                bougerSnoopy(conso,touche,dead);
             }
         }
-        while(!quit);
+        if(dead == true)
+        {
+            m_Snoopy.setVies(m_Snoopy.getVies()-1);
+            dead = false;
+            //Réinitialisation de la matrice de départ;
+            Sleep(1000);
+            m_Snoopy.setPosX(SNOOPYPOSX);
+            m_Snoopy.setPosY(SNOOPYPOSY);
+            m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
+            m_balle.setPosX(BALLPOSX);
+            m_balle.setPosY(BALLPOSY);
+            initialisationElements(niv);
+            if (m_Snoopy.getVies()<=0)
+            {
+                system("cls");
+                ecranMort(conso);
+                quit=true;
+            }
+        }
+        if(m_Snoopy.getOiseaux()==4)
+        {
+            ///Gagner partie : bouger le score
+            m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
+            ///Afficher qu'on a gagné
+            system("cls");
+            ecranVictoire(conso);
+            quit=true;
+            system("cls");
+        }
+    }
+    while(!quit);
 }
 
 ///_________________________________________________________________________

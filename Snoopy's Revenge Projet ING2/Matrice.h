@@ -33,8 +33,10 @@ private :
 public :
     //constructeur
     Matrice();
+
     //destructeur
     ~Matrice();
+
     //getters
     std::vector<std::vector<Bloc> > getMatrice()const;
     int getTableau()const;
