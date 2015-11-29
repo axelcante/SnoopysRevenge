@@ -71,7 +71,7 @@ void Console::_setColor(int back, int front)
 }
 
 //procedure qui écrit dans un fichier .txt
-void writeFile(const std::string& name, char m_matrice[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY)
+void writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY)
 {
     // Ouverture fichier en mode "w"
     // Cette fonction recoit un tableau de chars qui sera représentatif de la matrice de jeu
@@ -83,7 +83,7 @@ void writeFile(const std::string& name, char m_matrice[N_LIGNES][N_COLONNES], in
         {
             for(int j = 0; j < N_COLONNES; j++)
             {
-                ofs << m_matrice[i][j];
+                ofs << tableau[i][j];
             }
             ofs << std::endl;
         }
@@ -91,6 +91,8 @@ void writeFile(const std::string& name, char m_matrice[N_LIGNES][N_COLONNES], in
         ofs << score << std::endl;
         ofs << oiseaux << std::endl;
         ofs << time << std::endl;
+        ofs << decalageX << std::endl;
+        ofs << decalageY << std::endl;
         ofs.close(); // fermeture du flux
     }
 }

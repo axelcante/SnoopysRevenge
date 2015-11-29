@@ -17,6 +17,7 @@ Balle Matrice::getBalle()const
 {
     return m_balle;
 }
+
 Poussable Matrice::getBlocPoussable()const
 {
     return m_blocPoussable;
@@ -258,48 +259,51 @@ bool Matrice::bougerBalle()
 {
     bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
-    if((m_balle.getPosX() == (N_LIGNES-1)) || (m_balle.getPosX() == 0))
+
+    ///REBOND SUR MATRICE
+    if((m_balle.getPosX()<=0)||(m_balle.getPosX()>=N_LIGNES-1)) //BAS ou HAUT de la matrice
+        m_decalage_X = -m_decalage_X;
+    if((m_balle.getPosY()<=0)||(m_balle.getPosY()>=N_COLONNES-1)) //DROITE ou GAUCHE de la matrice
+        m_decalage_Y = -m_decalage_Y;
+
+    ///REBOND SUR BLOCS
+    if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType()!='S'))
+        m_decalage_Y = -m_decalage_Y;
+    if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()].getType()!='S'))
+        m_decalage_X = -m_decalage_Y;
+    if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()!='S'))
     {
-        m_decalage_X *= -1;
+        m_decalage_Y = -m_decalage_Y;
+        m_decalage_X = -m_decalage_Y;
+        if (((m_balle.getPosX()+m_decalage_X<=0)||(m_balle.getPosX()+m_decalage_Y>=N_LIGNES))||((m_balle.getPosY()+m_decalage_Y<=0)||(m_balle.getPosY()+m_decalage_Y>=N_COLONNES)))
+        {
+            m_decalage_Y = -m_decalage_Y;
+            m_decalage_X = -m_decalage_Y;
+        }
     }
-    if((m_balle.getPosY() == (N_COLONNES-1)) || (m_balle.getPosY() == 0))
-    {
-        m_decalage_Y *= -1;
-    }
-    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY()].getType() == m_Snoopy.getType()))
-    {
-        m_decalage_X += 0;
-    }
-    else
-    {
-        m_decalage_X *= -1;
-    }
-    if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
-    {
-        //euuh
-        m_decalage_Y += 0;
-        dead = true;
-    }
-    else
-    {
-        m_decalage_Y *= -1;
-    }
-    if((m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_blocVide.getType()) || (m_matrice[m_balle.getPosX() + m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType() == m_Snoopy.getType()))
-    {
-        m_decalage_X += 0;
-    }
-    else
-    {
-        m_decalage_X *= -1;
-        m_decalage_Y *= -1;
-    }
+
+    ///SI COINCE
+    if((m_balle.getPosX()+m_decalage_X==-1)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))//à l'interieur
+        m_decalage_X = -m_decalage_X;
+   else if((m_balle.getPosX()+m_decalage_X==N_LIGNES)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))
+        m_decalage_X = -m_decalage_X;
+   else if((m_balle.getPosY()+m_decalage_Y==-1)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))
+        m_decalage_Y = -m_decalage_Y;
+    else if((m_balle.getPosY()+m_decalage_Y==N_COLONNES-1)&&((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()==' ')||(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY() + m_decalage_Y].getType()=='S')))
+        m_decalage_Y = -m_decalage_Y;
+
+    ///REMPLACEMENT
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
+<<<<<<< HEAD
+=======
+
+>>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
     ///Diminuer nombre de vies de Snoopy si Balle touche Snoopy : mettre du sang :D ?
     if((m_balle.getPosX()==m_Snoopy.getPosX())&&(m_balle.getPosY()==m_Snoopy.getPosY()))
     {
-        return dead;
+        dead = true;
     }
     else dead = false;
     return dead;
@@ -404,6 +408,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
 void Matrice::bougerElements(Console* conso,int& niv)
 {
     bool quit = false;
+<<<<<<< HEAD
         bool dead = false;
         char touche;
         initialisationMatrice(niv);
@@ -421,9 +426,28 @@ void Matrice::bougerElements(Console* conso,int& niv)
                 std::cout << ' ';
             }
            // if(60000-m_time >= 0)
+=======
+    bool dead = false;
+    char touche;
+    initialisationMatrice(niv);
+    afficherMatrice(conso);
+    int start = clock();
+
+    do
+    {
+        m_time = (clock()-start);
+        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
+        {
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
+            std::cout << ' ';
+        }
+        /*if(60000-m_time >= 0)
+        {
+>>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
             conso->gotoLigCol(10,45);
-            //std::cout << (60-(m_time/CLOCKS_PER_SEC));    ligne qui permet d'afficher les secondes : ne sert que pour debugger
+            //std::cout << (60-(m_time/CLOCKS_PER_SEC));    lignes qui permettent d'afficher les secondes : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
+<<<<<<< HEAD
             if(60000-m_time <= 200)
             {
                 conso->setColor(COLOR_YELLOW);
@@ -445,33 +469,52 @@ void Matrice::bougerElements(Console* conso,int& niv)
                 }
             }
             if(fmod(m_time,100) < 52)
+=======
+        }*/
+        if(60000-m_time < 10000)
+        {
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+            conso->setColor(COLOR_RED);
+            std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+            conso->gotoLigCol(10,46);
+            std::cout << ' ';
+        }
+        conso->gotoLigCol(10,45);
+        std::cout << (60-(m_time/CLOCKS_PER_SEC));
+        conso->setColor(COLOR_DEFAULT);
+        if(60000-m_time <= 200)
+        {
+            dead = true;
+            m_Snoopy.setVies(0);
+        }
+        if(fmod(m_time,100) < 52)
+        {
+            dead = bougerBalle();
+        }
+        afficherMatrice(conso);
+        if(conso->ifKeyboardPressed())
+        {
+            touche=conso->getInputKey();
+            if(touche == 27)
+>>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
             {
-                dead = bougerBalle();
+                quit = true;
+                system("cls");
             }
-            afficherMatrice(conso);
-            if(conso->ifKeyboardPressed())
+            else if(touche == 'p') //pause
             {
-                touche=conso->getInputKey();
-                if(touche == 27)
+                system("cls");
+                do
                 {
-                    quit = true;
-                    system("cls");
+                    touche = conso->getInputKey();
                 }
-                else if(touche == 'p') //pause
-                {
-                    do
-                    {
-                        touche = conso->getInputKey();
-                    }
-                    while (touche != 'p'); ///Stopper le timer aussi
-                }
-                else
-                {
-                    bougerSnoopy(conso,touche,dead);
-                }
+                while (touche != 'p'); ///Stopper le timer aussi
+                afficherMatrice(conso);
+                afficherCadre(conso);
             }
-            if(dead == true)
+            else
             {
+<<<<<<< HEAD
                 m_Snoopy.setVies(m_Snoopy.getVies()-1);
                 dead = false;
                 //Réinitialisation de la matrice de départ;
@@ -489,20 +532,47 @@ void Matrice::bougerElements(Console* conso,int& niv)
                     niv=0;
                     quit=true;
                 }
-            }
-            if(m_Snoopy.getOiseaux()==4)
-            {
-                ///Gagner partie : bouger le score
-                m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
-                ///Afficher qu'on a gagné
-                system("cls");
-                ecranVictoire(conso);
-                niv++;
-                quit=true;
-                system("cls");
+=======
+                bougerSnoopy(conso,touche,dead);
+>>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
             }
         }
-        while(!quit);
+        if(dead == true)
+        {
+            m_Snoopy.setVies(m_Snoopy.getVies()-1);
+            dead = false;
+            //Réinitialisation de la matrice de départ;
+            Sleep(1000);
+            m_Snoopy.setPosX(SNOOPYPOSX);
+            m_Snoopy.setPosY(SNOOPYPOSY);
+            m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
+            m_balle.setPosX(BALLPOSX);
+            m_balle.setPosY(BALLPOSY);
+            initialisationElements(niv);
+            if (m_Snoopy.getVies()<=0)
+            {
+                system("cls");
+<<<<<<< HEAD
+                ecranVictoire(conso);
+                niv++;
+=======
+                ecranMort(conso);
+>>>>>>> df77d49e2cd8eba426a9f96a0ba3f613d0a7fcb4
+                quit=true;
+            }
+        }
+        if(m_Snoopy.getOiseaux()==4)
+        {
+            ///Gagner partie : bouger le score
+            m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
+            ///Afficher qu'on a gagné
+            system("cls");
+            ecranVictoire(conso);
+            quit=true;
+            system("cls");
+        }
+    }
+    while(!quit);
 }
 
 ///_________________________________________________________________________
@@ -600,51 +670,53 @@ void Matrice::ecranVictoire(Console* conso)
     conso->setColor(COLOR_DEFAULT);
 }
 
-void Matrice::traduireMatrice(char tableau[N_LIGNES][N_COLONNES])
+void Matrice::traduireMatrice()
 {
     for(int i = 0; i < N_LIGNES; i++)
     {
         for(int j = 0; j < N_COLONNES; j++)
         {
-            tableau[i][j] = m_matrice[i][j].getType();
+            m_tableau_sauvegarde[i][j] = m_matrice[i][j].getType();
         }
     }
 }
 
-
-void Matrice::traduireTableau(char tableau[N_LIGNES][N_COLONNES])
+void Matrice::traduireTableau()
 {
-    for(int i = 0; i < N_LIGNES; i++)
+    int i = 0;
+    int j = 0;
+
+    for(i = 0; i < N_LIGNES; i++)
     {
-        for(int j = 0; j < N_COLONNES; j++)
+        for(j = 0; j < N_COLONNES; j++)
         {
-            if((tableau[i][j] == 'O'))
+            if((m_tableau_sauvegarde[i][j] == 'O'))
             {
                 m_matrice[i][j] = m_Oiseau;
             }
-            if((tableau[i][j] = ' '))
+            if((m_tableau_sauvegarde[i][j] = ' '))
             {
                 m_matrice[i][j] = m_blocVide;
             }
-            if((tableau[i][j] = 'P'))
+            if((m_tableau_sauvegarde[i][j] = 'P'))
             {
                 m_matrice[i][j] = m_blocP;
             }
-            if((tableau[i][j] = 'T'))
+            if((m_tableau_sauvegarde[i][j] = 'T'))
             {
                 m_matrice[i][j] = m_blocT;
             }
-            if((tableau[i][j] = 'C'))
+            if((m_tableau_sauvegarde[i][j] = 'C'))
             {
                 m_matrice[i][j] = m_blocC;
             }
-            if((tableau[i][j] = 'S'))
+            if((m_tableau_sauvegarde[i][j] = 'S'))
             {
                 m_Snoopy.setPosX(i);
                 m_Snoopy.setPosY(j);
                 m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
             }
-            if((tableau[i][j] = 'B'))
+            if((m_tableau_sauvegarde[i][j] = 'B'))
             {
                 m_balle.setPosX(i);
                 m_balle.setPosY(j);
@@ -653,3 +725,4 @@ void Matrice::traduireTableau(char tableau[N_LIGNES][N_COLONNES])
         }
     }
 }
+
