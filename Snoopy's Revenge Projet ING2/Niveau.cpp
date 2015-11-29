@@ -24,10 +24,9 @@ void Niveau::setMdp(std::string mdp)
 int Niveau::lancerJeu(Console* conso)
 {
     int choix = 0;
-    int niv=0;
+    int niv=1;
     system("cls");
     do{
-    niv++;
     Matrice matrice_niveau_1;
     matrice_niveau_1.afficherCadre(conso);
     matrice_niveau_1.bougerElements(conso,niv);

@@ -59,16 +59,12 @@ public :
     bool bougerBalle();
     void afficherCadre(Console* conso);
     void bougerSnoopy(Console* conso,char& touche, bool& dead);
-    void pousser(Console* conso, char& touche);
+    bool pousser(Console* conso, char& touche);
     void casser(Console* conso, int& poslig, int& poscol);
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso);
-<<<<<<< HEAD
-
-=======
     void traduireMatrice(char tableau[N_LIGNES][N_COLONNES]);
     void traduireTableau(char tableau[N_LIGNES][N_COLONNES]);
->>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
 };
 
 #endif // MATRICE_H_INCLUDED

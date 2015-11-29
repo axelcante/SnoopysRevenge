@@ -296,7 +296,7 @@ bool Matrice::bougerBalle()
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
-    ///Diminuer nombre de vies de Snoopy si Balle touche Snoopy : mettre du sang :D
+    ///Diminuer nombre de vies de Snoopy si Balle touche Snoopy : mettre du sang :D ?
     if((m_balle.getPosX()==m_Snoopy.getPosX())&&(m_balle.getPosY()==m_Snoopy.getPosY()))
     {
         return dead;
@@ -361,7 +361,12 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
 
     ///Si 'P' : pousser si poussable
     if(m_matrice[poslig][poscol].getEstPoussableblocmere()==true)
-        pousser(conso,touche);
+       {if(pousser(conso,touche)==false)
+        {
+            poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
+            poscol = m_Snoopy.getPosY();
+        }
+       }
     else
     {
         ///Si 'O' : oiseau à récupérer
@@ -399,7 +404,6 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
 void Matrice::bougerElements(Console* conso,int& niv)
 {
     bool quit = false;
-<<<<<<< HEAD
         bool dead = false;
         char touche;
         initialisationMatrice(niv);
@@ -408,18 +412,6 @@ void Matrice::bougerElements(Console* conso,int& niv)
         int start = clock();
 
         do
-=======
-    bool dead = false;
-    char touche;
-    initialisationMatrice();
-    afficherMatrice(conso);
-    int start = clock();
-
-    do
-    {
-        m_time = (clock()-start);
-        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
->>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
         {
 
             m_time = (clock()-start);
@@ -428,14 +420,11 @@ void Matrice::bougerElements(Console* conso,int& niv)
                 conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
                 std::cout << ' ';
             }
-<<<<<<< HEAD
-            if(60000-m_time >= 0)
-=======
+           // if(60000-m_time >= 0)
             conso->gotoLigCol(10,45);
             //std::cout << (60-(m_time/CLOCKS_PER_SEC));    ligne qui permet d'afficher les secondes : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
             if(60000-m_time <= 200)
->>>>>>> 906cba46d12d5823c830e50a005c2efa5ef5fd2f
             {
                 conso->setColor(COLOR_YELLOW);
                 if(60000-m_time < 10000)
@@ -497,6 +486,7 @@ void Matrice::bougerElements(Console* conso,int& niv)
                 {
                     system("cls");
                     ecranMort(conso);
+                    niv=0;
                     quit=true;
                 }
             }
@@ -507,6 +497,7 @@ void Matrice::bougerElements(Console* conso,int& niv)
                 ///Afficher qu'on a gagné
                 system("cls");
                 ecranVictoire(conso);
+                niv++;
                 quit=true;
                 system("cls");
             }
@@ -521,7 +512,7 @@ void Matrice::casser(Console* conso, int& poslig, int& poscol)
 }
 
 ///_________________________________________________________________________
-void Matrice::pousser(Console* conso, char& touche)
+bool Matrice::pousser(Console* conso, char& touche)
 {
     /****
     /// Supposé fait :
@@ -531,13 +522,15 @@ void Matrice::pousser(Console* conso, char& touche)
 
     //Déclaration de variables
     int i = m_Snoopy.getPosX(),j = m_Snoopy.getPosY();
+    bool estpousse=false;
 
     switch(touche)
     {
     ///Chez nous, Snoopy bouge en même temps que la bloc poussable
     case 's': ///Pousser "bloc" vers le bas
-        if((i+2)<=N_LIGNES) //Pas sortir de la matrice
+        if((i+2<=N_LIGNES)&&(m_matrice[i+2][j].getType()==' '))//Pas sortir de la matrice
         {
+            estpousse = true;
             m_matrice[i][j]=m_blocVide;
             // m_matrice[i+1][j]=m_Snoopy; //fait
             m_matrice[i+2][j]=m_blocPoussable;
@@ -546,8 +539,9 @@ void Matrice::pousser(Console* conso, char& touche)
         }
         break;
     case 'q':///Pousser "bloc" vers gauche
-        if((j-2)>=0) //Pas sortir de la matrice
+        if((m_matrice[i][j-2].getType()==' ')&&(j-2>=0)) //Pas sortir de la matrice
         {
+            estpousse = true;
             m_matrice[i][j]=m_blocVide;
             //m_matrice[i][j-1]=m_Snoopy; //fait
             m_matrice[i][j-2]=m_blocPoussable;
@@ -556,8 +550,9 @@ void Matrice::pousser(Console* conso, char& touche)
         }
         break;
     case 'd':///Pousser "bloc" vers droite
-        if((j+2)<=N_COLONNES) //Pas sortir de la matrice
+        if((j+2<=N_COLONNES)&&(m_matrice[i][j+2].getType()==' ')) //Pas sortir de la matrice
         {
+            estpousse = true;
             m_matrice[i][j]=m_blocVide;
             //m_matrice[i][j+1]=m_Snoopy; //fait
             m_matrice[i][j+2]=m_blocPoussable;
@@ -566,8 +561,9 @@ void Matrice::pousser(Console* conso, char& touche)
         }
         break;
     case 'z':///Pousser "bloc" vers haut
-        if((i-2)>=0) //Pas sortir de la matrice
+        if((i-2>=0)&&(m_matrice[i-2][j].getType()==' ')) //Pas sortir de la matrice
         {
+            estpousse = true;
             m_matrice[i][j]=m_blocVide;
             //m_matrice[i-1][j]=m_Snoopy; //fait
             m_matrice[i-2][j]=m_blocPoussable;
@@ -578,6 +574,7 @@ void Matrice::pousser(Console* conso, char& touche)
     case 'w': //sauver la partie
         break;
     }
+    return estpousse;
 }
 
 void Matrice::ecranMort(Console* conso)
