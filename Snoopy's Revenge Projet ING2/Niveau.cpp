@@ -28,6 +28,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
     if((niveaumdp<=1)&&(niveaumdp>=3))
         niv=niveaumdp;
     int score=0;
+    m_matriceDeJeu.getSnoopy().setVies(3);
     system("cls");
     do
     {
@@ -38,6 +39,8 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
             std::cout<<"Niveau suivant : " << niv<< "\n";
         system("pause");
         system("cls");
+        m_matriceDeJeu.getSnoopy().setOiseaux(0);
+
     }
     while (niv<=3);
     afficherMenu(conso);

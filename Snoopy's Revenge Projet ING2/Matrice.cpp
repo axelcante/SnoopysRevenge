@@ -103,38 +103,46 @@ void Matrice::initialisationElements(int& niv)
     m_decalage_Y = 1;
     //Snoopy
     m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
-    m_Snoopy.setVies(3);
 
     ///Architecture spéciale
     switch(niv)
     {
     case 1:
         //Blocs poussables TEST
+        m_matrice[4][12] = m_blocPoussable;
         m_matrice[6][12] = m_blocPoussable;
-        m_matrice[3][7] = m_blocPoussable;
+        m_matrice[4][6] = m_blocPoussable;
         m_matrice[6][6] = m_blocPoussable;
         //Blocs Piégés TEST
-        m_matrice[5][8] = m_blocT;
+        m_matrice[2][9] = m_blocT;
+        m_matrice[6][9] = m_blocT;
+        m_matrice[8][11] = m_blocT;
+        m_matrice[3][11] = m_blocT;
         //Blocs Cassables TEST
-        m_matrice[6][8] = m_blocC;
+        m_matrice[1][0] = m_blocC;
+        m_matrice[1][19] = m_blocC;
+        m_matrice[8][19] = m_blocC;
+        m_matrice[8][0] = m_blocC;
         break;
     case 2:
         //Blocs poussables TEST
-        m_matrice[0][3] = m_blocPoussable;
-        m_matrice[1][3] = m_blocPoussable;
-        m_matrice[2][4] = m_blocPoussable;
-        m_matrice[0][17] = m_blocPoussable;
-        m_matrice[1][17] = m_blocPoussable;
-        m_matrice[9][19] = m_blocPoussable;
-        m_matrice[5][0] = m_blocPoussable;
-        m_matrice[0][9] = m_blocPoussable;
-        m_matrice[3][19] = m_blocPoussable;
+        m_matrice[4][12] = m_blocPoussable;
+        m_matrice[6][12] = m_blocPoussable;
+        m_matrice[4][6] = m_blocPoussable;
+        m_matrice[6][6] = m_blocPoussable;
+        m_matrice[5][9] = m_blocPoussable;
         //Blocs Piégés TEST
-        m_matrice[3][5] = m_blocT;
-        m_matrice[3][15] = m_blocT;
+        m_matrice[0][1] = m_blocT;
+        m_matrice[0][18] = m_blocT;
+        m_matrice[9][1] = m_blocT;
+        m_matrice[9][18] = m_blocT;
+        m_matrice[4][8] = m_blocT;
+        m_matrice[4][10] = m_blocT;
         //Blocs Cassables TEST
-        m_matrice[6][8] = m_blocC;
-        m_matrice[7][8] = m_blocC;
+        m_matrice[1][0] = m_blocC;
+        m_matrice[1][19] = m_blocC;
+        m_matrice[8][19] = m_blocC;
+        m_matrice[8][0] = m_blocC;
         break;
     case 3:
         break;
@@ -355,7 +363,6 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
             poslig--;//Decrementer la position de la ligne
         break;
     case 'a'://Casser ?
-        if((poslig+1<nbl)&&(poscol-1>=0)&&(poscol+1<nbc)&&(poslig-1>=0))
             casser(conso, poslig, poscol);
         break;
     }
@@ -437,6 +444,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
         {
             dead = true;
             m_Snoopy.setVies(0);
+            m_Snoopy.setOiseaux(0);
         }
         if(fmod(m_time,100) < 22)
         {
@@ -517,6 +525,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
         if(dead == true)
         {
             m_Snoopy.setVies(m_Snoopy.getVies()-1);
+            m_Snoopy.setOiseaux(0);
             dead = false;
             //Réinitialisation de la matrice de départ;
             Sleep(1000);
@@ -528,9 +537,12 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             initialisationElements(niv);
             if (m_Snoopy.getVies()==0)
             {
+                m_Snoopy.setOiseaux(0);
+                m_Snoopy.setVies(3);
                 system("cls");
                 ecranMort(conso);
                 niv=4;
+                m_Snoopy.setScore(0);
                 quit=true;
             }
         }
@@ -539,6 +551,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             ///Gagner partie : bouger le score
             m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
             score+=m_Snoopy.getScore();
+            m_Snoopy.setOiseaux(0);
             ///Afficher qu'on a gagné
             system("cls");
             ecranVictoire(conso,score);
@@ -547,6 +560,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_Snoopy.setPosX(SNOOPYPOSY); // on réinitialise Snoopy a sa position initiale (sinon il bouffe un oisea automatiquement)
             m_balle.setPosX(BALLPOSX);
             m_balle.setPosY(BALLPOSY);
+            initialisationElements(niv);
             quit=true;
             system("cls");
         }
@@ -557,22 +571,23 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
 ///_________________________________________________________________________
 void Matrice::casser(Console* conso, int& poslig, int& poscol)
 {
-    if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
+    if(((poslig+1>=0)&&(poslig+1<N_LIGNES))&&((poscol-1<N_COLONNES)&&(poscol-1>=0))&&((poscol+1<N_COLONNES)&&(poscol+1>=0))&&((poslig-1>=0)&&(poslig-1<N_LIGNES)))
+    {if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
     {
         if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
-            poslig=poslig+1;
+            poslig = poslig+1;
         else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
-            poscol=poscol+1;
+            poscol = poscol+1;
         else if(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)
-            poslig=poslig-1;
+            poslig = poslig-1;
         else if(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true)
-            poscol=poscol-1;
+            poscol = poscol-1;
         m_matrice[poslig][poscol] = m_blocVide;
         poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
         poscol = m_Snoopy.getPosY();
         conso->gotoLigCol(12, 45);
         std::cout << "                 ";
-    }
+    }}
 }
 
 ///_________________________________________________________________________
@@ -647,6 +662,7 @@ void Matrice::ecranMort(Console* conso)
     std::cout << "VOUS AVEZ PERDU ! QUEL DOMMAGE !";
     conso->gotoLigCol(25,30);
     std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore()<<std::endl<<std::endl;
+    conso->gotoLigCol(30,30);
     system("pause");
     conso->setColor(COLOR_DEFAULT);
 
@@ -659,6 +675,7 @@ void Matrice::ecranVictoire(Console* conso,int& score)
     std::cout << "EXCELLENT ! VOUS AVEZ REMPORTE LA PARTIE !";
     conso->gotoLigCol(25,30);
     std::cout << "VOTRE SCORE EST DE : " << score<<std::endl<<std::endl;
+    conso->gotoLigCol(30,30);
     system("pause");
     conso->setColor(COLOR_DEFAULT);
 }
