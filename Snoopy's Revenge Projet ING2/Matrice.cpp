@@ -13,11 +13,14 @@ std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
 }
+/*char Matrice::getTableau()const
+{
+    return m_tableau_sauvegarde;
+}*/
 Balle Matrice::getBalle()const
 {
     return m_balle;
 }
-
 Poussable Matrice::getBlocPoussable()const
 {
     return m_blocPoussable;
@@ -38,10 +41,14 @@ Snoopy Matrice::getSnoopy()const
 {
     return m_Snoopy;
 }
+double Matrice::getTime()const
+{
+    return m_time;
+}
 
 //setters
 //Permet de modifier manuellement un bloc de la matrice
-void Matrice::setBloc(int posX, int posY, Bloc bloc)
+void Matrice::setBloc(int posX, int posY, Bloc bloc) //n'est pas utilisé mais toujours utile ! :D
 {
     m_matrice[posX][posY] = bloc;
 }
@@ -148,7 +155,6 @@ void Matrice::afficherMatrice(Console* conso)
     conso->gotoLigCol(POSLIGNE,POSCOLONNE);
     int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
-
     {
         {
             for (int j = 0; j < N_COLONNES; j++)
@@ -412,38 +418,34 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
     initialisationMatrice(niv);
     afficherMatrice(conso);
     int start = clock();
+    std::string name;
     do
     {
         m_time = (clock()-start);
-        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
+        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps chaque seconde (60 carrés)
         {
             conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
             std::cout << ' ';
         }
+        conso->setColor(COLOR_YELLOW);
+        if(60000-m_time < 10000)
+        {
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+            conso->setColor(COLOR_RED);
+            std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+        }
+        /*if(60000-m_time >= 0)
+        {
+            conso->gotoLigCol(10,45);
+            std::cout << (60-(m_time/CLOCKS_PER_SEC)); // Lignes qui permettent d'afficher le temps : ne sert que pour debugger
+            conso->setColor(COLOR_DEFAULT);
+        }*/
         if(60000-m_time <= 200)
         {
-            conso->setColor(COLOR_YELLOW);
-            if(60000-m_time < 10000)
-            {
-                conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
-                conso->setColor(COLOR_RED);
-                std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
-                conso->gotoLigCol(10,46);
-                std::cout << ' ';
-            }
-            if(60000-m_time >= 0)
-            {
-                conso->gotoLigCol(10,45);
-                std::cout << (60-(m_time/CLOCKS_PER_SEC));
-                conso->setColor(COLOR_DEFAULT);
-            }
-            if(60000-m_time <= 200)
-            {
-                dead = true;
-                m_Snoopy.setVies(0);
-            }
+            dead = true;
+            m_Snoopy.setVies(0);
+            m_Snoopy.setOiseaux(0);
         }
-
         if(fmod(m_time,100) < 52)
         {
             dead = bougerBalle();
@@ -460,14 +462,60 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             }
             else if(touche == 'p') //pause
             {
-                system("cls");
+                int menu_choix = 0;
+                conso->setColor(COLOR_YELLOW);
+                conso->gotoLigCol(5,46);
+                std::cout << "MENU PAUSE";
+                conso->gotoLigCol(7,46);
+                conso->setColor(COLOR_RED);
+                std::cout << "1. Sauvegarder votre partie";
+                conso->setColor(COLOR_YELLOW);
+                conso->gotoLigCol(9,46);
+                std::cout << "2. Quitter ?";
                 do
                 {
                     touche = conso->getInputKey();
-                }
-                while (touche != 'p'); ///Stopper le timer aussi
-                afficherMatrice(conso);
-                afficherCadre(conso);
+                    if(touche == 'z')
+                    {
+                        menu_choix = 0;
+                        conso->gotoLigCol(7,46);
+                        conso->setColor(COLOR_RED);
+                        std::cout << "1. Sauvegarder votre partie";
+                        conso->setColor(COLOR_YELLOW);
+                        conso->gotoLigCol(9,46);
+                        std::cout << "2. Quitter ?";
+                    }
+                    if(touche == 's')
+                    {
+                        menu_choix = 1;
+                        conso->gotoLigCol(7,46);
+                        conso->setColor(COLOR_YELLOW);
+                        std::cout << "1. Sauvegarder votre partie";
+                        conso->setColor(COLOR_RED);
+                        conso->gotoLigCol(9,46);
+                        std::cout << "2. Quitter ?";
+                    }
+                    if(touche == 13 && menu_choix == 1)   //choix du menu pause et reste sauvegarde a faire
+                    {
+                        quit = true;
+                        niv = 4;
+                        touche = 'p';
+                    }
+                    if(touche == 13 && menu_choix == 0) // sauvegarde de la partie
+                    {
+                        system("cls");
+                        conso->gotoLigCol(POSLIGNE,POSCOLONNE);
+                        std::cout << "Entrez votre nom de joueur : ";
+                        std::cin >> name;
+                        name += ".txt";
+                        traduireMatrice();
+                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getScore(),m_time,m_decalage_X,m_decalage_Y);
+                        touche = 'p';
+                        system("cls");
+                        afficherCadre(conso);
+                        afficherMatrice(conso);
+                    }
+                }while (touche != 'p'); ///Stopper le timer aussi
             }
             else
             {
@@ -477,6 +525,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
         if(dead == true)
         {
             m_Snoopy.setVies(m_Snoopy.getVies()-1);
+            m_Snoopy.setOiseaux(0);
             dead = false;
             //Réinitialisation de la matrice de départ;
             Sleep(1000);
@@ -489,9 +538,11 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             if (m_Snoopy.getVies()==0)
             {
                 m_Snoopy.setOiseaux(0);
+                m_Snoopy.setVies(3);
                 system("cls");
                 ecranMort(conso);
                 niv=4;
+                m_Snoopy.setScore(0);
                 quit=true;
             }
         }
@@ -505,6 +556,11 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             system("cls");
             ecranVictoire(conso,score);
             niv++;
+            m_Snoopy.setPosX(SNOOPYPOSX);
+            m_Snoopy.setPosX(SNOOPYPOSY); // on réinitialise Snoopy a sa position initiale (sinon il bouffe un oisea automatiquement)
+            m_balle.setPosX(BALLPOSX);
+            m_balle.setPosY(BALLPOSY);
+            initialisationElements(niv);
             quit=true;
             system("cls");
         }
@@ -606,6 +662,7 @@ void Matrice::ecranMort(Console* conso)
     std::cout << "VOUS AVEZ PERDU ! QUEL DOMMAGE !";
     conso->gotoLigCol(25,30);
     std::cout << "VOTRE SCORE EST DE : " << m_Snoopy.getScore()<<std::endl<<std::endl;
+    conso->gotoLigCol(30,30);
     system("pause");
     conso->setColor(COLOR_DEFAULT);
 
@@ -618,6 +675,7 @@ void Matrice::ecranVictoire(Console* conso,int& score)
     std::cout << "EXCELLENT ! VOUS AVEZ REMPORTE LA PARTIE !";
     conso->gotoLigCol(25,30);
     std::cout << "VOTRE SCORE EST DE : " << score<<std::endl<<std::endl;
+    conso->gotoLigCol(30,30);
     system("pause");
     conso->setColor(COLOR_DEFAULT);
 }

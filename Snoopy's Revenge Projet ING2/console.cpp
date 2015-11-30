@@ -71,7 +71,7 @@ void Console::_setColor(int back, int front)
 }
 
 //procedure qui écrit dans un fichier .txt
-void writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY)
+void Console::writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY)
 {
     // Ouverture fichier en mode "w"
     // Cette fonction recoit un tableau de chars qui sera représentatif de la matrice de jeu
@@ -94,8 +94,75 @@ void writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int 
         ofs << decalageX << std::endl;
         ofs << decalageY << std::endl;
         ofs.close(); // fermeture du flux
+        gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        std::cout << "La sauvegarde est effectuee !";
+        gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        system("pause");
+    }
+    else
+    {
+        gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        std::cout << "ERREUR d'ouverture du fichier";
+        gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        system("pause");
     }
 }
+
+// Lire un fichier ligne par ligne
+// Entrée : le chemin d'accès au fichier
+
+/*void Console::readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY)
+{
+    std::ifstream ifs(name.c_str());
+    char c;
+    if(ifs) // test si le fichier est bien ouvert
+    {
+        while(!ifs.eof())
+        {
+            for(int i = 0; i < N_LIGNES; i++)
+            {
+                for(int j = 0; j < N_COLONNES; j++)
+                {
+                    ifs.get(tableau[i][j]);
+                }
+            }
+            ifs.get(vies);
+            score = c;
+            oiseaux = c;
+            time = c;
+            decalageX = c;
+            decalageY = c;
+            /*ifs.get(vies);                ///Cette partie : je ne sais pas cmt la faire marcher
+            ifs.get(score);
+            ifs.get(oiseaux);
+            ifs.get(time);
+            ifs.get(decalageX);
+            ifs.get(decalageY);*/
+            /*ifs.close(); //fermeture du flux
+            gotoLigCol(POSLIGNE+2,POSCOLONNE);
+            std::cout << "Le chargement est termine !";
+            gotoLigCol(POSLIGNE+4,POSCOLONNE);
+            system("pause");
+            system("cls");
+            for(int i = 0; i < N_LIGNES; i++)
+            {
+                for(int j = 0; j < N_COLONNES; j++)
+                {
+                    std::cout << tableau[i][j];
+                }
+                std::cout << std::endl;
+            }
+            system("pause");
+        }
+    }
+    else // en cas d'erreur...
+    {
+        gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        std::cout << "ERREUR d'ouverture du fichier";
+        gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        system("pause");
+    }
+}*/
 
 void Console::ShowConsoleCursor(bool showFlag)
 {
