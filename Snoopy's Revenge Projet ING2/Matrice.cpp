@@ -446,7 +446,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_Snoopy.setVies(0);
             m_Snoopy.setOiseaux(0);
         }
-        if(fmod(m_time,100) < 52)
+        if(fmod(m_time,100) < 22)
         {
             dead = bougerBalle();
         }
