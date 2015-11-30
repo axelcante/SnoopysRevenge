@@ -48,8 +48,8 @@ class Console
         char getInputKey();
         void setColor(Color col);
         void ShowConsoleCursor(bool showFlag);
-        void writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY);
-        void readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY);
+        void writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY);
+        void readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY);
 };
 
 struct console

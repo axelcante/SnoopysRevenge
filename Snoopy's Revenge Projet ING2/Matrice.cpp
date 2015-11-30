@@ -541,9 +541,9 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                         conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                         std::cout << "Entrez votre nom de joueur : ";
                         std::cin >> name;
-                        name += ".txt";
+                        //name += ".txt";
                         traduireMatrice();
-                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getScore(),m_time,m_decalage_X,m_decalage_Y);
+                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getScore(),m_decalage_X,m_decalage_Y);
                         touche = 'p';
                         system("cls");
                         afficherCadre(conso);
