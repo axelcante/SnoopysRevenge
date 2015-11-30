@@ -23,9 +23,10 @@ public :
 
     ///Methods
     void effetMenu(int choix, Console* conso);
-    int lancerJeu(Console* conso);
+    int lancerJeu(Console* conso, int& niveaumdp);
     void afficherMenu(Console* conso);
     void play(Console* conso);
+    int mdpNiveau(Console* conso);
 
     //passerNiveau();
     ///Idees Diedler en cours :
