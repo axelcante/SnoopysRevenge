@@ -160,7 +160,6 @@ void Matrice::initialisationElements(int& niv)
         m_matrice[9][1] = m_blocT;
         m_matrice[9][18] = m_blocT;
         m_matrice[4][8] = m_blocT;
-        m_matrice[4][10] = m_blocT;
         m_matrice[5][10] = m_blocT;
         m_matrice[6][10] = m_blocT;
         m_matrice[4][11] = m_blocT;
@@ -480,7 +479,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_Snoopy.setVies(0);
             m_Snoopy.setOiseaux(0);
         }
-        if(fmod(m_time,100) < 22)
+        if(fmod(m_time,100) < 52)
         {
             dead = bougerBalle();
         }
