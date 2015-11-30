@@ -21,9 +21,10 @@ void Niveau::setMdp(std::string mdp)
 }
 
 //Methods
-int Niveau::lancerJeu(Console* conso)
+int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
+<<<<<<< HEAD
     int niv=1;
     m_matriceDeJeu.getSnoopy().setVies(3);          //On réinitialise les vies a 3, les oiseaux et le score a 0. Comment faire si on charge une partie ?
     m_matriceDeJeu.getSnoopy().setOiseaux(0);
@@ -33,13 +34,23 @@ int Niveau::lancerJeu(Console* conso)
     {
         m_matriceDeJeu.afficherCadre(conso);
         m_matriceDeJeu.bougerElements(conso,niv);
+=======
+    int niv=niveaumdp;
+    int score=0;
+    system("cls");
+    do
+    {
+        Matrice MatriceDeJeu;
+        MatriceDeJeu.afficherCadre(conso);
+        MatriceDeJeu.bougerElements(conso,niv,score);
+>>>>>>> 16888cbd99ba65e91fc8de7a1a249e65541135c5
         conso->gotoLigCol(40,30);
-        if(niv<=3)
-        std::cout<<"Niveau suivant : " << niv+1 << "\n";
+        if(niv<3)
+            std::cout<<"Niveau suivant : " << niv<< "\n";
         system("pause");
         system("cls");
-        ///juste: pas réinitialiser score à chaque niveau
-    }while (niv<3);
+    }
+    while (niv<=3);
     afficherMenu(conso);
     return choix;
 }
@@ -177,6 +188,7 @@ void Niveau::afficherMenu(Console* conso)
 void Niveau::play(Console* conso)
 {
     int menu_choix = 1;
+    int niveaumdp = 0;
     bool quit = false;
     afficherMenu(conso);
     effetMenu(menu_choix,conso);
@@ -190,27 +202,35 @@ void Niveau::play(Console* conso)
             {
                 menu_choix++;
                 if(menu_choix == 6)
-                {
                     menu_choix = 5;
-                }
+
+                if(menu_choix == 5)
+                    menu_choix = 4;
+
                 effetMenu(menu_choix, conso);
             }
             if(key == 122)
             {
                 menu_choix--;
                 if(menu_choix == 0)
-                {
                     menu_choix = 1;
-                }
+
                 effetMenu(menu_choix, conso);
             }
+
+
             if(menu_choix == 1 && key == 13)
             {
-                menu_choix = lancerJeu(conso);
+                menu_choix = lancerJeu(conso,niveaumdp);
             }
             if(menu_choix == 5 && key == 13)
             {
                 quit = true;
+            }
+            if((menu_choix == 4)&&(key == 13))
+            {
+                niveaumdp=mdpNiveau(conso);
+                lancerJeu(conso, niveaumdp);
             }
             if(key == 27)
             {
@@ -230,6 +250,37 @@ void Niveau::play(Console* conso)
     }
 }
 
+int Niveau::mdpNiveau(Console* conso)
+{
+    //Declaration des variables
+    std::string mdp; //mot de passe
+    bool correct;
+    system("cls");
+    conso->gotoLigCol(POSLIGNE,POSCOLONNE+3);
+    std::cout<<"Entrez un mot de passe :"<<std::endl;
+    std::cin>>mdp;
+    ///Si niveau 1
+    m_mdp = "dimsum";
+    correct = (mdp==m_mdp);
+    if(correct)
+        return 1;
+    else if (mdp!=m_mdp) ///Sinon niveau 2
+    {
+        m_mdp = "seum";
+        correct = (mdp==m_mdp);
+        if(correct)
+            return 2;
+    }
+    else if (mdp!=m_mdp)///Et bah non, niveau 3
+    {
+        m_mdp = "chat";
+        correct = (mdp==m_mdp);
+        if(correct)
+            return 3;
+    }
+    else ///Ou pas
+        return 4;
+}
 //void Niveau::sauvegarde(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY, Console* conso)
 //{
 //}
