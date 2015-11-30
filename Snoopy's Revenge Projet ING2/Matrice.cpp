@@ -13,6 +13,10 @@ std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
 }
+char Matrice::getTableau()
+{
+    return m_tableau_sauvegarde;
+}
 Balle Matrice::getBalle()const
 {
     return m_balle;
@@ -134,7 +138,6 @@ void Matrice::afficherMatrice(Console* conso)
     conso->gotoLigCol(POSLIGNE,POSCOLONNE);
     int lignes = 0;
     for (int i = 0; i < N_LIGNES; i++)
-
     {
         {
             for (int j = 0; j < N_COLONNES; j++)
@@ -411,38 +414,33 @@ void Matrice::bougerElements(Console* conso,int& niv)
     initialisationMatrice(niv);
     afficherMatrice(conso);
     int start = clock();
+    std::string name;
     do
     {
         m_time = (clock()-start);
-        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps
+        for(int j = 60-(m_time/(CLOCKS_PER_SEC)); j < 60; j++) //efface les carrés de temps chaque seconde (60 carrés)
         {
             conso->gotoLigCol(POSLIGNE+N_LIGNES+10,POSCOLONNE+j);
             std::cout << ' ';
         }
+        conso->setColor(COLOR_YELLOW);
+        if(60000-m_time < 10000)
+        {
+            conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
+            conso->setColor(COLOR_RED);
+            std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
+        }
+        /*if(60000-m_time >= 0)
+        {
+            conso->gotoLigCol(10,45);
+            std::cout << (60-(m_time/CLOCKS_PER_SEC));
+            conso->setColor(COLOR_DEFAULT);
+        }*/
         if(60000-m_time <= 200)
         {
-            conso->setColor(COLOR_YELLOW);
-            if(60000-m_time < 10000)
-            {
-                conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
-                conso->setColor(COLOR_RED);
-                std::cout << "ATTENTION ! Moins de 10 secondes restantes...";
-                conso->gotoLigCol(10,46);
-                std::cout << ' ';
-            }
-            if(60000-m_time >= 0)
-            {
-                conso->gotoLigCol(10,45);
-                std::cout << (60-(m_time/CLOCKS_PER_SEC));
-                conso->setColor(COLOR_DEFAULT);
-            }
-            if(60000-m_time <= 200)
-            {
-                dead = true;
-                m_Snoopy.setVies(0);
-            }
+            dead = true;
+            m_Snoopy.setVies(0);
         }
-
         if(fmod(m_time,100) < 52)
         {
             dead = bougerBalle();
@@ -459,14 +457,60 @@ void Matrice::bougerElements(Console* conso,int& niv)
             }
             else if(touche == 'p') //pause
             {
-                system("cls");
+                int menu_choix = 0;
+                conso->setColor(COLOR_YELLOW);
+                conso->gotoLigCol(5,46);
+                std::cout << "MENU PAUSE";
+                conso->gotoLigCol(7,46);
+                conso->setColor(COLOR_RED);
+                std::cout << "1. Sauvegarder votre partie";
+                conso->setColor(COLOR_YELLOW);
+                conso->gotoLigCol(9,46);
+                std::cout << "2. Quitter ?";
                 do
                 {
                     touche = conso->getInputKey();
-                }
-                while (touche != 'p'); ///Stopper le timer aussi
-                afficherMatrice(conso);
-                afficherCadre(conso);
+                    if(touche == 'z')
+                    {
+                        menu_choix = 0;
+                        conso->gotoLigCol(7,46);
+                        conso->setColor(COLOR_RED);
+                        std::cout << "1. Sauvegarder votre partie";
+                        conso->setColor(COLOR_YELLOW);
+                        conso->gotoLigCol(9,46);
+                        std::cout << "2. Quitter ?";
+                    }
+                    if(touche == 's')
+                    {
+                        menu_choix = 1;
+                        conso->gotoLigCol(7,46);
+                        conso->setColor(COLOR_YELLOW);
+                        std::cout << "1. Sauvegarder votre partie";
+                        conso->setColor(COLOR_RED);
+                        conso->gotoLigCol(9,46);
+                        std::cout << "2. Quitter ?";
+                    }
+                    if(touche == 13 && menu_choix == 1)   //choix du menu pause et reste sauvegarde a faire
+                    {
+                        quit = true;
+                        niv = 4;
+                        touche = 'p';
+                    }
+                    if(touche == 13 && menu_choix == 0) // sauvegarde de la partie
+                    {
+                        system("cls");
+                        conso->gotoLigCol(POSLIGNE,POSCOLONNE);
+                        std::cout << "Entrez votre nom de joueur : ";
+                        std::cin >> name;
+                        name += ".txt";
+                        traduireMatrice();
+                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getScore(),m_time,m_decalage_X,m_decalage_Y);
+                        touche = 'p';
+                        system("cls");
+                        afficherCadre(conso);
+                        afficherMatrice(conso);
+                    }
+                }while (touche != 'p'); ///Stopper le timer aussi
             }
             else
             {

@@ -172,7 +172,7 @@ void Niveau::afficherMenu(Console* conso)
     conso->gotoLigCol(POSLIGNE+20,POSCOLONNE+8);
 }
 
-void Niveau::play(Console* conso)
+void Niveau::play(Console* conso, Matrice matriceDeJeu)
 {
     int menu_choix = 1;
     bool quit = false;
@@ -213,6 +213,16 @@ void Niveau::play(Console* conso)
             if(key == 27)
             {
                 quit = true;
+            }
+            if(menu_choix == 2 && key == 13)
+            {
+                std::string name;
+                system("cls");
+                conso->gotoLigCol(POSLIGNE,POSCOLONNE);
+                std::cout << "Entrez votre nom de joueur : ";
+                std::cin >> name;
+                name += ".txt";
+                conso->readFile(name,) ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
             }
         }
     }
