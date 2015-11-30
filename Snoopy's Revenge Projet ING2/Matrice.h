@@ -19,7 +19,6 @@ class Matrice
 private :
     std::vector<std::vector<Bloc> > m_matrice;
     int m_decalage_X = 1, m_decalage_Y = 1;
-    char m_tableau_sauvegarde[N_LIGNES][N_COLONNES];
     Balle m_balle = Balle(BALLPOSX,BALLPOSY,'B',false,false); //On a C++11
     Bloc m_blocVide = Bloc(0,0,' ',false,false);
     Bloc m_Oiseau = Bloc(0,0,'O',false,false);
@@ -31,6 +30,10 @@ private :
     double m_time;
 
 public :
+
+    //attribut public : tableau de sauvegarde
+    char m_tableau_sauvegarde[N_LIGNES][N_COLONNES];
+
     //constructeur
     Matrice();
 
@@ -46,7 +49,7 @@ public :
     Snoopy getSnoopy()const;
     int getDecalageX()const;
     int getDecalageY()const;
-    float getTime()const;
+    double getTime()const;
 
     //setters
     void setBloc(int posX, int posY, Bloc bloc);

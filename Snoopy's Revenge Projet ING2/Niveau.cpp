@@ -25,12 +25,14 @@ int Niveau::lancerJeu(Console* conso)
 {
     int choix = 0;
     int niv=1;
+    m_matriceDeJeu.getSnoopy().setVies(3);          //On réinitialise les vies a 3, les oiseaux et le score a 0. Comment faire si on charge une partie ?
+    m_matriceDeJeu.getSnoopy().setOiseaux(0);
+    m_matriceDeJeu.getSnoopy().setScore(0);
     system("cls");
     do
     {
-        Matrice MatriceDeJeu;
-        MatriceDeJeu.afficherCadre(conso);
-        MatriceDeJeu.bougerElements(conso,niv);
+        m_matriceDeJeu.afficherCadre(conso);
+        m_matriceDeJeu.bougerElements(conso,niv);
         conso->gotoLigCol(40,30);
         if(niv<=3)
         std::cout<<"Niveau suivant : " << niv+1 << "\n";
@@ -172,7 +174,7 @@ void Niveau::afficherMenu(Console* conso)
     conso->gotoLigCol(POSLIGNE+20,POSCOLONNE+8);
 }
 
-void Niveau::play(Console* conso, Matrice matriceDeJeu)
+void Niveau::play(Console* conso)
 {
     int menu_choix = 1;
     bool quit = false;
@@ -216,14 +218,14 @@ void Niveau::play(Console* conso, Matrice matriceDeJeu)
             }
             if(menu_choix == 2 && key == 13)
             {
-                std::string name;
+                /*std::string name;
                 system("cls");
                 conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                 std::cout << "Entrez votre nom de joueur : ";
                 std::cin >> name;
                 name += ".txt";
-                conso->readFile(name,) ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
-            }
+                conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getTime(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY()); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
+            */}
         }
     }
 }

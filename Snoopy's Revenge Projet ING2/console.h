@@ -6,6 +6,7 @@
 #include <limits>
 #include <stdexcept>
 #include <fstream>
+#include <istream>
 #include "Constantes.h"
 
 enum Color

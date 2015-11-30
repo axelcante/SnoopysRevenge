@@ -13,15 +13,14 @@ std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
 }
-char Matrice::getTableau()
+/*char Matrice::getTableau()const
 {
     return m_tableau_sauvegarde;
-}
+}*/
 Balle Matrice::getBalle()const
 {
     return m_balle;
 }
-
 Poussable Matrice::getBlocPoussable()const
 {
     return m_blocPoussable;
@@ -42,10 +41,14 @@ Snoopy Matrice::getSnoopy()const
 {
     return m_Snoopy;
 }
+double Matrice::getTime()const
+{
+    return m_time;
+}
 
 //setters
 //Permet de modifier manuellement un bloc de la matrice
-void Matrice::setBloc(int posX, int posY, Bloc bloc)
+void Matrice::setBloc(int posX, int posY, Bloc bloc) //n'est pas utilisé mais toujours utile ! :D
 {
     m_matrice[posX][posY] = bloc;
 }
@@ -433,7 +436,7 @@ void Matrice::bougerElements(Console* conso,int& niv)
         /*if(60000-m_time >= 0)
         {
             conso->gotoLigCol(10,45);
-            std::cout << (60-(m_time/CLOCKS_PER_SEC));
+            std::cout << (60-(m_time/CLOCKS_PER_SEC)); // Lignes qui permettent d'afficher le temps : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
         }*/
         if(60000-m_time <= 200)
@@ -545,6 +548,10 @@ void Matrice::bougerElements(Console* conso,int& niv)
             system("cls");
             ecranVictoire(conso);
             niv++;
+            m_Snoopy.setPosX(SNOOPYPOSX);
+            m_Snoopy.setPosX(SNOOPYPOSY); // on réinitialise Snoopy a sa position initiale (sinon il bouffe un oisea automatiquement)
+            m_balle.setPosX(BALLPOSX);
+            m_balle.setPosY(BALLPOSY);
             quit=true;
             system("cls");
         }

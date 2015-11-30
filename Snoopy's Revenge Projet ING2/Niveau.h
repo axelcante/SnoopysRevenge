@@ -9,6 +9,7 @@ class Niveau
 private :
     std::string m_mdp; //Mot de passe
     char matrice_traduite[N_LIGNES][N_COLONNES];
+    Matrice m_matriceDeJeu = Matrice();
 
 public :
     ///Constructeurs et destructeur

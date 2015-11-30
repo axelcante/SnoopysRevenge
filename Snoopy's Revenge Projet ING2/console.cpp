@@ -111,29 +111,49 @@ void Console::writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONN
 // Lire un fichier ligne par ligne
 // Entrée : le chemin d'accès au fichier
 
-void Console::readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY)
+/*void Console::readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY)
 {
     std::ifstream ifs(name.c_str());
+    char c;
     if(ifs) // test si le fichier est bien ouvert
     {
-        for(int i = 0; i < N_LIGNES; i++)
+        while(!ifs.eof())
         {
-            for(int j = 0; j < N_COLONNES; j++)
+            for(int i = 0; i < N_LIGNES; i++)
             {
-                ifs.get(tableau[i][j]);
+                for(int j = 0; j < N_COLONNES; j++)
+                {
+                    ifs.get(tableau[i][j]);
+                }
             }
+            ifs.get(vies);
+            score = c;
+            oiseaux = c;
+            time = c;
+            decalageX = c;
+            decalageY = c;
+            /*ifs.get(vies);                ///Cette partie : je ne sais pas cmt la faire marcher
+            ifs.get(score);
+            ifs.get(oiseaux);
+            ifs.get(time);
+            ifs.get(decalageX);
+            ifs.get(decalageY);*/
+            /*ifs.close(); //fermeture du flux
+            gotoLigCol(POSLIGNE+2,POSCOLONNE);
+            std::cout << "Le chargement est termine !";
+            gotoLigCol(POSLIGNE+4,POSCOLONNE);
+            system("pause");
+            system("cls");
+            for(int i = 0; i < N_LIGNES; i++)
+            {
+                for(int j = 0; j < N_COLONNES; j++)
+                {
+                    std::cout << tableau[i][j];
+                }
+                std::cout << std::endl;
+            }
+            system("pause");
         }
-        ifs.get(vies);
-        ifs.get(score);
-        ifs.get(oiseaux);
-        ifs.get(time);
-        ifs.get(decalageX);
-        ifs.get(decalageY);
-        ifs.close(); //fermeture du flux
-        gotoLigCol(POSLIGNE+2,POSCOLONNE);
-        std::cout << "Le chargement est termine !";
-        gotoLigCol(POSLIGNE+4,POSCOLONNE);
-        system("pause");
     }
     else // en cas d'erreur...
     {
@@ -142,25 +162,7 @@ void Console::readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNE
         gotoLigCol(POSLIGNE+4,POSCOLONNE);
         system("pause");
     }
-}
-void readFile(const std::string& name)
-{
-    std::ifstream ifs(name.c_str());
-    if (ifs) // test si le fichier est bien ouvert
-    {
-        std::string line;
-        while (std::getline(ifs, line)) // lecture ligne par ligne
-        {
-            std::cout << line << std::endl;
-        }
-        std::cout << "Reading " << name << " => OK" << std::endl;
-        ifs.close(); // fermeture du flux
-    }
-    else // en cas d'erreur...
-    {
-        std::cout << "Cannot read " << name << std::endl;
-    }
-}
+}*/
 
 void Console::ShowConsoleCursor(bool showFlag)
 {
