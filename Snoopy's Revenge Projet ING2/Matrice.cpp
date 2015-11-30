@@ -103,6 +103,8 @@ void Matrice::initialisationElements(int& niv)
     m_decalage_Y = 1;
     //Snoopy
     m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+    m_Snoopy.setVies(3);
+
     ///Architecture spéciale
     switch(niv)
     {
@@ -524,7 +526,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_balle.setPosX(BALLPOSX);
             m_balle.setPosY(BALLPOSY);
             initialisationElements(niv);
-            if (m_Snoopy.getVies()<=0)
+            if (m_Snoopy.getVies()==0)
             {
                 system("cls");
                 ecranMort(conso);

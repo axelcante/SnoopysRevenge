@@ -10,9 +10,9 @@ Snoopy::Snoopy(int posX, int posY, char type,bool estPoussableblocmere, bool est
     m_type = type;
     m_estPoussableblocmere = estPoussableblocmere;
     m_estCassableblocmere = estCassableblocmere;
-    m_vies=vies;
-    m_score=score;
-    m_oiseaux=oiseaux;
+    m_vies = vies;
+    m_score = score;
+    m_oiseaux = oiseaux;
 }
 
 //Destructeur unique
@@ -38,6 +38,7 @@ int Snoopy::getOiseaux() const
 //Setters
 void Snoopy::setVies(int vies)
 {
+    if (vies>=0)
     m_vies=vies;
 }
 void Snoopy::setScore(int score)
