@@ -24,6 +24,8 @@ void Niveau::setMdp(std::string mdp)
 int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
+    Matrice MatriceDeJeu;
+    MatriceDeJeu.getSnoopy().setVies(3);
     int niv=1;
     if((niveaumdp<=1)&&(niveaumdp>=3))
         niv=niveaumdp;
@@ -31,7 +33,6 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
     system("cls");
     do
     {
-        Matrice MatriceDeJeu;
         MatriceDeJeu.afficherCadre(conso);
         MatriceDeJeu.bougerElements(conso,niv,score);
         conso->gotoLigCol(40,30);
@@ -39,6 +40,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
             std::cout<<"Niveau suivant : " << niv<< "\n";
         system("pause");
         system("cls");
+        MatriceDeJeu.getSnoopy().setOiseaux(0);
     }
     while (niv<=3);
     afficherMenu(conso);
