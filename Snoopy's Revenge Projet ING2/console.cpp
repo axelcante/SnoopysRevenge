@@ -111,7 +111,7 @@ void Console::writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONN
 // Lire un fichier ligne par ligne
 // Entrée : le chemin d'accès au fichier
 
-/*void Console::readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY)
+void Console::readFile(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalageY)
 {
     std::ifstream ifs(name.c_str());
     char c;
@@ -138,7 +138,7 @@ void Console::writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONN
             ifs.get(time);
             ifs.get(decalageX);
             ifs.get(decalageY);*/
-            /*ifs.close(); //fermeture du flux
+            ifs.close(); //fermeture du flux
             gotoLigCol(POSLIGNE+2,POSCOLONNE);
             std::cout << "Le chargement est termine !";
             gotoLigCol(POSLIGNE+4,POSCOLONNE);
@@ -162,7 +162,7 @@ void Console::writeFile(const std::string& name, char tableau[N_LIGNES][N_COLONN
         gotoLigCol(POSLIGNE+4,POSCOLONNE);
         system("pause");
     }
-}*/
+}
 
 void Console::ShowConsoleCursor(bool showFlag)
 {
@@ -204,3 +204,30 @@ void Console::setColor(Color col)
         this->_setColor(7, 0);
     }
 }
+
+
+/*void Console::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, double time, int decalageX, int decalage)
+{
+    std::string file("Sauvegardes/");
+    file += name;
+    file += ".txt";
+    std::ifstream ifs(file.c_str());
+    if (ifs) // test si le fichier est bien ouvert
+    {
+        std::string line;
+        while (std::getline(ifs, line)) // lecture ligne par ligne
+        {
+            std::cout << line << std::endl;
+        }
+        std::cout << "Reading " << file << " => OK" << std::endl;
+        ifs.close(); // fermeture du flux
+    }
+    else // en cas d'erreur...
+    {
+        gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        std::cout << "Cannot read " << file << std::endl;
+        gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        system("pause");
+        system("cls");
+    }
+}*/

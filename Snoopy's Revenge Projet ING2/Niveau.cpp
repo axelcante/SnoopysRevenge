@@ -193,9 +193,6 @@ void Niveau::play(Console* conso)
                 if(menu_choix == 6)
                     menu_choix = 5;
 
-                if(menu_choix == 5)
-                    menu_choix = 4;
-
                 effetMenu(menu_choix, conso);
             }
             if(key == 122)
@@ -206,7 +203,6 @@ void Niveau::play(Console* conso)
 
                 effetMenu(menu_choix, conso);
             }
-
 
             if(menu_choix == 1 && key == 13)
             {
@@ -234,14 +230,13 @@ void Niveau::play(Console* conso)
             }
             if(menu_choix == 2 && key == 13)
             {
-                /*std::string name;
+                std::string name;
                 system("cls");
                 conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                 std::cout << "Entrez votre nom de joueur : ";
                 std::cin >> name;
-                name += ".txt";
                 conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getTime(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY()); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
-            */}
+            }
         }
     }
 }
@@ -266,9 +261,9 @@ int Niveau::mdpNiveau(Console* conso)
         return 3;
     else
     {
-        conso->gotoLigCol(POSLIGNE+1,POSCOLONNE+3);
-        std::cout<<"Incorrect.\n";
         conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
+        std::cout<<"Incorrect.\n";
+        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
         system("pause");
         return 4;
     }
