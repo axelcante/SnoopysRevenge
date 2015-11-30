@@ -75,10 +75,11 @@ public :
     //Déplacements
     void bougerElements(Console* conso,int& niv,int& score);
     bool bougerBalle();
-    void bougerSnoopy(Console* conso,char& touche, bool& dead);
+    void bougerSnoopy(Console* conso,char& touche, bool& dead,int& niv);
     //Actions
     bool pousser(Console* conso, char& touche); //Pousser les blocs
     void casser(Console* conso, int& poslig, int& poscol); //Casser les blocs
+    void boomShakaLaka(Console* conso, int& poslig, int& poscol); //BOUUUM explosion
     //Pour la sauvegarde
     void traduireMatrice();
     void traduireTableau();

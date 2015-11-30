@@ -25,7 +25,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
     int niv=1;
-    if((niveaumdp>=1)&&(niveaumdp<=3))
+    if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
         niv=niveaumdp;
     int score=0;
     m_matriceDeJeu.getSnoopy().setVies(3);
@@ -42,7 +42,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
         m_matriceDeJeu.getSnoopy().setOiseaux(0);
 
     }
-    while (niv<=3);
+    while ((niv<=3)||(niv>6));
     afficherMenu(conso);
     return choix;
 }
@@ -218,7 +218,7 @@ void Niveau::play(Console* conso)
             if((menu_choix == 4)&&(key == 13))
             {
                 niveaumdp=mdpNiveau(conso);
-                if(niveaumdp<4)
+                if((niveaumdp<4)||(niveaumdp==6))
                     lancerJeu(conso, niveaumdp);
                 else
                 {
@@ -252,6 +252,7 @@ int Niveau::mdpNiveau(Console* conso)
     std::string mdp1="dimsum"; //mot de passe
     std::string mdp2="seum"; //mot de passe
     std::string mdp3="chat"; //mot de passe
+    std::string mdp4="chien"; //mot de passe
     system("cls");
     conso->gotoLigCol(POSLIGNE,POSCOLONNE+3);
     std::cout<<"Entrez un mot de passe : ";
@@ -263,7 +264,10 @@ int Niveau::mdpNiveau(Console* conso)
         return 2;
     else if (mdp==mdp3)///Et bah non, niveau 3
         return 3;
-    else
+    ///Si niveau bonus
+    else if (mdp==mdp4)
+        return 6;
+    else///Ou pas
     {
         conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
         std::cout<<"Incorrect.\n";

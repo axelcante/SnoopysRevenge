@@ -25,10 +25,10 @@ Poussable Matrice::getBlocPoussable()const
 {
     return m_blocPoussable;
 }
-Bloc Matrice::getBlocP()const
-{
-    return m_blocP;
-}
+//Bloc Matrice::getBlocP()const
+//{
+// return m_blocP;
+//}
 int Matrice::getDecalageX()const
 {
     return m_decalage_X;
@@ -119,7 +119,6 @@ void Matrice::initialisationElements(int& niv)
         //Blocs Piégés TEST
         m_matrice[2][9] = m_blocT;
         m_matrice[6][9] = m_blocT;
-        m_matrice[8][11] = m_blocT;
         m_matrice[3][11] = m_blocT;
         //Blocs Cassables TEST
         m_matrice[1][0] = m_blocC;
@@ -178,6 +177,46 @@ void Matrice::initialisationElements(int& niv)
         m_matrice[1][19] = m_blocC;
         m_matrice[8][19] = m_blocC;
         m_matrice[8][0] = m_blocC;
+        break;
+    case 6:
+        //Blocs poussables TEST
+        m_matrice[4][12] = m_blocPoussable;
+        m_matrice[6][12] = m_blocPoussable;
+        m_matrice[4][6] = m_blocPoussable;
+        m_matrice[6][6] = m_blocPoussable;
+        m_matrice[5][9] = m_blocPoussable;
+        m_matrice[1][0] = m_blocPoussable;
+        m_matrice[1][19] = m_blocPoussable;
+        m_matrice[8][0] = m_blocPoussable;
+        //Blocs Piégés TEST
+        m_matrice[0][1] = m_blocT;
+        m_matrice[0][18] = m_blocT;
+        m_matrice[9][1] = m_blocT;
+        m_matrice[9][18] = m_blocT;
+        m_matrice[4][8] = m_blocT;
+        m_matrice[5][10] = m_blocT;
+        m_matrice[6][10] = m_blocT;
+        m_matrice[4][11] = m_blocT;
+        m_matrice[3][9] = m_blocT;
+        m_matrice[5][9] = m_blocT;
+        m_matrice[2][0] = m_blocT;
+        m_matrice[3][0] = m_blocT;
+        m_matrice[5][0] = m_blocT;
+        m_matrice[6][0] = m_blocT;
+        m_matrice[2][19] = m_blocT;
+        m_matrice[3][19] = m_blocT;
+        m_matrice[5][19] = m_blocT;
+        m_matrice[6][19] = m_blocT;
+        //Blocs Cassables TEST
+        m_matrice[8][19] = m_blocC;
+        m_matrice[8][18] = m_blocC;
+        m_matrice[7][18] = m_blocC;
+        m_matrice[8][17] = m_blocC;
+
+        //Bloc snoopy
+        break;
+    case 7:
+        m_Snoopy.setVies(m_Snoopy.getVies()-2);
         break;
     }
 }
@@ -346,13 +385,13 @@ bool Matrice::bougerBalle()
         m_decalage_Y = -m_decalage_Y;
 
     ///REMPLACEMENT
-/***    POUR PAS QUE CA EFFACE NAWAK QUOI
-         if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!='S'))
-         {
-             m_decalage_X = -m_decalage_X;
-             m_decalage_Y = -m_decalage_Y;
-         }
-***/
+    /***    POUR PAS QUE CA EFFACE NAWAK QUOI
+             if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!='S'))
+             {
+                 m_decalage_X = -m_decalage_X;
+                 m_decalage_Y = -m_decalage_Y;
+             }
+    ***/
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
@@ -367,7 +406,7 @@ bool Matrice::bougerBalle()
 }
 
 ///_________________________________________________________________________
-void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
+void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead,int& niv)
 {
     //Ressources
     //Position de Snoopy par rapport au TABLEAU
@@ -396,7 +435,11 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
             poslig--;//Decrementer la position de la ligne
         break;
     case 'a'://Casser ?
-            casser(conso, poslig, poscol);
+        casser(conso, poslig, poscol);
+        break;
+    case 'b': ///BOMBE !!!!!!!! PROUUUUUU BOUM GNIAAAAH
+        if((m_Snoopy.getOiseaux()>=1)&&(m_Snoopy.getVies()>2))
+            boomShakaLaka(conso,poslig,poscol);
         break;
     }
 
@@ -439,6 +482,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
         m_Snoopy.setPosX(poslig);
         m_Snoopy.setPosY(poscol);
         m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
+
     }
 }
 
@@ -448,6 +492,12 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
     bool quit = false;
     bool dead = false;
     char touche;
+    if(niv>6)
+    {
+        niv=1;
+        m_Snoopy.setVies(m_Snoopy.getVies()+3);   ///Vie bonus
+    }
+
     initialisationMatrice(niv);
     afficherMatrice(conso);
     int start = clock();
@@ -548,11 +598,12 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                         afficherCadre(conso);
                         afficherMatrice(conso);
                     }
-                }while (touche != 'p'); ///Stopper le timer aussi
+                }
+                while (touche != 'p');  ///Stopper le timer aussi
             }
             else
             {
-                bougerSnoopy(conso,touche,dead);
+                bougerSnoopy(conso,touche,dead,niv);
             }
         }
         if(dead == true)
@@ -590,7 +641,8 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             ecranVictoire(conso,score);
             niv++;
             m_Snoopy.setPosX(SNOOPYPOSX);
-            m_Snoopy.setPosX(SNOOPYPOSY); // on réinitialise Snoopy a sa position initiale (sinon il bouffe un oisea automatiquement)
+            m_Snoopy.setPosY(SNOOPYPOSY);
+            m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
             m_balle.setPosX(BALLPOSX);
             m_balle.setPosY(BALLPOSY);
             initialisationElements(niv);
@@ -605,22 +657,31 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
 void Matrice::casser(Console* conso, int& poslig, int& poscol)
 {
     if(((poslig+1>=0)&&(poslig+1<N_LIGNES))&&((poscol-1<N_COLONNES)&&(poscol-1>=0))&&((poscol+1<N_COLONNES)&&(poscol+1>=0))&&((poslig-1>=0)&&(poslig-1<N_LIGNES)))
-    {if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
     {
-        if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
-            poslig = poslig+1;
-        else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
-            poscol = poscol+1;
-        else if(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)
-            poslig = poslig-1;
-        else if(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true)
-            poscol = poscol-1;
-        m_matrice[poslig][poscol] = m_blocVide;
-        poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
-        poscol = m_Snoopy.getPosY();
-        conso->gotoLigCol(12, 45);
-        std::cout << "                 ";
-    }}
+        if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
+        {
+            if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
+                poslig = poslig+1;
+            else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
+                poscol = poscol+1;
+            else if(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)
+                poslig = poslig-1;
+            else if(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true)
+                poscol = poscol-1;
+            m_matrice[poslig][poscol] = m_blocVide;
+            poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
+            poscol = m_Snoopy.getPosY();
+            conso->gotoLigCol(12, 45);
+            std::cout << "                 ";
+        }
+    }
+}
+
+///_________________________________________________________________________
+void Matrice::boomShakaLaka(Console* conso, int& poslig, int& poscol)
+{
+    int nivBoom=7;
+    initialisationElements(nivBoom);
 }
 
 ///_________________________________________________________________________
@@ -743,7 +804,7 @@ void Matrice::traduireTableau()
             }
             if((m_tableau_sauvegarde[i][j] = 'P'))
             {
-                m_matrice[i][j] = m_blocP;
+                m_matrice[i][j] = m_blocPoussable;
             }
             if((m_tableau_sauvegarde[i][j] = 'T'))
             {
