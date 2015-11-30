@@ -25,7 +25,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
     int niv=1;
-    if((niveaumdp<=1)&&(niveaumdp>=3))
+    if((niveaumdp>=1)&&(niveaumdp<=3))
         niv=niveaumdp;
     int score=0;
     m_matriceDeJeu.getSnoopy().setVies(3);
@@ -238,7 +238,7 @@ void Niveau::play(Console* conso)
                 conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                 std::cout << "Entrez votre nom de joueur : ";
                 std::cin >> name;
-                conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getTime(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY()); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
+                //conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getTime(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY()); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
             }
         }
     }

@@ -8,7 +8,7 @@ Matrice::Matrice() {}
 //desctructeur unique
 Matrice::~Matrice() {}
 
-//getters
+///Getters
 std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
@@ -46,7 +46,7 @@ double Matrice::getTime()const
     return m_time;
 }
 
-//setters
+///Setters
 //Permet de modifier manuellement un bloc de la matrice
 void Matrice::setBloc(int posX, int posY, Bloc bloc) //n'est pas utilisé mais toujours utile ! :D
 {
@@ -62,20 +62,23 @@ void Matrice::setDecalageY(int decalageY)
 {
     m_decalage_Y = decalageY;
 }
-
-///_________________________________________________________________________
 ///Methodes
+///_________________________________________________________________________
+//Initialisation de la matrice de jeu
 void Matrice::initialisationMatrice(int& niv)
 {
-    std::vector<Bloc>column;
+    //Déclaration de variables
+    std::vector<Bloc>column; // PREMIERE PARTIE : faire un vecteur de bloc: ce sont les colonnes
     for (int i = 0; i < N_COLONNES; i++)
     {
         column.push_back(m_blocVide);
     }
+    //DEUXIEME PARTIE : faire les lignes maintenant
     for (int i = 0; i < N_LIGNES; i++)
     {
         m_matrice.push_back(column);
     }
+    //Initialisation des éléments dans la matrice
     initialisationElements(niv);
 
 }
@@ -83,7 +86,7 @@ void Matrice::initialisationMatrice(int& niv)
 ///_________________________________________________________________________
 void Matrice::initialisationElements(int& niv)
 {
-    //Matrice vide
+    //Initialisation de matrice vide
     for(int i = 0; i < N_LIGNES; i++)
     {
         for(int j = 0; j < N_COLONNES; j++)
@@ -91,7 +94,7 @@ void Matrice::initialisationElements(int& niv)
             m_matrice[i][j] = m_blocVide;
         }
     }
-    ///TOUJOURS LA
+    ///ELEMENTS QUI SONT TOUJOURS LA
     //Oiseaux
     m_matrice[0][0] = m_Oiseau;
     m_matrice[0][19] = m_Oiseau;
@@ -105,7 +108,7 @@ void Matrice::initialisationElements(int& niv)
     m_matrice[m_Snoopy.getPosX()][m_Snoopy.getPosY()] = m_Snoopy;
 
     ///Architecture spéciale
-    switch(niv)
+    switch(niv) //selon le niveau
     {
     case 1:
         //Blocs poussables TEST
@@ -145,6 +148,37 @@ void Matrice::initialisationElements(int& niv)
         m_matrice[8][0] = m_blocC;
         break;
     case 3:
+        //Blocs poussables TEST
+        m_matrice[4][12] = m_blocPoussable;
+        m_matrice[6][12] = m_blocPoussable;
+        m_matrice[4][6] = m_blocPoussable;
+        m_matrice[6][6] = m_blocPoussable;
+        m_matrice[5][9] = m_blocPoussable;
+        //Blocs Piégés TEST
+        m_matrice[0][1] = m_blocT;
+        m_matrice[0][18] = m_blocT;
+        m_matrice[9][1] = m_blocT;
+        m_matrice[9][18] = m_blocT;
+        m_matrice[4][8] = m_blocT;
+        m_matrice[4][10] = m_blocT;
+        m_matrice[5][10] = m_blocT;
+        m_matrice[6][10] = m_blocT;
+        m_matrice[4][11] = m_blocT;
+        m_matrice[3][9] = m_blocT;
+        m_matrice[5][9] = m_blocT;
+        m_matrice[2][0] = m_blocT;
+        m_matrice[3][0] = m_blocT;
+        m_matrice[5][0] = m_blocT;
+        m_matrice[6][0] = m_blocT;
+        m_matrice[2][19] = m_blocT;
+        m_matrice[3][19] = m_blocT;
+        m_matrice[5][19] = m_blocT;
+        m_matrice[6][19] = m_blocT;
+        //Blocs Cassables TEST
+        m_matrice[1][0] = m_blocC;
+        m_matrice[1][19] = m_blocC;
+        m_matrice[8][19] = m_blocC;
+        m_matrice[8][0] = m_blocC;
         break;
     }
 }
