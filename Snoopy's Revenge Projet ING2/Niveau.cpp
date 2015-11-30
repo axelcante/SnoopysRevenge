@@ -24,7 +24,9 @@ void Niveau::setMdp(std::string mdp)
 int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
-    int niv=niveaumdp;
+    int niv=1;
+    if((niveaumdp<=1)&&(niveaumdp>=3))
+        niv=niveaumdp;
     int score=0;
     system("cls");
     do
@@ -218,7 +220,14 @@ void Niveau::play(Console* conso)
             if((menu_choix == 4)&&(key == 13))
             {
                 niveaumdp=mdpNiveau(conso);
-                lancerJeu(conso, niveaumdp);
+                if(niveaumdp<4)
+                    lancerJeu(conso, niveaumdp);
+                else
+                {
+                    system("cls");
+                    afficherMenu(conso);
+                    effetMenu(menu_choix, conso);
+                }
             }
             if(key == 27)
             {
@@ -232,32 +241,28 @@ int Niveau::mdpNiveau(Console* conso)
 {
     //Declaration des variables
     std::string mdp; //mot de passe
-    bool correct;
+    std::string mdp1="dimsum"; //mot de passe
+    std::string mdp2="seum"; //mot de passe
+    std::string mdp3="chat"; //mot de passe
     system("cls");
     conso->gotoLigCol(POSLIGNE,POSCOLONNE+3);
-    std::cout<<"Entrez un mot de passe :"<<std::endl;
+    std::cout<<"Entrez un mot de passe : ";
     std::cin>>mdp;
     ///Si niveau 1
-    m_mdp = "dimsum";
-    correct = (mdp==m_mdp);
-    if(correct)
+    if(mdp==mdp1)
         return 1;
-    else if (mdp!=m_mdp) ///Sinon niveau 2
+    else if (mdp==mdp2) ///Sinon niveau 2
+        return 2;
+    else if (mdp==mdp3)///Et bah non, niveau 3
+        return 3;
+    else
     {
-        m_mdp = "seum";
-        correct = (mdp==m_mdp);
-        if(correct)
-            return 2;
-    }
-    else if (mdp!=m_mdp)///Et bah non, niveau 3
-    {
-        m_mdp = "chat";
-        correct = (mdp==m_mdp);
-        if(correct)
-            return 3;
-    }
-    else ///Ou pas
+        conso->gotoLigCol(POSLIGNE+1,POSCOLONNE+3);
+        std::cout<<"Incorrect.\n";
+        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
+        system("pause");
         return 4;
+    }
 }
 //void Niveau::sauvegarde(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY, Console* conso)
 //{
