@@ -24,26 +24,13 @@ void Niveau::setMdp(std::string mdp)
 int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
-<<<<<<< HEAD
-    int niv=1;
-    m_matriceDeJeu.getSnoopy().setVies(3);          //On réinitialise les vies a 3, les oiseaux et le score a 0. Comment faire si on charge une partie ?
-    m_matriceDeJeu.getSnoopy().setOiseaux(0);
-    m_matriceDeJeu.getSnoopy().setScore(0);
-    system("cls");
-    do
-    {
-        m_matriceDeJeu.afficherCadre(conso);
-        m_matriceDeJeu.bougerElements(conso,niv);
-=======
     int niv=niveaumdp;
     int score=0;
     system("cls");
     do
     {
-        Matrice MatriceDeJeu;
-        MatriceDeJeu.afficherCadre(conso);
-        MatriceDeJeu.bougerElements(conso,niv,score);
->>>>>>> 16888cbd99ba65e91fc8de7a1a249e65541135c5
+        m_matriceDeJeu.afficherCadre(conso);
+        m_matriceDeJeu.bougerElements(conso,niv,score);
         conso->gotoLigCol(40,30);
         if(niv<3)
             std::cout<<"Niveau suivant : " << niv<< "\n";
