@@ -17,8 +17,11 @@
 class Matrice
 {
 private :
+    //Matrice de jeu
     std::vector<std::vector<Bloc> > m_matrice;
+    //Décalages pour la balle
     int m_decalage_X = 1, m_decalage_Y = 1;
+    //Création de blocs
     Balle m_balle = Balle(BALLPOSX,BALLPOSY,'B',false,false); //On a C++11
     Bloc m_blocVide = Bloc(0,0,' ',false,false);
     Bloc m_Oiseau = Bloc(0,0,'O',false,false);
@@ -27,6 +30,7 @@ private :
     Bloc m_blocC = Bloc(0,0,'C',false,true);
     Snoopy m_Snoopy = Snoopy(SNOOPYPOSX,SNOOPYPOSY,'S',false,false,3,0,0);
     Poussable m_blocPoussable = Poussable(0,0,'P',true,false,true); ///sert à rien pour le moment (?)
+    //Déclaration du temps
     double m_time;
 
 public :
@@ -40,6 +44,7 @@ public :
     //destructeur
     ~Matrice();
 
+    ///Accesseurs
     //getters
     std::vector<std::vector<Bloc> > getMatrice()const;
     char getTableau()const;
@@ -58,18 +63,23 @@ public :
     void setTime(float);
     void setTableau(int);
 
-    //methodes
-    void initialisationMatrice(int& niv);
-    void initialisationElements(int& niv);
+    ///Méthodes
+    //Initialisations
+    void initialisationMatrice(int& niv); //Matrice de jeu
+    void initialisationElements(int& niv); //Elements dans la matrice : blocs, perso
+   //Affichage
     void afficherMatrice(Console* conso);
-    void bougerElements(Console* conso,int& niv,int& score);
-    bool bougerBalle();
-    void afficherCadre(Console* conso);
-    void bougerSnoopy(Console* conso,char& touche, bool& dead);
-    bool pousser(Console* conso, char& touche);
-    void casser(Console* conso, int& poslig, int& poscol);
+    void afficherCadre(Console* conso); //contour
     void ecranMort(Console* conso);
     void ecranVictoire(Console* conso,int& score);
+    //Déplacements
+    void bougerElements(Console* conso,int& niv,int& score);
+    bool bougerBalle();
+    void bougerSnoopy(Console* conso,char& touche, bool& dead);
+    //Actions
+    bool pousser(Console* conso, char& touche); //Pousser les blocs
+    void casser(Console* conso, int& poslig, int& poscol); //Casser les blocs
+    //Pour la sauvegarde
     void traduireMatrice();
     void traduireTableau();
 };

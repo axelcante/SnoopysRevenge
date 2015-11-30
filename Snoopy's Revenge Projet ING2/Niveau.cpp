@@ -25,7 +25,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 {
     int choix = 0;
     int niv=1;
-    if((niveaumdp<=1)&&(niveaumdp>=3))
+    if((niveaumdp>=1)&&(niveaumdp<=3))
         niv=niveaumdp;
     int score=0;
     m_matriceDeJeu.getSnoopy().setVies(3);
