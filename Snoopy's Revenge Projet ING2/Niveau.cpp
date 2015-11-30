@@ -239,7 +239,7 @@ void Niveau::play(Console* conso)
                 std::cout << "Entrez votre nom de joueur : ";
                 std::cin >> name;
                 //name += ".txt";
-                conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY()); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
+                conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY(),niveaumdp); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
             }
         }
     }

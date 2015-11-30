@@ -71,7 +71,7 @@ void Console::_setColor(int back, int front)
 }
 
 //procedure qui écrit dans un fichier .txt
-void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY)
+void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau)
 {
     // Ouverture fichier en mode "w"
     // Cette fonction recoit un tableau de chars qui sera représentatif de la matrice de jeu
@@ -110,7 +110,7 @@ void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], in
 // Lire un fichier ligne par ligne
 // Entrée : le chemin d'accès au fichier
 
-void Console::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY)
+void Console::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau)
 {
     std::ifstream ifs(name.c_str());
     std::string line;
