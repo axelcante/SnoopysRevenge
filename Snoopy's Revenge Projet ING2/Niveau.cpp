@@ -29,6 +29,40 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
         niv=niveaumdp;
     int score=0;
     m_matriceDeJeu.getSnoopy().setVies(3);
+    ///AFFICHAGE RAPIDE D'AIDE
+    //Effacer:
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
+        std::cout << "                        ";
+        conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);
+        std::cout << "                        ";
+        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE+8);
+        std::cout << "                        ";
+        conso->gotoLigCol(POSLIGNE+14,POSCOLONNE+8);
+        std::cout << "                               ";
+        conso->gotoLigCol(POSLIGNE+16,POSCOLONNE+8);
+        std::cout << "                            ";
+    //Ecrire:
+        conso->setColor(COLOR_DEFAULT);
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+5);
+        std::cout << " z   pour se diriger";
+        conso->gotoLigCol(POSLIGNE+9,POSCOLONNE+5);
+        std::cout<<"qsd";
+        conso->gotoLigCol(POSLIGNE+11,POSCOLONNE+5);
+        std::cout << "'p' pause";
+        conso->gotoLigCol(POSLIGNE+13,POSCOLONNE+5);
+        std::cout << "'a' casser les blocs cassables";
+        conso->gotoLigCol(POSLIGNE+15,POSCOLONNE+5);
+        std::cout << "Attention au temps ! Vous n'avez que 60 secondes";
+        conso->gotoLigCol(POSLIGNE+17,POSCOLONNE+5);
+        std::cout << "La balle tue, les blocs pieges aussi";
+        conso->gotoLigCol(POSLIGNE+19,POSCOLONNE+5);
+        std::cout << "Bon jeu !";
+        conso->setColor(COLOR_RED);
+        conso->gotoLigCol(POSLIGNE+21,POSCOLONNE+5);
+        system("pause");
+        conso->setColor(COLOR_DEFAULT);
+
+    ///LANCEMENT DU JEU
     system("cls");
     do
     {
