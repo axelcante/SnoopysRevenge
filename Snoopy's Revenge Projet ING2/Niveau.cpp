@@ -266,11 +266,19 @@ int Niveau::mdpNiveau(Console* conso)
         return 3;
     ///Si niveau bonus
     else if (mdp==mdp4)
+    {
+        conso->gotoLigCol(POSLIGNE+1,POSCOLONNE+3);
+        std::cout<<"Vous pouvez lacher une bombe 'b' (a activer :D) dans ce niveau seulement ! Mais attention aux degats";
+        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
+        std::cout<<"Vous pouvez gagner une vie supplementaire pour les niveaux suivants si vous reussissez celui-ci";
+        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
+        system("pause");
         return 6;
+    }
     else///Ou pas
     {
         conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
-        std::cout<<"Incorrect.\n";
+        std::cout<<"Incorrect.";
         conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
         system("pause");
         return 4;
