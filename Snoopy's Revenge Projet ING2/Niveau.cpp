@@ -23,7 +23,6 @@ void Niveau::setMdp(std::string mdp)
 //Methods
 int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
 {
-<<<<<<< HEAD
     int choix = 0;  //variable qui va permettre au joueur de naviguer le menu
     int niv = 1;    //variable qui lancera le niveau de jeu correspondant
     int score = 0;  //variable qui initialisera le score
@@ -31,13 +30,6 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
     if(!partie)     //test si une partie sauvegardée est lancée. Si non, on lance une nouvelle partie en fonction du mot de passe entré
     {
         niv=1;
-=======
-    int choix = 0;
-    int niv = 1;
-    int score = 0;
-    if(!partie)
-    {
->>>>>>> 85c9ecd84a1f129b9cef6c73395cd95c81c3dad4
         if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
         niv=niveaumdp;
         m_matriceDeJeu.getSnoopy().setVies(3);
@@ -271,15 +263,10 @@ void Niveau::play(Console* conso)
             if((menu_choix == 4)&&(key == 13))  //on rentre un mot de passe : s'il est bon, on lance le niveau correspondant
             {
                 niveaumdp=mdpNiveau(conso);
-<<<<<<< HEAD
-                if((niveaumdp<4)||(niveaumdp==6))
-                    lancerJeu(conso, niveaumdp,false);
-=======
                 if(niveaumdp<4)
                     lancerJeu(conso, niveaumdp,false);
                 if(niveaumdp==6)
                     lancerJeu(conso, niveaumdp,true);
->>>>>>> 85c9ecd84a1f129b9cef6c73395cd95c81c3dad4
                 else
                 {
                     system("cls");
