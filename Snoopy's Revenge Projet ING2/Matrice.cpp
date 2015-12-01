@@ -13,10 +13,6 @@ std::vector<std::vector<Bloc>> Matrice::getMatrice()const
 {
     return m_matrice;
 }
-/*char Matrice::getTableau()const
-{
-    return m_tableau_sauvegarde;
-}*/
 Balle Matrice::getBalle()const
 {
     return m_balle;
@@ -231,7 +227,7 @@ void Matrice::afficherMatrice(Console* conso)
         {
             for (int j = 0; j < N_COLONNES; j++)
             {
-                if(m_matrice[i][j].getType() == 'S')
+                if(m_matrice[i][j].getType() == 'S')        ///SUITE D'INSTRUCTIONS QUI COLORIE LES ELEMENTS DE LA MATRICE EN FONCTION DE LEUR TYPE
                 {
                     conso->setColor(COLOR_YELLOW);
                 }
@@ -251,7 +247,7 @@ void Matrice::afficherMatrice(Console* conso)
                 {
                     conso->setColor(COLOR_GREEN);
                 }
-                std::cout << m_matrice[i][j].getType();
+                std::cout << m_matrice[i][j].getType();         ///ON AFFICHE LE TYPE DES BLOCS
                 conso->setColor(COLOR_DEFAULT);
             }
             lignes++;
@@ -264,11 +260,13 @@ void Matrice::afficherMatrice(Console* conso)
     std::cout <<"Nombre d'oiseaux : ";
     conso->setColor(COLOR_GREEN);
     std::cout<< m_Snoopy.getOiseaux();
+    ///Affichage du score
     conso->gotoLigCol(POSLIGNE+N_LIGNES+5, POSCOLONNE);
     conso->setColor(COLOR_YELLOW);
     std::cout <<"Score : ";
     conso->setColor(COLOR_BLUE);
     std::cout << m_Snoopy.getScore();
+    //Affichage du nombre de vies
     conso->gotoLigCol(POSLIGNE+N_LIGNES+7, POSCOLONNE);
     conso->setColor(COLOR_YELLOW);
     std::cout <<"Nombre de vies : ";
@@ -278,7 +276,7 @@ void Matrice::afficherMatrice(Console* conso)
 }
 
 ///_________________________________________________________________________
-void Matrice::afficherCadre(Console* conso)
+void Matrice::afficherCadre(Console* conso) //Affiche un joli cadre autour de la matrice de jeu + titre snoopy
 {
     char horizontal=205,vertical=186;
     char C_right_top=187,C_right_bottom=188;
@@ -347,7 +345,7 @@ void Matrice::afficherCadre(Console* conso)
 }
 
 ///_________________________________________________________________________
-bool Matrice::bougerBalle()
+bool Matrice::bougerBalle()     //fonction qui bouge la balle de une case a chaque fois
 {
     bool dead = false;
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
@@ -358,7 +356,7 @@ bool Matrice::bougerBalle()
     if((m_balle.getPosY()<=0)||(m_balle.getPosY()>=N_COLONNES-1)) //DROITE ou GAUCHE de la matrice
         m_decalage_Y = -m_decalage_Y;
 
-    ///REBOND SUR BLOCS
+    ///REBOND SUR BLOCS (on test si le bloc est vide / snoopy, SI NON, elle rebondit !)
     if((m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()][m_balle.getPosY() + m_decalage_Y].getType()!='S'))
         m_decalage_Y = -m_decalage_Y;
     if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()].getType()!='S'))
@@ -406,7 +404,7 @@ bool Matrice::bougerBalle()
 }
 
 ///_________________________________________________________________________
-void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead,int& niv)
+void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead,int& niv)  ///Fonction de mouvement de Snoopy
 {
     //Ressources
     //Position de Snoopy par rapport au TABLEAU
@@ -487,7 +485,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead,int& niv)
 }
 
 ///_________________________________________________________________________
-void Matrice::bougerElements(Console* conso,int& niv,int& score)
+void Matrice::bougerElements(Console* conso,int& niv,int& score)        /// !!!!!! FONCTION PRINCIPALE DE NOTRE CODE : TOURNE TANT QU'ON NE MEURT PAS / QUITTE PAS
 {
     bool quit = false;
     bool dead = false;
@@ -500,8 +498,8 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
 
     initialisationMatrice(niv);
     afficherMatrice(conso);
-    int start = clock();
-    std::string name;
+    int start = clock();    //pour le temps : fonctions très approximative. On note le temps lors du lancement du niveau, sinon mesure le temps écoulé depuis le lancement du programme
+    std::string name; //pour la sauvegarde
     do
     {
         m_time = (clock()-start);
@@ -511,7 +509,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             std::cout << ' ';
         }
         conso->setColor(COLOR_YELLOW);
-        if(60000-m_time < 10000)
+        if(60000-m_time < 10000) // si on arrive a moins de 10 secondes restantes, alors un message en ROUGE s'affiche pour nous le dire !
         {
             conso->gotoLigCol(POSLIGNE+N_LIGNES+12,POSCOLONNE);
             conso->setColor(COLOR_RED);
@@ -523,15 +521,15 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             std::cout << (60-(m_time/CLOCKS_PER_SEC)); // Lignes qui permettent d'afficher le temps : ne sert que pour debugger
             conso->setColor(COLOR_DEFAULT);
         }*/
-        if(60000-m_time <= 200)
+        if(60000-m_time <= 200) // processeurs pas assez rapides pour tester == 0, donc on met une valeur très petite (en milisecondes). Si le test est vérifié, TIME'S OUT
         {
             dead = true;
             m_Snoopy.setVies(0);
-            m_Snoopy.setOiseaux(0);
+            m_Snoopy.setOiseaux(0); //tous les éléments sont automatiquements mis a 0. On quitte le jeu et on est renvoyé au menu !
         }
-        if(fmod(m_time,100) < 26)
+        if(fmod(m_time,100) < 26)   ///PLUS GROSSE SOURCE DE DIFFERENCES ENTRE ORDINATEUR : CETTE PARTIE DU CODE DEPEND ENTIREMENT DU PROCESSEUR ET SA CAPACITE A RENTRER DANS LA BOUCLE DE TEST
         {
-            dead = bougerBalle();
+            dead = bougerBalle(); //Gère la vitesse de la balle mais peut être très aléatoire
         }
         afficherMatrice(conso);
         if(conso->ifKeyboardPressed())
@@ -539,7 +537,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             touche=conso->getInputKey();
             if(touche == 27)
             {
-                quit = true;
+                quit = true; //si on appuie sur "ESC", on quitte la partie
                 system("cls");
                 niv=4;
             }
@@ -548,7 +546,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                 int menu_choix = 0;
                 conso->setColor(COLOR_YELLOW);
                 conso->gotoLigCol(5,46);
-                std::cout << "MENU PAUSE";
+                std::cout << "MENU PAUSE"; //affiche un menu pause a droite de la matrice
                 conso->gotoLigCol(7,46);
                 conso->setColor(COLOR_RED);
                 std::cout << "1. Sauvegarder votre partie";
@@ -561,7 +559,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                     if(touche == 'z')
                     {
                         menu_choix = 0;
-                        conso->gotoLigCol(7,46);
+                        conso->gotoLigCol(7,46);    //comme pour le menu d'origine, on peut naviguer ce petit menu avec Z et S, puis la touche "Entrée"
                         conso->setColor(COLOR_RED);
                         std::cout << "1. Sauvegarder votre partie";
                         conso->setColor(COLOR_YELLOW);
@@ -594,13 +592,13 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                         conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getOiseaux(),m_decalage_X,m_decalage_Y,niv);
                         touche = 'p';
                         system("cls");
-                        afficherCadre(conso);
-                        afficherMatrice(conso);
+                        quit = true; //on est renvoyé au menu !
+                        niv = 4;
                     }
                 }
-                while (touche != 'p');  ///Stopper le timer aussi
+                while (touche != 'p');
                 conso->gotoLigCol(5,46);
-                std::cout << "                     ";
+                std::cout << "                     ";           // On "efface" le menu pause une fois la partie recommencée
                 conso->gotoLigCol(7,46);
                 std::cout << "                                       ";
                 conso->gotoLigCol(9,46);
@@ -608,18 +606,18 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             }
             else
             {
-                bougerSnoopy(conso,touche,dead,niv);
+                bougerSnoopy(conso,touche,dead,niv); ///on récupère la touche entrée par l'utilisateur et on fait bouger snoopy en fonction
             }
         }
-        if(dead == true)
+        if(dead == true) //MORT
         {
             m_Snoopy.setVies(m_Snoopy.getVies()-1);
             m_Snoopy.setOiseaux(0);
             dead = false;
-            //Réinitialisation de la matrice de départ;
-            Sleep(1000);
+            //Réinitialisation de la matrice de départ du niveau !
+            Sleep(1000);// Si on meurt : 1 seconde de latence pour marquer notre mort :D
             m_Snoopy.setPosX(SNOOPYPOSX);
-            m_Snoopy.setPosY(SNOOPYPOSY);
+            m_Snoopy.setPosY(SNOOPYPOSY); //on remet snoopy a 0, et la balle aussi
             m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_blocVide;
             m_balle.setPosX(BALLPOSX);
             m_balle.setPosY(BALLPOSY);
@@ -635,7 +633,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                 quit=true;
             }
         }
-        if(m_Snoopy.getOiseaux()==4)
+        if(m_Snoopy.getOiseaux()==4) // VICTOIRE
         {
             ///Gagner partie : bouger le score
             m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
@@ -653,13 +651,14 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             initialisationElements(niv);
             quit=true;
             system("cls");
+            ///LE SCORE S'AJOUTE A LA FIN DE NOTRE SESSION DE JEU
         }
     }
     while(!quit);
 }
 
 ///_________________________________________________________________________
-void Matrice::casser(Console* conso, int& poslig, int& poscol)
+void Matrice::casser(Console* conso, int& poslig, int& poscol) //fonction qui test si un bloc cassable est autour, et le casse si oui :D
 {
     if(((poslig+1>=0)&&(poslig+1<N_COLONNES))||((poscol-1<N_LIGNES)&&(poscol-1>=0))||((poscol+1<N_LIGNES)&&(poscol+1>=0))||((poslig-1>=0)&&(poslig-1<N_COLONNES)))
     {
@@ -683,24 +682,18 @@ void Matrice::casser(Console* conso, int& poslig, int& poscol)
 }
 
 ///_________________________________________________________________________
-void Matrice::boomShakaLaka(Console* conso, int& poslig, int& poscol)
+void Matrice::boomShakaLaka(Console* conso, int& poslig, int& poscol) ///FONCTION BONUS : TOUT EXPLOSE
 {
     int nivBoom=7;
     initialisationElements(nivBoom);
 }
 
 ///_________________________________________________________________________
-bool Matrice::pousser(Console* conso, char& touche)
+bool Matrice::pousser(Console* conso, char& touche) ///VA POUSSER UN BLOC POUSSABLE
 {
-    /****
-    /// Supposé fait :
-    ///     touche=conso->getInputKey(); // Touche récupéréé
-    ///     Vérifier que le "bloc" soit bien poussable AVANT de "pousser"
-    ****/
-
     //Déclaration de variables
-    int i = m_Snoopy.getPosX(),j = m_Snoopy.getPosY();
-    bool estpousse=false;
+    int i = m_Snoopy.getPosX(),j = m_Snoopy.getPosY(); //on récupère la position de snoopy
+    bool estpousse=false;//va tester si on peut pousser le bloc, et modifier cette valeur si on pousse pour ne pousser qu'une seule fois
 
     switch(touche)
     {
@@ -779,7 +772,7 @@ void Matrice::ecranVictoire(Console* conso,int& score)
     conso->setColor(COLOR_DEFAULT);
 }
 
-void Matrice::traduireMatrice()
+void Matrice::traduireMatrice() ///POUR LA SAUVGARDE : traduit la matrice de blocs (on récupère les types avec getType) en tableau 2D de chars
 {
     for(int i = 0; i < N_LIGNES; i++)
     {
@@ -790,7 +783,7 @@ void Matrice::traduireMatrice()
     }
 }
 
-void Matrice::traduireTableau()
+void Matrice::traduireTableau()///POUR LE CHARGEMENT : on initialise une matrice de blocs en fonction d'un tableau 2D de chars
 {
     int i = 0;
     int j = 0;

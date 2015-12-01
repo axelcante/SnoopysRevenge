@@ -23,37 +23,34 @@ void Niveau::setMdp(std::string mdp)
 //Methods
 int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
 {
-    int choix = 0;
-<<<<<<< HEAD
-    int niv = 1;
-    int score = 0;
-    if(!partie)
+    int choix = 0;  //variable qui va permettre au joueur de naviguer le menu
+    int niv = 1;    //variable qui lancera le niveau de jeu correspondant
+    int score = 0;  //variable qui initialisera le score
+
+    if(!partie)     //test si une partie sauvegardée est lancée. Si non, on lance une nouvelle partie en fonction du mot de passe entré
     {
-        if((niveaumdp>=1)&&(niveaumdp<=3))
-=======
-    int niv=1;
-    if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
->>>>>>> de71a87059a5d99114121b5441df0150993f65f2
+        niv=1;
+        if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
         niv=niveaumdp;
         m_matriceDeJeu.getSnoopy().setVies(3);
         system("cls");
     }
-    else
+    else        //si une partie sauvegardée est détectée, on la lance ! Seul le temps n'est pas sauvegardé (fonction clock() difficile a manier)
     {
         niv = niveaumdp;
-        score = m_matriceDeJeu.getSnoopy().getScore();
+        score = m_matriceDeJeu.getSnoopy().getScore();  //a ce niveau ci le score a été chargé depuis la précédent partie
         system("cls");
     }
     do
     {
-        m_matriceDeJeu.afficherCadre(conso);
-        m_matriceDeJeu.bougerElements(conso,niv,score);
-        conso->gotoLigCol(40,30);
-        if(niv<3)
+        m_matriceDeJeu.afficherCadre(conso);        //fonction qui affiche le cadre de la matrice et le titre !
+        m_matriceDeJeu.bougerElements(conso,niv,score);     //fonction principale du jeu qui tourne tant qu'on ne quitte pas
+        conso->gotoLigCol(20,30);
+        if(niv<3)   //gestion de la progression des niveaux
         std::cout<<"Niveau suivant : " << niv<< "\n";
         system("pause");
         system("cls");
-        m_matriceDeJeu.getSnoopy().setOiseaux(0);
+        m_matriceDeJeu.getSnoopy().setOiseaux(0);   //a chaque nouveau niveau, on réinitialise les oiseaux bien sur
 
     }
     while ((niv<=3)||(niv>6));
@@ -61,7 +58,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
     return choix;
 }
 
-void Niveau::effetMenu(int choix, Console* conso)
+void Niveau::effetMenu(int choix, Console* conso) //fonction qui affiche un beau menu avec des effets de séléction !
 {
     switch(choix)
     {
@@ -151,7 +148,7 @@ void Niveau::effetMenu(int choix, Console* conso)
     }
 }
 
-void Niveau::afficherMenu(Console* conso)
+void Niveau::afficherMenu(Console* conso) //idem
 {
     conso->setColor(COLOR_YELLOW);
 
@@ -194,8 +191,8 @@ void Niveau::afficherMenu(Console* conso)
 void Niveau::play(Console* conso)
 {
     int menu_choix = 1;
-    int niveaumdp = 0;
-    bool quit = false;
+    int niveaumdp = 0; //variable qui va tester si on rentre le bon mot de passe
+    bool quit = false; //tant qu'on ne quitte par le jeu, cette fonction tourne
     afficherMenu(conso);
     effetMenu(menu_choix,conso);
 
@@ -206,7 +203,7 @@ void Niveau::play(Console* conso)
             int key = conso->getInputKey();
             if(key == 115)
             {
-                menu_choix++;
+                menu_choix++;       //menu_choix permet de naviguer dans le menu avec les touches z et s, blindées entre 1 et 5
                 if(menu_choix == 6)
                     menu_choix = 5;
 
@@ -221,24 +218,19 @@ void Niveau::play(Console* conso)
                 effetMenu(menu_choix, conso);
             }
 
-            if(menu_choix == 1 && key == 13)
+            if(menu_choix == 1 && key == 13) //on lance une nouvelle partie
             {
                 menu_choix = lancerJeu(conso,niveaumdp,false);
             }
-            if(menu_choix == 5 && key == 13)
+            if(menu_choix == 5 && key == 13) //on quite le jeu
             {
                 quit = true;
             }
-            if((menu_choix == 4)&&(key == 13))
+            if((menu_choix == 4)&&(key == 13))  //on rentre un mot de passe : s'il est bon, on lance le niveau correspondant
             {
                 niveaumdp=mdpNiveau(conso);
-<<<<<<< HEAD
-                if(niveaumdp<4)
-                    lancerJeu(conso, niveaumdp,false);
-=======
                 if((niveaumdp<4)||(niveaumdp==6))
-                    lancerJeu(conso, niveaumdp);
->>>>>>> de71a87059a5d99114121b5441df0150993f65f2
+                    lancerJeu(conso, niveaumdp,false);
                 else
                 {
                     system("cls");
@@ -250,7 +242,7 @@ void Niveau::play(Console* conso)
             {
                 quit = true;
             }
-            if(menu_choix == 2 && key == 13)
+            if(menu_choix == 2 && key == 13) //chargement d'une partie. On doit entrer le nom de joueur et, si le fichier existe, on lance la partie !
             {
                 std::string name;
                 system("cls");
@@ -258,13 +250,13 @@ void Niveau::play(Console* conso)
                 std::cout << "Entrez votre nom de joueur : ";
                 std::cin >> name;
                 readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY(),niveaumdp, conso);
-                lancerJeu(conso,niveaumdp,true);
+                lancerJeu(conso,niveaumdp,true); //si le nom coincide, on lance la partie chargée !
             }
         }
     }
 }
 
-int Niveau::mdpNiveau(Console* conso)
+int Niveau::mdpNiveau(Console* conso) //fonction qui va tester le mot de passe entré
 {
     //Declaration des variables
     std::string mdp; //mot de passe
@@ -296,12 +288,12 @@ int Niveau::mdpNiveau(Console* conso)
     }
 }
 
-// Lire un fichier ligne par ligne
-// Entrée : le chemin d'accès au fichier
-///MATRICE puis ///DONNEES
+///FONCTION DE CHARGEMENT
+///PLACEE DANS NIVEAU POUR EVITER DES POINTEURS INUTILES
+///On charge la MATRICE puis les DONNEES de la matrice
 void Niveau::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int& niveau, Console* conso)
 {
-    std::ifstream ifs(name.c_str());
+    std::ifstream ifs(name.c_str()); ///Premier chargement : LA MATRICE
     std::string line;
     int i = 0;
     if(ifs.is_open()) // test si le fichier est bien ouvert
@@ -327,7 +319,7 @@ void Niveau::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int 
         conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
         system("pause");
     }
-    name += "_donnees";
+    name += "_donnees"; ///DEUXIEME CHARGEMENT : nom de joueur + _donnees pour trouver le fichier
     std::ifstream myFlux(name.c_str());
     if(myFlux.is_open())
     {
@@ -339,7 +331,7 @@ void Niveau::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int 
         std::cout << "Le chargement des donnees est termine !";
         conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
         system("pause");
-        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE);
+        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE);      //on initialise les données de jeu avec les données chargées
         m_matriceDeJeu.getSnoopy().setVies(vies);
         m_matriceDeJeu.getSnoopy().setScore(score);
         m_matriceDeJeu.getSnoopy().setOiseaux(oiseaux);
