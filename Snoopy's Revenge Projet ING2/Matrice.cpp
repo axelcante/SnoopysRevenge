@@ -346,13 +346,13 @@ bool Matrice::bougerBalle()
         m_decalage_Y = -m_decalage_Y;
 
     ///REMPLACEMENT
-/***    POUR PAS QUE CA EFFACE NAWAK QUOI
-         if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!='S'))
-         {
-             m_decalage_X = -m_decalage_X;
-             m_decalage_Y = -m_decalage_Y;
-         }
-***/
+    /***    POUR PAS QUE CA EFFACE NAWAK QUOI
+             if((m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!=' ')&&(m_matrice[m_balle.getPosX()+m_decalage_X][m_balle.getPosY()+m_decalage_Y].getType()!='S'))
+             {
+                 m_decalage_X = -m_decalage_X;
+                 m_decalage_Y = -m_decalage_Y;
+             }
+    ***/
     m_balle.setPosX(m_balle.getPosX()+m_decalage_X);
     m_balle.setPosY(m_balle.getPosY()+m_decalage_Y);
     m_matrice[m_balle.getPosX()][m_balle.getPosY()] = m_balle;
@@ -396,7 +396,7 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead)
             poslig--;//Decrementer la position de la ligne
         break;
     case 'a'://Casser ?
-            casser(conso, poslig, poscol);
+        casser(conso, poslig, poscol);
         break;
     }
 
@@ -479,7 +479,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_Snoopy.setVies(0);
             m_Snoopy.setOiseaux(0);
         }
-        if(fmod(m_time,100) < 22)
+        if(fmod(m_time,100) < 36)
         {
             dead = bougerBalle();
         }
@@ -540,15 +540,21 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                         conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                         std::cout << "Entrez votre nom de joueur : ";
                         std::cin >> name;
-                        //name += ".txt";
                         traduireMatrice();
-                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getScore(),m_decalage_X,m_decalage_Y,niv);
+                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getOiseaux(),m_decalage_X,m_decalage_Y,niv);
                         touche = 'p';
                         system("cls");
                         afficherCadre(conso);
                         afficherMatrice(conso);
                     }
-                }while (touche != 'p'); ///Stopper le timer aussi
+                }
+                while (touche != 'p');  ///Stopper le timer aussi
+                conso->gotoLigCol(5,46);
+                std::cout << "                     ";
+                conso->gotoLigCol(7,46);
+                std::cout << "                                       ";
+                conso->gotoLigCol(9,46);
+                std::cout << "                     ";
             }
             else
             {
@@ -604,23 +610,25 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
 ///_________________________________________________________________________
 void Matrice::casser(Console* conso, int& poslig, int& poscol)
 {
-    if(((poslig+1>=0)&&(poslig+1<N_LIGNES))&&((poscol-1<N_COLONNES)&&(poscol-1>=0))&&((poscol+1<N_COLONNES)&&(poscol+1>=0))&&((poslig-1>=0)&&(poslig-1<N_LIGNES)))
-    {if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
+    if(((poslig+1>=0)&&(poslig+1<N_COLONNES))||((poscol-1<N_LIGNES)&&(poscol-1>=0))||((poscol+1<N_LIGNES)&&(poscol+1>=0))||((poslig-1>=0)&&(poslig-1<N_COLONNES)))
     {
-        if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
-            poslig = poslig+1;
-        else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
-            poscol = poscol+1;
-        else if(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)
-            poslig = poslig-1;
-        else if(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true)
-            poscol = poscol-1;
-        m_matrice[poslig][poscol] = m_blocVide;
-        poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
-        poscol = m_Snoopy.getPosY();
-        conso->gotoLigCol(12, 45);
-        std::cout << "                 ";
-    }}
+        if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
+        {
+            if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
+                poslig = poslig+1;
+            else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
+                poscol = poscol+1;
+            else if(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)
+                poslig = poslig-1;
+            else if(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true)
+                poscol = poscol-1;
+            m_matrice[poslig][poscol] = m_blocVide;
+            poslig = m_Snoopy.getPosX(); //revenir aux coordonnées de départ
+            poscol = m_Snoopy.getPosY();
+            conso->gotoLigCol(12, 45);
+            std::cout << "                 ";
+        }
+    }
 }
 
 ///_________________________________________________________________________

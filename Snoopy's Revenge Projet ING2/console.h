@@ -49,7 +49,6 @@ class Console
         void setColor(Color col);
         void ShowConsoleCursor(bool showFlag);
         void writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau);
-        void readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau);
 };
 
 struct console

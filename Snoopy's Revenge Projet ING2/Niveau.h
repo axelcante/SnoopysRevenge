@@ -8,7 +8,6 @@ class Niveau
 {
 private :
     std::string m_mdp; //Mot de passe
-    char matrice_traduite[N_LIGNES][N_COLONNES];
     Matrice m_matriceDeJeu = Matrice();
 
 public :
@@ -24,10 +23,11 @@ public :
 
     ///Methods
     void effetMenu(int choix, Console* conso);
-    int lancerJeu(Console* conso, int& niveaumdp);
+    int lancerJeu(Console* conso, int& niveaumdp, bool partie);
     void afficherMenu(Console* conso);
     void play(Console* conso);
     int mdpNiveau(Console* conso);
+    void readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int& niveau, Console* conso);
 
     //passerNiveau();
     ///Idees Diedler en cours :

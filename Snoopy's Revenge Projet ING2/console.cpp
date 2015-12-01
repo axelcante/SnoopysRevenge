@@ -78,7 +78,7 @@ void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], in
     std::ofstream ofs(name.c_str(), std::ios::out);
     if (ofs)
     {
-        // Ecriture dans le fichier
+        // Ecriture dans le fichier de la MATRICE
         for(int i = 0; i < N_LIGNES; i++)
         {
             for(int j = 0; j < N_COLONNES; j++)
@@ -87,14 +87,9 @@ void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], in
             }
             ofs << std::endl;
         }
-        ofs << vies << std::endl;
-        ofs << score << std::endl;
-        ofs << oiseaux << std::endl;
-        ofs << decalageX << std::endl;
-        ofs << decalageY << std::endl;
-        ofs.close(); // fermeture du flux
+        ofs.close();
         gotoLigCol(POSLIGNE+2,POSCOLONNE);
-        std::cout << "La sauvegarde est effectuee !";
+        std::cout << "La sauvegarde de la matrice est effectuee !";
         gotoLigCol(POSLIGNE+4,POSCOLONNE);
         system("pause");
     }
@@ -105,61 +100,32 @@ void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], in
         gotoLigCol(POSLIGNE+4,POSCOLONNE);
         system("pause");
     }
-}
 
-// Lire un fichier ligne par ligne
-// Entrée : le chemin d'accès au fichier
-
-void Console::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau)
-{
-    std::ifstream ifs(name.c_str());
-    std::string line;
-    int i = 0;
-    if(ifs.is_open()) // test si le fichier est bien ouvert
+    // Ecriture dans le fichier des données de la matrice (score, vie...)
+    name += "_donnees";
+    std::ofstream myFlux(name.c_str(),std::ios::out);
+    if (myFlux)
     {
-        while(getline(ifs,line))
-        {
-            for(int j = 0; j < N_COLONNES; j++)
-            {
-                tableau[i][j] = line[j];
-            }
-            i++;
-        }
-        /*vies = line;
-        i++;
-        score = line;
-        i++;
-        oiseaux = line;
-        i++;
-        decalageX = line;
-        i++;
-        decalageY = line;
-        i++;*/
-        ifs.close(); //fermeture du flux
-        gotoLigCol(POSLIGNE+2,POSCOLONNE);
-        std::cout << "Le chargement est termine !";
-        gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        myFlux << vies << std::endl;
+        myFlux << score << std::endl;
+        myFlux << oiseaux << std::endl;
+        myFlux << decalageX << std::endl;
+        myFlux << decalageY << std::endl;
+        myFlux << niveau << std::endl;
+        myFlux.close(); // fermeture du flux
+        gotoLigCol(POSLIGNE+6,POSCOLONNE);
+        std::cout << "La sauvegarde des donnees de la matrice est effectuee !";
+        gotoLigCol(POSLIGNE+8,POSCOLONNE);
         system("pause");
-        system("cls");
-        system("pause");
-
     }
-
-    else // en cas d'erreur...
+    else
     {
-        gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        gotoLigCol(POSLIGNE+6,POSCOLONNE);
         std::cout << "ERREUR d'ouverture du fichier";
-        gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        gotoLigCol(POSLIGNE+8,POSCOLONNE);
         system("pause");
     }
-    for(int i = 0; i < N_LIGNES; i++)
-    {
-        for(int j = 0; j < N_COLONNES; j++)
-        {
-            std::cout << tableau[i][j];
-        }
-        std::cout << std::endl;
-    }
+
 }
 
 void Console::ShowConsoleCursor(bool showFlag)
