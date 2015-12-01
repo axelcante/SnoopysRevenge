@@ -28,7 +28,7 @@ public:
     int getPosX()const;
     int getPosY()const;
     char getType()const;
-    bool getEstPoussableblocmere()const;
+    bool getEstPoussableblocmere()const;        //Ce booléen n'est mis true que pour les blocs de type Poussable. L'utilisation de ce booléen s'est faite car nous n'utilisons pas de polymorphisme.
     bool getEstCassableblocmere()const;
     //setters
     void setPosX(int posX);

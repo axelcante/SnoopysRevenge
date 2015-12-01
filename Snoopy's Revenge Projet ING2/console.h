@@ -49,6 +49,8 @@ class Console
         void setColor(Color col);
         void ShowConsoleCursor(bool showFlag); //n'affiche plus le curseur de gotoligcol pour ne pas avoir de clignotement a l'écran
         void writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau);//fonction sauvegarde (chargement dans Niveau)
+        void writeHS(int score);
+
 };
 
 struct console
