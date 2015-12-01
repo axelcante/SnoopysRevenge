@@ -23,6 +23,7 @@ void Niveau::setMdp(std::string mdp)
 //Methods
 int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
 {
+<<<<<<< HEAD
     int choix = 0;  //variable qui va permettre au joueur de naviguer le menu
     int niv = 1;    //variable qui lancera le niveau de jeu correspondant
     int score = 0;  //variable qui initialisera le score
@@ -30,10 +31,51 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
     if(!partie)     //test si une partie sauvegardée est lancée. Si non, on lance une nouvelle partie en fonction du mot de passe entré
     {
         niv=1;
+=======
+    int choix = 0;
+    int niv = 1;
+    int score = 0;
+    if(!partie)
+    {
+>>>>>>> 85c9ecd84a1f129b9cef6c73395cd95c81c3dad4
         if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
         niv=niveaumdp;
         m_matriceDeJeu.getSnoopy().setVies(3);
-        system("cls");
+    ///AFFICHAGE RAPIDE D'AIDE
+    //Effacer:
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
+        std::cout << "                        ";
+        conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);
+        std::cout << "                        ";
+        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE+8);
+        std::cout << "                        ";
+        conso->gotoLigCol(POSLIGNE+14,POSCOLONNE+8);
+        std::cout << "                               ";
+        conso->gotoLigCol(POSLIGNE+16,POSCOLONNE+8);
+        std::cout << "                            ";
+    //Ecrire:
+        conso->setColor(COLOR_DEFAULT);
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+5);
+        std::cout << " z   pour se diriger";
+        conso->gotoLigCol(POSLIGNE+9,POSCOLONNE+5);
+        std::cout<<"qsd";
+        conso->gotoLigCol(POSLIGNE+11,POSCOLONNE+5);
+        std::cout << "'p' pause";
+        conso->gotoLigCol(POSLIGNE+13,POSCOLONNE+5);
+        std::cout << "'a' casser les blocs cassables";
+        conso->gotoLigCol(POSLIGNE+15,POSCOLONNE+5);
+        std::cout << "Attention au temps ! Vous n'avez que 60 secondes";
+        conso->gotoLigCol(POSLIGNE+17,POSCOLONNE+5);
+        std::cout << "La balle tue, les blocs pieges aussi";
+        conso->gotoLigCol(POSLIGNE+19,POSCOLONNE+5);
+        std::cout << "Bon jeu !";
+        conso->setColor(COLOR_RED);
+        conso->gotoLigCol(POSLIGNE+21,POSCOLONNE+5);
+        system("pause");
+        conso->setColor(COLOR_DEFAULT);
+
+    ///LANCEMENT DU JEU
+    system("cls");
     }
     else        //si une partie sauvegardée est détectée, on la lance ! Seul le temps n'est pas sauvegardé (fonction clock() difficile a manier)
     {
@@ -229,8 +271,15 @@ void Niveau::play(Console* conso)
             if((menu_choix == 4)&&(key == 13))  //on rentre un mot de passe : s'il est bon, on lance le niveau correspondant
             {
                 niveaumdp=mdpNiveau(conso);
+<<<<<<< HEAD
                 if((niveaumdp<4)||(niveaumdp==6))
                     lancerJeu(conso, niveaumdp,false);
+=======
+                if(niveaumdp<4)
+                    lancerJeu(conso, niveaumdp,false);
+                if(niveaumdp==6)
+                    lancerJeu(conso, niveaumdp,true);
+>>>>>>> 85c9ecd84a1f129b9cef6c73395cd95c81c3dad4
                 else
                 {
                     system("cls");
@@ -277,11 +326,19 @@ int Niveau::mdpNiveau(Console* conso) //fonction qui va tester le mot de passe e
         return 3;
     ///Si niveau bonus
     else if (mdp==mdp4)
+    {
+        conso->gotoLigCol(POSLIGNE+1,POSCOLONNE+3);
+        std::cout<<"Vous pouvez lacher une bombe 'b' (a activer :D) dans ce niveau seulement ! Mais attention aux degats";
+        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
+        std::cout<<"Vous pouvez gagner une vie supplementaire pour les niveaux suivants si vous reussissez celui-ci";
+        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
+        system("pause");
         return 6;
+    }
     else///Ou pas
     {
         conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
-        std::cout<<"Incorrect.\n";
+        std::cout<<"Incorrect.";
         conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
         system("pause");
         return 4;
