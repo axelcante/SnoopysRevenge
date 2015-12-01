@@ -4,6 +4,8 @@
 #include "console.h"
 
 ///Classe mère : one block to rule them all...
+///Les blocs n'ont pas de fonctions. Tout est géré par la Matrice (et, dans une moindre mesure, par le Niveau). Ils ne servent qu'a fragmenter le code et rendre le tout plus logique pour nous.
+///En effet, on gère une matrice de blocs. Tout objet manipulé est une classe fille de bloc (ou un bloc tout court :D).
 class Bloc
 {
 protected:

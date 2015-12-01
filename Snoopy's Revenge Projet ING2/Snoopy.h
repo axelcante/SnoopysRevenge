@@ -23,11 +23,6 @@ public :
     void setVies(int vies);
     void setScore(int score);
     void setOiseaux(int oiseaux);
-    /* //Méthodes
-       void moveSnoopy();
-       void breakbloc(Bloc &bloc); ///
-       void saveGame();
-       void loadGame();*/
 };
 
 #endif // SNOOPY_H_INCLUDED

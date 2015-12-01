@@ -8,7 +8,7 @@ class Niveau
 {
 private :
     std::string m_mdp; //Mot de passe
-    Matrice m_matriceDeJeu = Matrice();
+    Matrice m_matriceDeJeu = Matrice();//c'est la matrice de jeu !
 
 public :
     ///Constructeurs et destructeur
@@ -22,23 +22,12 @@ public :
     void setMdp(std::string mdp);
 
     ///Methods
-    void effetMenu(int choix, Console* conso);
-    int lancerJeu(Console* conso, int& niveaumdp, bool partie);
+    void effetMenu(int choix, Console* conso); //méthode pour rendre le menu plus flashy
+    int lancerJeu(Console* conso, int& niveaumdp, bool partie); //méthode qui lance véritablement la boucle de jeu. Fait la transition niveau ->main.cpp
     void afficherMenu(Console* conso);
-    void play(Console* conso);
+    void play(Console* conso); //méthode qui permet de faire le pont main.cpp -> niveau
     int mdpNiveau(Console* conso);
     void readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int& niveau, Console* conso);
-
-    //passerNiveau();
-    ///Idees Diedler en cours :
-    //gérer blocs  (pousser, casser ,..)
-    //Deplacer (ennemis balle et snoopy) //Sauvergarder la position du Snoopy et Balle pour chargement ?
-    ///METTRE LA SAUVEGARDE ICI ?
-/*
-    void saveGame();
-    void loadGame();
-*/
-
 };
 
 
