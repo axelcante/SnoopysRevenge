@@ -638,6 +638,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)        /// !!!!
             ///Gagner partie : bouger le score
             m_Snoopy.setScore(m_Snoopy.getScore() + ((60-(m_time/CLOCKS_PER_SEC)))*100);
             score+=m_Snoopy.getScore();
+            conso->writeHS(score);
             m_Snoopy.setOiseaux(0);
             ///Afficher qu'on a gagné
             system("cls");
@@ -664,7 +665,7 @@ void Matrice::casser(Console* conso, int& poslig, int& poscol) //fonction qui te
     {
         if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
         {
-            if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)
+            if(m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)      /// ICI, on blinde la position de Snoopy pour effectuer les tests de blocs cassables ou non.
                 poslig = poslig+1;
             else if(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)
                 poscol = poscol+1;
@@ -749,7 +750,7 @@ bool Matrice::pousser(Console* conso, char& touche) ///VA POUSSER UN BLOC POUSSA
 
 void Matrice::ecranMort(Console* conso)
 {
-    conso->gotoLigCol(20,30);
+    conso->gotoLigCol(20,30);       ///Cet écran s'affiche lorsque Snoopy perd toutes ses vies :(
     conso->setColor(COLOR_RED);
     std::cout << "VOUS AVEZ PERDU ! QUEL DOMMAGE !";
     conso->gotoLigCol(25,30);
@@ -763,7 +764,7 @@ void Matrice::ecranMort(Console* conso)
 void Matrice::ecranVictoire(Console* conso,int& score)
 {
     conso->gotoLigCol(20,30);
-    conso->setColor(COLOR_YELLOW);
+    conso->setColor(COLOR_YELLOW);          // Au contraire, cet écran s'affiche lorsqu'on gagne un niveau !
     std::cout << "EXCELLENT ! VOUS AVEZ REMPORTE LA PARTIE !";
     conso->gotoLigCol(25,30);
     std::cout << "VOTRE SCORE EST DE : " << score<<std::endl<<std::endl;
@@ -792,7 +793,7 @@ void Matrice::traduireTableau()///POUR LE CHARGEMENT : on initialise une matrice
     {
         for(j = 0; j < N_COLONNES; j++)
         {
-            if((m_tableau_sauvegarde[i][j] == 'O'))
+            if((m_tableau_sauvegarde[i][j] == 'O'))     ///On associe a chaque char lu dans le fichier sauvegardé un bloc de la matrice de jeu
             {
                 m_matrice[i][j] = m_Oiseau;
             }

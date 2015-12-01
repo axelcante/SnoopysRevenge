@@ -70,6 +70,16 @@ void Console::_setColor(int back, int front)
     SetConsoleTextAttribute(H,front*16+back);
 }
 
+void Console::writeHS(int score)
+{
+    std::ofstream ofs("scores",std::ios::app);
+    if(ofs)
+    {
+        ofs << score;
+    }
+    ofs.close();
+}
+
 //procedure qui écrit dans un fichier .txt
 void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int niveau)
 {
@@ -89,7 +99,7 @@ void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], in
         }
         ofs.close();
         gotoLigCol(POSLIGNE+2,POSCOLONNE);
-        std::cout << "La sauvegarde de la matrice est effectuee !";
+        std::cout << "La sauvegarde de la matrice est effectuee !";     //On affiche l'état de la sauvegarde (même chose pour le chargement !)
         gotoLigCol(POSLIGNE+4,POSCOLONNE);
         system("pause");
     }
@@ -107,7 +117,7 @@ void Console::writeFile(std::string name, char tableau[N_LIGNES][N_COLONNES], in
     if (myFlux)
     {
         myFlux << vies << std::endl;
-        myFlux << score << std::endl;
+        myFlux << score << std::endl;           //On écrit chaque variable a la suite dans le fichier, séparés d'un retour à la ligne qui ne sera pas pris en compte lors du chargement
         myFlux << oiseaux << std::endl;
         myFlux << decalageX << std::endl;
         myFlux << decalageY << std::endl;

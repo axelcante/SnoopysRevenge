@@ -31,10 +31,10 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
     {
         niv=1;
         if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
-        niv=niveaumdp;
+            niv=niveaumdp;
         m_matriceDeJeu.getSnoopy().setVies(3);
-    ///AFFICHAGE RAPIDE D'AIDE
-    //Effacer:
+        ///AFFICHAGE RAPIDE D'AIDE
+        //Effacer:
         conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
         std::cout << "                        ";
         conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);
@@ -45,11 +45,11 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
         std::cout << "                               ";
         conso->gotoLigCol(POSLIGNE+16,POSCOLONNE+8);
         std::cout << "                            ";
-    //Ecrire:
+        //Ecrire:
         conso->setColor(COLOR_DEFAULT);
         conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+5);
         std::cout << " z   pour se diriger";
-        conso->gotoLigCol(POSLIGNE+9,POSCOLONNE+5);
+        conso->gotoLigCol(POSLIGNE+9,POSCOLONNE+5);         //affichage des instructions de jeu pour le joueur :D
         std::cout<<"qsd";
         conso->gotoLigCol(POSLIGNE+11,POSCOLONNE+5);
         std::cout << "'p' pause";
@@ -66,8 +66,8 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
         system("pause");
         conso->setColor(COLOR_DEFAULT);
 
-    ///LANCEMENT DU JEU
-    system("cls");
+        ///LANCEMENT DU JEU
+        system("cls");
     }
     else        //si une partie sauvegardée est détectée, on la lance ! Seul le temps n'est pas sauvegardé (fonction clock() difficile a manier)
     {
@@ -81,7 +81,7 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
         m_matriceDeJeu.bougerElements(conso,niv,score);     //fonction principale du jeu qui tourne tant qu'on ne quitte pas
         conso->gotoLigCol(20,30);
         if(niv<3)   //gestion de la progression des niveaux
-        std::cout<<"Niveau suivant : " << niv<< "\n";
+            std::cout<<"Niveau suivant : " << niv<< "\n";
         system("pause");
         system("cls");
         m_matriceDeJeu.getSnoopy().setOiseaux(0);   //a chaque nouveau niveau, on réinitialise les oiseaux bien sur
@@ -97,7 +97,7 @@ void Niveau::effetMenu(int choix, Console* conso) //fonction qui affiche un beau
     switch(choix)
     {
     case 1 :
-        conso->setColor(COLOR_DEFAULT);
+        conso->setColor(COLOR_DEFAULT);                     //la première option apparait en rouge, le reste du menu reste en jaune
         conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
         std::cout << "1. Nouvelle partie";
         conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);
@@ -115,7 +115,7 @@ void Niveau::effetMenu(int choix, Console* conso) //fonction qui affiche un beau
 
     case 2 :
         conso->setColor(COLOR_DEFAULT);
-        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);     //au tour de la seconde option !
         std::cout << "1. Nouvelle partie";
         conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);
         std::cout << "2. Charger partie";
@@ -143,7 +143,7 @@ void Niveau::effetMenu(int choix, Console* conso) //fonction qui affiche un beau
         conso->gotoLigCol(POSLIGNE+16,POSCOLONNE+8);
         std::cout << "5. Quitter le jeu";
         conso->setColor(COLOR_RED);
-        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE+8);
+        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE+8);            ///maintenant, la troisième :D
         std::cout << "3. High scores";
         break;
 
@@ -151,7 +151,7 @@ void Niveau::effetMenu(int choix, Console* conso) //fonction qui affiche un beau
         conso->setColor(COLOR_DEFAULT);
         conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
         std::cout << "1. Nouvelle partie";
-        conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);
+        conso->gotoLigCol(POSLIGNE+10,POSCOLONNE+8);        //n'oublions pas la quatrième...
         std::cout << "2. Charger partie";
         conso->gotoLigCol(POSLIGNE+12,POSCOLONNE+8);
         std::cout << "3. High scores";
@@ -173,7 +173,7 @@ void Niveau::effetMenu(int choix, Console* conso) //fonction qui affiche un beau
         conso->gotoLigCol(POSLIGNE+12,POSCOLONNE+8);
         std::cout << "3. High scores";
         conso->gotoLigCol(POSLIGNE+14,POSCOLONNE+8);
-        std::cout << "4. Entrer un mot de passe";
+        std::cout << "4. Entrer un mot de passe";               //ET ENFIN, la dernière :D
         conso->gotoLigCol(POSLIGNE+16,POSCOLONNE+8);
         std::cout << "5. Quitter le jeu";
         conso->setColor(COLOR_RED);
@@ -194,7 +194,7 @@ void Niveau::afficherMenu(Console* conso) //idem
               "/ __|_ _  ___ ___ _ __ _  _( __| _ \\_____ _____ _ _  __ _ ___";
     conso->gotoLigCol(17,60);
     std::cout <<
-              "\\__ | ' \\/ _ / _ | '_ | || |(_-|   / -_\\ V / -_| ' \\/ _` / -_)";
+              "\\__ | ' \\/ _ / _ | '_ | || |(_-|   / -_\\ V / -_| ' \\/ _` / -_)";         //oui oui, le titre a l'air moche ici, mais il est très beau sur la console :D
     conso->gotoLigCol(18,60);
     std::cout <<
               "|___|_||_\\___\\___| .__/\\_, |/__|_|_\\___|\\_/\\___|_||_\\__, \\___|";
@@ -260,134 +260,153 @@ void Niveau::play(Console* conso)
             {
                 quit = true;
             }
-            if((menu_choix == 4)&&(key == 13))  //on rentre un mot de passe : s'il est bon, on lance le niveau correspondant
+            if(menu_choix == 3 && key == 13) //HIGH SCORES
             {
-                niveaumdp=mdpNiveau(conso);
-                if(niveaumdp<4)
-                    lancerJeu(conso, niveaumdp,false);
-                if(niveaumdp==6)
-                    lancerJeu(conso, niveaumdp,true);
-                else
+                system("CLS");
+                std::ifstream myFlux("scores");
+                if(myFlux.is_open())
                 {
+                    int n = 0;
+                    while(!myFlux.eof())
+                    {
+                        myFlux >> n;
+                        std::cout << n << std::endl;
+                    }
+                    myFlux.close();
+                    conso->gotoLigCol(20,30);
+                    system("pause");
                     system("cls");
                     afficherMenu(conso);
-                    effetMenu(menu_choix, conso);
+                    effetMenu(menu_choix,conso);
                 }
             }
-            if(key == 27)
-            {
-                quit = true;
-            }
-            if(menu_choix == 2 && key == 13) //chargement d'une partie. On doit entrer le nom de joueur et, si le fichier existe, on lance la partie !
-            {
-                std::string name;
-                system("cls");
-                conso->gotoLigCol(POSLIGNE,POSCOLONNE);
-                std::cout << "Entrez votre nom de joueur : ";
-                std::cin >> name;
-                readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY(),niveaumdp, conso);
-                lancerJeu(conso,niveaumdp,true); //si le nom coincide, on lance la partie chargée !
+                if((menu_choix == 4)&&(key == 13))  //on rentre un mot de passe : s'il est bon, on lance le niveau correspondant
+                {
+                    niveaumdp=mdpNiveau(conso);
+                    if(niveaumdp<4)
+                        lancerJeu(conso, niveaumdp,false);
+                    if(niveaumdp==6)
+                        lancerJeu(conso, niveaumdp,true);
+                    else
+                    {
+                        afficherMenu(conso);
+                        effetMenu(menu_choix, conso);
+                    }
+                }
+                if(key == 27)
+                {
+                    quit = true;
+                }
+                if(menu_choix == 2 && key == 13) //chargement d'une partie. On doit entrer le nom de joueur et, si le fichier existe, on lance la partie !
+                {
+                    std::string name;
+                    system("cls");
+                    conso->gotoLigCol(POSLIGNE,POSCOLONNE);
+                    std::cout << "Entrez votre nom de joueur : ";
+                    std::cin >> name;
+                    readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY(),niveaumdp, conso);
+                    lancerJeu(conso,niveaumdp,true); //si le nom coincide, on lance la partie chargée !
+                }
             }
         }
     }
-}
 
-int Niveau::mdpNiveau(Console* conso) //fonction qui va tester le mot de passe entré
-{
-    //Declaration des variables
-    std::string mdp; //mot de passe
-    std::string mdp1="dimsum"; //mot de passe
-    std::string mdp2="seum"; //mot de passe
-    std::string mdp3="chat"; //mot de passe
-    std::string mdp4="chien"; //mot de passe
-    system("cls");
-    conso->gotoLigCol(POSLIGNE,POSCOLONNE+3);
-    std::cout<<"Entrez un mot de passe : ";
-    std::cin>>mdp;
-    ///Si niveau 1
-    if(mdp==mdp1)
-        return 1;
-    else if (mdp==mdp2) ///Sinon niveau 2
-        return 2;
-    else if (mdp==mdp3)///Et bah non, niveau 3
-        return 3;
-    ///Si niveau bonus
-    else if (mdp==mdp4)
+    int Niveau::mdpNiveau(Console* conso) //fonction qui va tester le mot de passe entré
     {
-        conso->gotoLigCol(POSLIGNE+1,POSCOLONNE+3);
-        std::cout<<"Vous pouvez lacher une bombe 'b' (a activer :D) dans ce niveau seulement ! Mais attention aux degats";
-        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
-        std::cout<<"Vous pouvez gagner une vie supplementaire pour les niveaux suivants si vous reussissez celui-ci";
-        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
-        system("pause");
-        return 6;
+        //Declaration des variables
+        std::string mdp; //mot de passe
+        std::string mdp1="dimsum"; //mot de passe
+        std::string mdp2="seum"; //mot de passe
+        std::string mdp3="chat"; //mot de passe
+        std::string mdp4="chien"; //mot de passe
+        system("cls");
+        conso->gotoLigCol(POSLIGNE,POSCOLONNE+3);
+        std::cout<<"Entrez un mot de passe : ";
+        std::cin>>mdp;
+        ///Si niveau 1
+        if(mdp==mdp1)
+            return 1;
+        else if (mdp==mdp2) ///Sinon niveau 2
+            return 2;
+        else if (mdp==mdp3)///Et bah non, niveau 3
+            return 3;
+        ///Si niveau bonus
+        else if (mdp==mdp4)
+        {
+            conso->gotoLigCol(POSLIGNE+1,POSCOLONNE+3);
+            std::cout<<"Vous pouvez lacher une bombe 'b' (a activer :D) dans ce niveau seulement ! Mais attention aux degats";
+            conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
+            std::cout<<"Vous pouvez gagner une vie supplementaire pour les niveaux suivants si vous reussissez celui-ci";
+            conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
+            system("pause");
+            return 6;
+        }
+        else///Ou pas
+        {
+            conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
+            std::cout<<"Incorrect.";
+            conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
+            system("pause");
+            return 4;
+        }
     }
-    else///Ou pas
-    {
-        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE+3);
-        std::cout<<"Incorrect.";
-        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE+3);
-        system("pause");
-        return 4;
-    }
-}
 
 ///FONCTION DE CHARGEMENT
 ///PLACEE DANS NIVEAU POUR EVITER DES POINTEURS INUTILES
 ///On charge la MATRICE puis les DONNEES de la matrice
-void Niveau::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int& niveau, Console* conso)
-{
-    std::ifstream ifs(name.c_str()); ///Premier chargement : LA MATRICE
-    std::string line;
-    int i = 0;
-    if(ifs.is_open()) // test si le fichier est bien ouvert
+    void Niveau::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int& niveau, Console* conso)
     {
-        while(getline(ifs,line))
+        std::ifstream ifs(name.c_str()); ///Premier chargement : LA MATRICE
+        std::string line;
+        int i = 0;
+        if(ifs.is_open()) // test si le fichier est bien ouvert
         {
-            for(int j = 0; j < N_COLONNES; j++)
+            while(getline(ifs,line))
             {
-                tableau[i][j] = line[j];
+                for(int j = 0; j < N_COLONNES; j++)
+                {
+                    tableau[i][j] = line[j];    ///Pour la matrice, on récupère chaque ligne du tableau de chars sauvegardée, puis on lit chaque char individuellement
+                }
+                i++;
             }
-            i++;
+            ifs.close(); //fermeture du flux
+            conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
+            std::cout << "Le chargement de la matrice est termine !";
+            conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
+            system("pause");
         }
-        ifs.close(); //fermeture du flux
-        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
-        std::cout << "Le chargement de la matrice est termine !";
-        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
-        system("pause");
-    }
-    else // en cas d'erreur...
-    {
-        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
-        std::cout << "ERREUR d'ouverture du fichier";
-        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
-        system("pause");
-    }
-    name += "_donnees"; ///DEUXIEME CHARGEMENT : nom de joueur + _donnees pour trouver le fichier
-    std::ifstream myFlux(name.c_str());
-    if(myFlux.is_open())
-    {
-        while(myFlux >> vies >> score >> oiseaux >> decalageX >> decalageY >> niveau)
+        else // en cas d'erreur...
         {
+            conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
+            std::cout << "ERREUR d'ouverture du fichier";
+            conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
+            system("pause");
         }
-        myFlux.close();
-        conso->gotoLigCol(POSLIGNE+6,POSCOLONNE);
-        std::cout << "Le chargement des donnees est termine !";
-        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
-        system("pause");
-        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE);      //on initialise les données de jeu avec les données chargées
-        m_matriceDeJeu.getSnoopy().setVies(vies);
-        m_matriceDeJeu.getSnoopy().setScore(score);
-        m_matriceDeJeu.getSnoopy().setOiseaux(oiseaux);
-        m_matriceDeJeu.setDecalageX(decalageX);
-        m_matriceDeJeu.setDecalageY(decalageY);
+        name += "_donnees"; ///DEUXIEME CHARGEMENT : nom de joueur + _donnees pour trouver le fichier
+        std::ifstream myFlux(name.c_str());
+        if(myFlux.is_open())
+        {
+            while(myFlux >> vies >> score >> oiseaux >> decalageX >> decalageY >> niveau)
+            {
+            }
+            myFlux.close();
+            conso->gotoLigCol(POSLIGNE+6,POSCOLONNE);
+            std::cout << "Le chargement des donnees est termine !";
+            conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
+            system("pause");
+            conso->gotoLigCol(POSLIGNE+12,POSCOLONNE);      //on initialise les données de jeu avec les données chargées
+            m_matriceDeJeu.getSnoopy().setVies(vies);
+            m_matriceDeJeu.getSnoopy().setScore(score);
+            m_matriceDeJeu.getSnoopy().setOiseaux(oiseaux);
+            m_matriceDeJeu.setDecalageX(decalageX);
+            m_matriceDeJeu.setDecalageY(decalageY);
+        }
+        else // en cas d'erreur...
+        {
+            conso->gotoLigCol(POSLIGNE+6,POSCOLONNE);
+            std::cout << "ERREUR d'ouverture du fichier";
+            conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
+            system("pause");
+        }
     }
-    else // en cas d'erreur...
-    {
-        conso->gotoLigCol(POSLIGNE+6,POSCOLONNE);
-        std::cout << "ERREUR d'ouverture du fichier";
-        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
-        system("pause");
-    }
-}
 
