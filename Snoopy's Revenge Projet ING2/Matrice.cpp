@@ -436,13 +436,10 @@ void Matrice::bougerSnoopy(Console*conso,char& touche,bool& dead,int& niv)
         break;
     case 'a'://Casser ?
         casser(conso, poslig, poscol);
-<<<<<<< HEAD
-=======
         break;
     case 'b': ///BOMBE !!!!!!!! PROUUUUUU BOUM GNIAAAAH
         if((m_Snoopy.getOiseaux()>=1)&&(m_Snoopy.getVies()>2))
             boomShakaLaka(conso,poslig,poscol);
->>>>>>> de71a87059a5d99114121b5441df0150993f65f2
         break;
     }
 
@@ -532,7 +529,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_Snoopy.setVies(0);
             m_Snoopy.setOiseaux(0);
         }
-        if(fmod(m_time,100) < 36)
+        if(fmod(m_time,100) < 26)
         {
             dead = bougerBalle();
         }
@@ -602,15 +599,12 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                     }
                 }
                 while (touche != 'p');  ///Stopper le timer aussi
-<<<<<<< HEAD
                 conso->gotoLigCol(5,46);
                 std::cout << "                     ";
                 conso->gotoLigCol(7,46);
                 std::cout << "                                       ";
                 conso->gotoLigCol(9,46);
                 std::cout << "                     ";
-=======
->>>>>>> de71a87059a5d99114121b5441df0150993f65f2
             }
             else
             {
@@ -667,11 +661,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
 ///_________________________________________________________________________
 void Matrice::casser(Console* conso, int& poslig, int& poscol)
 {
-<<<<<<< HEAD
     if(((poslig+1>=0)&&(poslig+1<N_COLONNES))||((poscol-1<N_LIGNES)&&(poscol-1>=0))||((poscol+1<N_LIGNES)&&(poscol+1>=0))||((poslig-1>=0)&&(poslig-1<N_COLONNES)))
-=======
-    if(((poslig+1>=0)&&(poslig+1<N_LIGNES))&&((poscol-1<N_COLONNES)&&(poscol-1>=0))&&((poscol+1<N_COLONNES)&&(poscol+1>=0))&&((poslig-1>=0)&&(poslig-1<N_LIGNES)))
->>>>>>> de71a87059a5d99114121b5441df0150993f65f2
     {
         if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
         {
@@ -690,8 +680,6 @@ void Matrice::casser(Console* conso, int& poslig, int& poscol)
             std::cout << "                 ";
         }
     }
-<<<<<<< HEAD
-=======
 }
 
 ///_________________________________________________________________________
@@ -699,7 +687,6 @@ void Matrice::boomShakaLaka(Console* conso, int& poslig, int& poscol)
 {
     int nivBoom=7;
     initialisationElements(nivBoom);
->>>>>>> de71a87059a5d99114121b5441df0150993f65f2
 }
 
 ///_________________________________________________________________________
