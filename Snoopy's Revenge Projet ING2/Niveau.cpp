@@ -21,14 +21,16 @@ void Niveau::setMdp(std::string mdp)
 }
 
 //Methods
-int Niveau::lancerJeu(Console* conso, int& niveaumdp)
+int Niveau::lancerJeu(Console* conso, int& niveaumdp, bool partie)
 {
     int choix = 0;
-    int niv=1;
-    if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
+    int niv = 1;
+    int score = 0;
+    if(!partie)
+    {
+        if(((niveaumdp>=1)&&(niveaumdp<=3))||(niveaumdp==6))
         niv=niveaumdp;
-    int score=0;
-    m_matriceDeJeu.getSnoopy().setVies(3);
+        m_matriceDeJeu.getSnoopy().setVies(3);
     ///AFFICHAGE RAPIDE D'AIDE
     //Effacer:
         conso->gotoLigCol(POSLIGNE+8,POSCOLONNE+8);
@@ -64,13 +66,20 @@ int Niveau::lancerJeu(Console* conso, int& niveaumdp)
 
     ///LANCEMENT DU JEU
     system("cls");
+    }
+    else
+    {
+        niv = niveaumdp;
+        score = m_matriceDeJeu.getSnoopy().getScore();
+        system("cls");
+    }
     do
     {
         m_matriceDeJeu.afficherCadre(conso);
         m_matriceDeJeu.bougerElements(conso,niv,score);
         conso->gotoLigCol(40,30);
         if(niv<3)
-            std::cout<<"Niveau suivant : " << niv<< "\n";
+        std::cout<<"Niveau suivant : " << niv<< "\n";
         system("pause");
         system("cls");
         m_matriceDeJeu.getSnoopy().setOiseaux(0);
@@ -243,7 +252,7 @@ void Niveau::play(Console* conso)
 
             if(menu_choix == 1 && key == 13)
             {
-                menu_choix = lancerJeu(conso,niveaumdp);
+                menu_choix = lancerJeu(conso,niveaumdp,false);
             }
             if(menu_choix == 5 && key == 13)
             {
@@ -252,8 +261,10 @@ void Niveau::play(Console* conso)
             if((menu_choix == 4)&&(key == 13))
             {
                 niveaumdp=mdpNiveau(conso);
-                if((niveaumdp<4)||(niveaumdp==6))
-                    lancerJeu(conso, niveaumdp);
+                if(niveaumdp<4)
+                    lancerJeu(conso, niveaumdp,false);
+                if(niveaumdp==6)
+                    lancerJeu(conso, niveaumdp,true);
                 else
                 {
                     system("cls");
@@ -272,8 +283,8 @@ void Niveau::play(Console* conso)
                 conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                 std::cout << "Entrez votre nom de joueur : ";
                 std::cin >> name;
-                //name += ".txt";
-                conso->readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY(),niveaumdp); ///il faut envoyer la matrice de jeu d'une façon ou d'une autre pour la sauvegarde
+                readFile(name,m_matriceDeJeu.m_tableau_sauvegarde,m_matriceDeJeu.getSnoopy().getVies(),m_matriceDeJeu.getSnoopy().getScore(),m_matriceDeJeu.getSnoopy().getOiseaux(),m_matriceDeJeu.getDecalageX(),m_matriceDeJeu.getDecalageY(),niveaumdp, conso);
+                lancerJeu(conso,niveaumdp,true);
             }
         }
     }
@@ -318,7 +329,63 @@ int Niveau::mdpNiveau(Console* conso)
         return 4;
     }
 }
-//void Niveau::sauvegarde(const std::string& name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int time, int decalageX, int decalageY, Console* conso)
-//{
-//}
+
+// Lire un fichier ligne par ligne
+// Entrée : le chemin d'accès au fichier
+///MATRICE puis ///DONNEES
+void Niveau::readFile(std::string name, char tableau[N_LIGNES][N_COLONNES], int vies, int score, int oiseaux, int decalageX, int decalageY, int& niveau, Console* conso)
+{
+    std::ifstream ifs(name.c_str());
+    std::string line;
+    int i = 0;
+    if(ifs.is_open()) // test si le fichier est bien ouvert
+    {
+        while(getline(ifs,line))
+        {
+            for(int j = 0; j < N_COLONNES; j++)
+            {
+                tableau[i][j] = line[j];
+            }
+            i++;
+        }
+        ifs.close(); //fermeture du flux
+        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        std::cout << "Le chargement de la matrice est termine !";
+        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        system("pause");
+    }
+    else // en cas d'erreur...
+    {
+        conso->gotoLigCol(POSLIGNE+2,POSCOLONNE);
+        std::cout << "ERREUR d'ouverture du fichier";
+        conso->gotoLigCol(POSLIGNE+4,POSCOLONNE);
+        system("pause");
+    }
+    name += "_donnees";
+    std::ifstream myFlux(name.c_str());
+    if(myFlux.is_open())
+    {
+        while(myFlux >> vies >> score >> oiseaux >> decalageX >> decalageY >> niveau)
+        {
+        }
+        myFlux.close();
+        conso->gotoLigCol(POSLIGNE+6,POSCOLONNE);
+        std::cout << "Le chargement des donnees est termine !";
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
+        system("pause");
+        conso->gotoLigCol(POSLIGNE+12,POSCOLONNE);
+        m_matriceDeJeu.getSnoopy().setVies(vies);
+        m_matriceDeJeu.getSnoopy().setScore(score);
+        m_matriceDeJeu.getSnoopy().setOiseaux(oiseaux);
+        m_matriceDeJeu.setDecalageX(decalageX);
+        m_matriceDeJeu.setDecalageY(decalageY);
+    }
+    else // en cas d'erreur...
+    {
+        conso->gotoLigCol(POSLIGNE+6,POSCOLONNE);
+        std::cout << "ERREUR d'ouverture du fichier";
+        conso->gotoLigCol(POSLIGNE+8,POSCOLONNE);
+        system("pause");
+    }
+}
 

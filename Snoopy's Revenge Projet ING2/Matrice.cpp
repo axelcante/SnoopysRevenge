@@ -529,7 +529,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
             m_Snoopy.setVies(0);
             m_Snoopy.setOiseaux(0);
         }
-        if(fmod(m_time,100) < 22)
+        if(fmod(m_time,100) < 26)
         {
             dead = bougerBalle();
         }
@@ -590,9 +590,8 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                         conso->gotoLigCol(POSLIGNE,POSCOLONNE);
                         std::cout << "Entrez votre nom de joueur : ";
                         std::cin >> name;
-                        //name += ".txt";
                         traduireMatrice();
-                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getScore(),m_decalage_X,m_decalage_Y,niv);
+                        conso->writeFile(name, m_tableau_sauvegarde,m_Snoopy.getVies(),m_Snoopy.getScore(),m_Snoopy.getOiseaux(),m_decalage_X,m_decalage_Y,niv);
                         touche = 'p';
                         system("cls");
                         afficherCadre(conso);
@@ -600,6 +599,12 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
                     }
                 }
                 while (touche != 'p');  ///Stopper le timer aussi
+                conso->gotoLigCol(5,46);
+                std::cout << "                     ";
+                conso->gotoLigCol(7,46);
+                std::cout << "                                       ";
+                conso->gotoLigCol(9,46);
+                std::cout << "                     ";
             }
             else
             {
@@ -656,7 +661,7 @@ void Matrice::bougerElements(Console* conso,int& niv,int& score)
 ///_________________________________________________________________________
 void Matrice::casser(Console* conso, int& poslig, int& poscol)
 {
-    if(((poslig+1>=0)&&(poslig+1<N_LIGNES))&&((poscol-1<N_COLONNES)&&(poscol-1>=0))&&((poscol+1<N_COLONNES)&&(poscol+1>=0))&&((poslig-1>=0)&&(poslig-1<N_LIGNES)))
+    if(((poslig+1>=0)&&(poslig+1<N_COLONNES))||((poscol-1<N_LIGNES)&&(poscol-1>=0))||((poscol+1<N_LIGNES)&&(poscol+1>=0))||((poslig-1>=0)&&(poslig-1<N_COLONNES)))
     {
         if((m_matrice[poslig+1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol+1].getEstCassableblocmere()==true)||(m_matrice[poslig-1][poscol].getEstCassableblocmere()==true)||(m_matrice[poslig][poscol-1].getEstCassableblocmere()==true))
         {
